@@ -58,7 +58,7 @@ class NoteItem extends HTMLElement {
       }
 
       .note-info__date p {
-        font-size: 3em;
+        font-size: .5em;
       }
 
       .note-info__description p {
