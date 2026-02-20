@@ -6,7 +6,7 @@ const home = () => {
   const noteListContainerElement = document.querySelector('#noteListContainer');
   const noteQueryWaitingElement = noteListContainerElement.querySelector('.query-waiting');
   const noteLoadingElement = noteListContainerElement.querySelector('.search-loading');
-  const noteListElement = noteListContainerElement.querySelector('club-list');
+  const noteListElement = noteListContainerElement.querySelector('note-list');
 
   const showNotesData = (query) => {
     showLoading();
