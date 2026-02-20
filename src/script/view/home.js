@@ -72,15 +72,12 @@ const home = () => {
 
   // tambah
   const renderDetail = (note) => {
-    if (!note) {
-      console.log('Note tidak ditemukan');
-      return;
-    }
-
-    Utils.emptyElement(noteListContainerElement);
+    Utils.hideElement(noteListElement);
+    Utils.hideElement(noteNotFoundElement);
 
     const detail = document.createElement('note-detail');
     detail.note = note;
+    detail.id = 'noteDetailView';
 
     noteListContainerElement.appendChild(detail);
   };
@@ -96,8 +93,11 @@ const home = () => {
 
   // tambah
   document.addEventListener('back-to-list', () => {
-  showNotes();
-});
+    const detail = document.querySelector('#noteDetailView');
+    if (detail) detail.remove();
+
+    showNotes();
+  });
 };
 
 export default home;
