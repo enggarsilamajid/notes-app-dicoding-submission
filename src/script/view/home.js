@@ -62,10 +62,8 @@ const home = () => {
   };
 
   searchBarElement.addEventListener('search', onSearchHandler);
-  // ASLI
   showNotes();
 
-  // tambah
   document.addEventListener('open-detail', (event) => {
     const noteId = event.detail.id;
     const selectedNote = NotesData.getNoteById(noteId);
@@ -73,7 +71,6 @@ const home = () => {
     renderDetail(selectedNote);
   });
 
-  // tambah
   const renderDetail = (note) => {
     Utils.hideElement(noteListElement);
     Utils.hideElement(noteNotFoundElement);
@@ -88,7 +85,6 @@ const home = () => {
     noteListContainerElement.appendChild(detail);
   };
 
-  // tambah
   document.addEventListener('toggle-archive', (event) => {
     const noteId = event.detail.id;
 
@@ -97,12 +93,10 @@ const home = () => {
     returnToListView();
   });
 
-  // tambah
   document.addEventListener('back-to-list', () => {
     returnToListView();
   });
 
-  // tambah
   const returnToListView = () => {
     const detail = document.querySelector('#noteDetailView');
     if (detail) detail.remove();
