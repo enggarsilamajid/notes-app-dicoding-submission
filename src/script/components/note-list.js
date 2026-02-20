@@ -58,7 +58,6 @@ class NoteList extends HTMLElement {
     return this._gutter;
   }
  
- 
   _emptyContent() {
     this._shadowRoot.innerHTML = '';
   }

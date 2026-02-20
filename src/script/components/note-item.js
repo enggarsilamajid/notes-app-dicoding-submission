@@ -83,6 +83,9 @@ class NoteItem extends HTMLElement {
             <h2>${this._note.title}</h2>
           </div>
           <div class="note-info__description">
+            <p>${this._note.createdAt}</p>
+          </div>
+          <div class="note-info__description">
             <p>${this._note.body}</p>
           </div>
         </div>
