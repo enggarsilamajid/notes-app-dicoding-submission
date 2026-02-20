@@ -158,7 +158,7 @@ class SearchBar extends HTMLElement {
         <form id="searchForm" class="search-form">
           <div class="form-group">
             <input id="name" name="name" type="search" required />
-            <label for="name">Sport club's name</label>
+            <label for="name">Note's Title</label>
           </div>
  
           <button>Search</button>
