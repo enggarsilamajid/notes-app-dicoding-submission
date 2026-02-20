@@ -106,4 +106,22 @@ const notesData = [
   },
 ];
 
-console.log(notesData);
+class Notes {
+  static getAll() {
+    return notesData;
+  }
+
+  static searchNote(query) {
+    return notesData.filter((note) => {
+      const loweredCaseNoteTitle = (note.title || '-').toLocaleLowerCase();
+      const jammedNoteTitle = loweredCaseNoteTitle.replace(/\s/g, '');
+
+      const loweredCaseQuery = query.toLocaleLowerCase();
+      const jammedQuery = loweredCaseQuery.replace(/\s/g, '');
+
+      return jammedNoteTitle.indexOf(jammedQuery) !== -1;
+    });
+  }
+}
+
+export default Notes;
