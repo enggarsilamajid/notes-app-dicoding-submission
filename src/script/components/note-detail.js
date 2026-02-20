@@ -34,10 +34,10 @@ class NoteDetail extends HTMLElement {
         <p>${this._note.body}</p>
 
         <button class="archive-btn">
-          ${this._note.archived ? 'Keluarkan dari Arsip' : 'Arsipkan'}
+          ${this._note.archived ? 'Unarchive' : 'Archive'}
         </button>
 
-        <button class="back-btn">Kembali</button>
+        <button class="back-btn">Back</button>
       </div>
     `;
 
