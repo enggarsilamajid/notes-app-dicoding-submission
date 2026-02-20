@@ -59,9 +59,40 @@ const home = () => {
   };
 
   searchBarElement.addEventListener('search', onSearchHandler);
+  // ASLI
+  // showNotes();
 
-  // langsung tampil semua saat load
+  // tambah
+  document.addEventListener('open-detail', (event) => {
+    const noteId = event.detail.id;
+    const selectedNote = NotesData.getNoteById(noteId);
+
+    renderDetail(selectedNote);
+  });
+
+  // tambah
+  const renderDetail = (note) => {
+    hideAllChildren();
+
+    const detail = document.createElement('note-detail');
+    detail.note = note;
+
+    noteListContainerElement.appendChild(detail);
+  };
+
+  // tambah
+  document.addEventListener('toggle-archive', (event) => {
+    const noteId = event.detail.id;
+
+    NotesData.toggleArchive(noteId);
+
+    showNotes();
+  });
+
+  // tambah
+  document.addEventListener('back-to-list', () => {
   showNotes();
+});
 };
 
 export default home;

@@ -126,6 +126,19 @@ class NotesData {
       return loweredTitle.includes(loweredQuery);
     });
   }
+
+  // tambah
+  static getNoteById(id) {
+    return this._notes.find(note => note.id === id);
+  }
+
+  // tambah
+  static toggleArchive(id) {
+    const note = this._notes.find(note => note.id === id);
+    if (note) {
+      note.archived = !note.archived;
+    }
+  }
 }
 
 export default NotesData;
