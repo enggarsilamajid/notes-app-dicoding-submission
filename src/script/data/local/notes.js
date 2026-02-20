@@ -112,14 +112,18 @@ class NotesData {
   }
 
   static searchNote(query) {
+    if (!query || query.trim() === '') {
+      return this.getAll();
+    }
+
     return notesData.filter((note) => {
-      const loweredCaseNoteTitle = (note.title || '-').toLocaleLowerCase();
+      const loweredCaseNoteTitle = (note.title || '').toLowerCase();
       const jammedNoteTitle = loweredCaseNoteTitle.replace(/\s/g, '');
 
-      const loweredCaseQuery = query.toLocaleLowerCase();
+      const loweredCaseQuery = query.toLowerCase();
       const jammedQuery = loweredCaseQuery.replace(/\s/g, '');
 
-      return jammedNoteTitle.indexOf(jammedQuery) !== -1;
+      return jammedNoteTitle.includes(jammedQuery);
     });
   }
 }

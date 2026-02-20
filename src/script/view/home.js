@@ -8,22 +8,6 @@ const home = () => {
   const noteLoadingElement = noteListContainerElement.querySelector('.search-loading');
   const noteListElement = noteListContainerElement.querySelector('note-list');
 
-  const showNotesData = (query) => {
-    showLoading();
-
-    const result = NotesData.searchNote(query);
-    displayResult(result);
-
-    showNoteList();
-  };
-
-  const onSearchHandler = (event) => {
-    event.preventDefault();
-
-    const { query } = event.detail;
-    showNotesData(query);
-  };
-
   const displayResult = (notes) => {
     const noteItemElements = notes.map((note) => {
       const noteItemElement = document.createElement('note-item');
@@ -49,15 +33,32 @@ const home = () => {
     Utils.showElement(noteLoadingElement);
   };
 
-  const showQueryWaiting = () => {
-    Array.from(noteListContainerElement.children).forEach((element) => {
-      Utils.hideElement(element);
-    });
-    Utils.showElement(noteQueryWaitingElement);
+  const showAllNotes = () => {
+    showLoading();
+
+    const result = NotesData.getAll();
+    displayResult(result);
+
+    showNoteList();
+  };
+
+  const showNotesByQuery = (query) => {
+    showLoading();
+
+    const result = NotesData.searchNote(query);
+    displayResult(result);
+
+    showNoteList();
+  };
+
+  const onSearchHandler = (event) => {
+    event.preventDefault();
+    const { query } = event.detail;
+    showNotesByQuery(query);
   };
 
   searchFormElement.addEventListener('search', onSearchHandler);
-  showQueryWaiting();
+  showAllNotes();
 };
 
 export default home;
