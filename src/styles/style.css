@@ -39,11 +39,19 @@ label {
 }
 
 section>.title-section {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
   margin-block-start: 2rem;
   font-size: 1.2em;
+}
+
+section>.title-section>h2 {
+  justify-self: start;
+}
+
+#addNoteBtn {
+  justify-self: end;
 }
 
 /* GLOBAL */
