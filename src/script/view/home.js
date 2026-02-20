@@ -2,6 +2,9 @@ import Utils from '../utils.js';
 import NotesData from '../data/local/notes.js';
 
 const home = () => {
+  const searchBarContainerElement = document.querySelector('#searchBarContainer');
+  const titleSectionElement = document.querySelector('.title-section');
+
   const searchBarElement = document.querySelector('search-bar');
   const noteListContainerElement = document.querySelector('#noteListContainer');
   const noteNotFoundElement = noteListContainerElement.querySelector('.not-found');
@@ -75,6 +78,9 @@ const home = () => {
     Utils.hideElement(noteListElement);
     Utils.hideElement(noteNotFoundElement);
 
+    Utils.hideElement(searchBarContainerElement);
+    Utils.hideElement(titleSectionElement);
+
     const detail = document.createElement('note-detail');
     detail.note = note;
     detail.id = 'noteDetailView';
@@ -95,6 +101,9 @@ const home = () => {
   document.addEventListener('back-to-list', () => {
     const detail = document.querySelector('#noteDetailView');
     if (detail) detail.remove();
+
+    Utils.showElement(searchBarContainerElement);
+    Utils.showElement(titleSectionElement);
 
     showNotes();
   });
