@@ -130,6 +130,25 @@ main {
   font-size: 0.8em;
 }
 
+.search-form button {
+  border: 0;
+  padding-inline: 24px;
+  background-color: cornflowerblue;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: 100ms linear;
+}
+
+.search-form button:hover {
+  background-color: #4485ff;
+}
+
+.search-form button:active {
+  background-color: #6c9aee;
+}
+
 /* Search bar */
 
 .note-list-container {
