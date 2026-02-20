@@ -28,13 +28,13 @@ class NoteForm extends HTMLElement {
       </style>
 
       <div class="form-container">
-        <h2>Tambah Catatan</h2>
+        <h2>New Note</h2>
 
-        <input type="text" id="title" placeholder="Judul" required />
-        <textarea id="body" rows="5" placeholder="Isi catatan" required></textarea>
+        <input type="text" id="title" placeholder="Title" required />
+        <textarea id="body" rows="5" placeholder="Body" required></textarea>
 
-        <button id="saveBtn">Simpan</button>
-        <button id="cancelBtn">Batal</button>
+        <button id="saveBtn">Save</button>
+        <button id="cancelBtn">Cancel</button>
       </div>
     `;
 
