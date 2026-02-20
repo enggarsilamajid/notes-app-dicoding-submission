@@ -137,6 +137,18 @@ class NotesData {
       note.archived = !note.archived;
     }
   }
+
+  static addNote({ title, body }) {
+    const newNote = {
+      id: `notes-${Date.now()}`,
+      title,
+      body,
+      createdAt: new Date().toISOString(),
+      archived: false,
+    };
+
+    notesData.unshift(newNote);
+  }
 }
 
 export default NotesData;

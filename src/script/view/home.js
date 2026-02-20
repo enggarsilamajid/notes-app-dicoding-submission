@@ -2,6 +2,7 @@ import Utils from '../utils.js';
 import NotesData from '../data/local/notes.js';
 
 const home = () => {
+  const addNoteButton = document.querySelector('#addNoteBtn');
   const searchBarContainerElement = document.querySelector('#searchBarContainer');
   const titleSectionElement = document.querySelector('.title-section');
 
@@ -106,6 +107,40 @@ const home = () => {
 
     showNotes();
   };
+
+  const renderAddForm = () => {
+    Utils.hideElement(searchBarContainerElement);
+    Utils.hideElement(titleSectionElement);
+    Utils.hideElement(noteListElement);
+    Utils.hideElement(noteNotFoundElement);
+
+    const form = document.createElement('note-form');
+    form.id = 'noteFormView';
+
+    noteListContainerElement.appendChild(form);
+  };
+
+  addNoteButton.addEventListener('click', () => {
+    renderAddForm();
+  });
+
+  document.addEventListener('add-note', (event) => {
+    const { title, body } = event.detail;
+
+    NotesData.addNote({ title, body });
+
+    const form = document.querySelector('#noteFormView');
+    if (form) form.remove();
+
+    returnToListView();
+  });
+
+  document.addEventListener('cancel-add-note', () => {
+    const form = document.querySelector('#noteFormView');
+    if (form) form.remove();
+
+    returnToListView();
+  });
 };
 
 export default home;
