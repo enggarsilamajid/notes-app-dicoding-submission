@@ -49,8 +49,6 @@ section>.title-section {
 /* Start of Header */
 header {
   background-color: var(--secondary);
-
-  color: var(--text);
 }
 
 .app-bar {
@@ -61,6 +59,7 @@ header {
   margin: 0;
 
   font-size: 1.7em;
+  color: var(--text);
 }
 
 /* End of Header */
