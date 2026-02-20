@@ -112,7 +112,6 @@ main {
   line-height: 60px;
   font-size: 1em;
   font-weight: 700;
-  text-transform: uppercase;
   color: var(--secondary);
   white-space: nowrap;
   position: absolute;
