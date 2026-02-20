@@ -1,15 +1,16 @@
 class NoteForm extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+  }
 
-    connectedCallback() {
-        this.render();
-    }
+  connectedCallback() {
+    this.render();
+    this.setupValidation();
+  }
 
-    render() {
-        this.shadowRoot.innerHTML = `
+  render() {
+    this.shadowRoot.innerHTML = `
       <style>
         .form-container {
           padding: 20px;
@@ -18,52 +19,109 @@ class NoteForm extends HTMLElement {
         input, textarea {
           width: 100%;
           padding: 8px;
-          margin-bottom: 12px;
+          margin-bottom: 4px;
+          box-sizing: border-box;
+        }
+
+        .error {
+          font-size: 12px;
+          color: red;
+          margin-bottom: 10px;
+          min-height: 14px;
         }
 
         button {
           padding: 8px 16px;
           cursor: pointer;
         }
+
+        button:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
       </style>
 
       <div class="form-container">
-        <h2>New Note</h2>
+        <h2>Tambah Catatan</h2>
 
-        <input type="text" id="title" placeholder="Title" required />
-        <textarea id="body" rows="5" placeholder="Body" required></textarea>
+        <input type="text" id="title" placeholder="Judul" />
+        <div id="titleError" class="error"></div>
 
-        <button id="saveBtn">Save</button>
-        <button id="cancelBtn">Cancel</button>
+        <textarea id="body" rows="5" placeholder="Isi catatan"></textarea>
+        <div id="bodyError" class="error"></div>
+
+        <button id="saveBtn" disabled>Simpan</button>
+        <button id="cancelBtn">Batal</button>
       </div>
     `;
+  }
 
-        this.shadowRoot
-            .querySelector('#saveBtn')
-            .addEventListener('click', () => {
-                const title = this.shadowRoot.querySelector('#title').value;
-                const body = this.shadowRoot.querySelector('#body').value;
+  setupValidation() {
+    const titleInput = this.shadowRoot.querySelector('#title');
+    const bodyInput = this.shadowRoot.querySelector('#body');
+    const saveBtn = this.shadowRoot.querySelector('#saveBtn');
 
-                this.dispatchEvent(
-                    new CustomEvent('add-note', {
-                        detail: { title, body },
-                        bubbles: true,
-                        composed: true,
-                    })
-                );
-            });
+    const titleError = this.shadowRoot.querySelector('#titleError');
+    const bodyError = this.shadowRoot.querySelector('#bodyError');
 
-        this.shadowRoot
-            .querySelector('#cancelBtn')
-            .addEventListener('click', () => {
-                this.dispatchEvent(
-                    new CustomEvent('cancel-add-note', {
-                        bubbles: true,
-                        composed: true,
-                    })
-                );
-            });
-    }
+    const validate = () => {
+      let isValid = true;
+
+      // Title validation
+      if (!titleInput.value.trim()) {
+        titleError.textContent = 'Judul wajib diisi';
+        isValid = false;
+      } else if (titleInput.value.trim().length < 3) {
+        titleError.textContent = 'Minimal 3 karakter';
+        isValid = false;
+      } else {
+        titleError.textContent = '';
+      }
+
+      // Body validation
+      if (!bodyInput.value.trim()) {
+        bodyError.textContent = 'Isi catatan wajib diisi';
+        isValid = false;
+      } else if (bodyInput.value.trim().length < 5) {
+        bodyError.textContent = 'Minimal 5 karakter';
+        isValid = false;
+      } else {
+        bodyError.textContent = '';
+      }
+
+      saveBtn.disabled = !isValid;
+    };
+
+    // Realtime validation
+    titleInput.addEventListener('input', validate);
+    bodyInput.addEventListener('input', validate);
+
+    // Submit handler
+    saveBtn.addEventListener('click', () => {
+      this.dispatchEvent(
+        new CustomEvent('add-note', {
+          detail: {
+            title: titleInput.value.trim(),
+            body: bodyInput.value.trim(),
+          },
+          bubbles: true,
+          composed: true,
+        })
+      );
+    });
+
+    // Cancel handler
+    this.shadowRoot
+      .querySelector('#cancelBtn')
+      .addEventListener('click', () => {
+        this.dispatchEvent(
+          new CustomEvent('cancel-add-note', {
+            bubbles: true,
+            composed: true,
+          })
+        );
+      });
+  }
 }
 
 customElements.define('note-form', NoteForm);
