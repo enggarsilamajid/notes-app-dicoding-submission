@@ -48,9 +48,9 @@ section>.title-section {
 
 /* Start of Header */
 header {
-  background-color: var(--secondary);
+  background-color: var(--text);
 
-  color: var(--text);
+  color: var(--secondary);
 }
 
 .app-bar {
@@ -194,9 +194,9 @@ main {
 
 /* Start of Footer */
 footer {
-  background-color: var(--secondary);
+  background-color: var(--text);
 
-  color: var(--text);
+  color: var(--secondary);
 }
 
 footer .container {
