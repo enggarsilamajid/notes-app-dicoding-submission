@@ -61,8 +61,7 @@ class SearchBar extends HTMLElement {
         padding: 14px 10px 0 10px;
         border-inline: none;
         border-block-start: none;
-        border-block-end: var(--secondary);
-
+        border-block-end: 1px solid var(--secondary);
         font-size: 1rem;
       }
 
@@ -103,7 +102,7 @@ class SearchBar extends HTMLElement {
         <div class="search-form">
           <div class="form-group">
             <input id="name" type="search" placeholder=" " />
-            <label for="name">Note's Title</label>
+            <label for="name">Search Note's Title ...</label>
           </div>
         </div>
       </div>
