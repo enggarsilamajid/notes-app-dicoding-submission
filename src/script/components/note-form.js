@@ -25,7 +25,7 @@ class NoteForm extends HTMLElement {
 
         .error {
           font-size: 12px;
-          color: var(--additional);
+          color: var(--text);
           margin-bottom: 10px;
           min-height: 14px;
         }
