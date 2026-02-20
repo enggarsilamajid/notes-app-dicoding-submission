@@ -94,13 +94,16 @@ const home = () => {
 
     NotesData.toggleArchive(noteId);
 
-    Utils.showElement(searchBarContainerElement);
-    Utils.showElement(titleSectionElement);
-    showNotes();
+    returnToListView();
   });
 
   // tambah
   document.addEventListener('back-to-list', () => {
+    returnToListView();
+  });
+
+  // tambah
+  const returnToListView = () => {
     const detail = document.querySelector('#noteDetailView');
     if (detail) detail.remove();
 
@@ -108,7 +111,7 @@ const home = () => {
     Utils.showElement(titleSectionElement);
 
     showNotes();
-  });
+  };
 };
 
 export default home;
