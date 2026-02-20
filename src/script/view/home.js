@@ -67,8 +67,9 @@ const home = () => {
   };
 
   const returnToListView = () => {
-    Utils.showElement(searchBarContainerElement);
-    Utils.showElement(titleSectionElement);
+    searchBarContainerElement.classList.remove('view-hidden');
+    titleSectionElement.classList.remove('view-hidden');
+
     showNotes();
   };
 

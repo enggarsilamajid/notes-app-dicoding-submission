@@ -11,8 +11,8 @@ const renderDetail = ({
   returnToList,
 }) => {
   // Hide list related elements
-  Utils.hideElement(searchBar);
-  Utils.hideElement(titleSection);
+  searchBar.classList.add('view-hidden');
+  titleSection.classList.add('view-hidden');
   Utils.hideElement(noteList);
   Utils.hideElement(notFound);
 

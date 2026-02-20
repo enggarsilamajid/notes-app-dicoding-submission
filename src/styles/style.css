@@ -54,6 +54,10 @@ section>.title-section>h2 {
   justify-self: end;
 }
 
+.view-hidden {
+  display: none !important;
+}
+
 /* GLOBAL */
 
 /* Start of Header */
