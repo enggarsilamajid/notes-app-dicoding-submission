@@ -44,14 +44,14 @@ class NoteForm extends HTMLElement {
       <div class="form-container">
         <h2>Tambah Catatan</h2>
 
-        <input type="text" id="title" placeholder="Judul" />
+        <input type="text" id="title" placeholder="Title" />
         <div id="titleError" class="error"></div>
 
-        <textarea id="body" rows="5" placeholder="Isi catatan"></textarea>
+        <textarea id="body" rows="5" placeholder="Body"></textarea>
         <div id="bodyError" class="error"></div>
 
-        <button id="saveBtn" disabled>Simpan</button>
-        <button id="cancelBtn">Batal</button>
+        <button id="saveBtn" disabled>Save</button>
+        <button id="cancelBtn">Cancel</button>
       </div>
     `;
   }
@@ -69,10 +69,10 @@ class NoteForm extends HTMLElement {
 
       // Title validation
       if (!titleInput.value.trim()) {
-        titleError.textContent = 'Judul wajib diisi';
+        titleError.textContent = 'Title is required';
         isValid = false;
       } else if (titleInput.value.trim().length < 3) {
-        titleError.textContent = 'Minimal 3 karakter';
+        titleError.textContent = 'At least 3 characters';
         isValid = false;
       } else {
         titleError.textContent = '';
@@ -80,10 +80,10 @@ class NoteForm extends HTMLElement {
 
       // Body validation
       if (!bodyInput.value.trim()) {
-        bodyError.textContent = 'Isi catatan wajib diisi';
+        bodyError.textContent = 'Body is required';
         isValid = false;
       } else if (bodyInput.value.trim().length < 5) {
-        bodyError.textContent = 'Minimal 5 karakter';
+        bodyError.textContent = 'At least 5 characters';
         isValid = false;
       } else {
         bodyError.textContent = '';
