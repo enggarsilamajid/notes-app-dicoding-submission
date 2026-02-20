@@ -150,6 +150,10 @@ main {
   font-weight: lighter;
 }
 
+.note-list .list .card .note-info__date p {
+  font-size: 3em;
+}
+
 .note-list .list .card .note-info__description p {
   display: -webkit-box;
   margin-top: 10px;

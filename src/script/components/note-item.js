@@ -56,7 +56,11 @@ class NoteItem extends HTMLElement {
       .note-info__title h2 {
         font-weight: lighter;
       }
- 
+
+      .note-info__date p {
+        font-size: 3em;
+      }
+
       .note-info__description p {
         display: -webkit-box;
         margin-top: 10px;
@@ -82,7 +86,7 @@ class NoteItem extends HTMLElement {
           <div class="note-info__title">
             <h2>${this._note.title}</h2>
           </div>
-          <div class="note-info__description">
+          <div class="note-info__date">
             <p>${this._note.createdAt}</p>
           </div>
           <div class="note-info__description">
