@@ -48,9 +48,9 @@ section>.title-section {
 
 /* Start of Header */
 header {
-  background-color: cornflowerblue;
+  background-color: var(--secondary);
 
-  color: beige;
+  color: var(--text);
 }
 
 .app-bar {
@@ -162,14 +162,6 @@ main {
   gap: 16px;
 }
 
-/* .note-list .list .card .fan-art-club {
-  width: 100%;
-  max-height: 450px;
-
-  object-fit: cover;
-  object-position: center;
-} */
-
 .note-list .list .card .note-info {
   padding: 16px 24px;
 }
@@ -202,9 +194,9 @@ main {
 
 /* Start of Footer */
 footer {
-  background-color: cornflowerblue;
+  background-color: var(--secondary);
 
-  color: beige;
+  color: var(--text);
 }
 
 footer .container {
