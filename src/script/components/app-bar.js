@@ -47,7 +47,7 @@ class AppBar extends HTMLElement {
     this._shadowRoot.appendChild(this._style);
     this._shadowRoot.innerHTML += `      
       <div>
-        <h1 class="brand-name">Notes App by enggarsilamajid</h1>
+        <h1 class="brand-name">eng's Note App</h1>
       </div>
     `;
   }

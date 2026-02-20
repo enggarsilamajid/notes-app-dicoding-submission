@@ -187,7 +187,7 @@ main {
 
   font-size: 1.5rem;
   font-weight: lighter;
-  color: rgba(0, 0, 0, 0.5);
+  color: var(--text);
 }
 
 /* End of Main */
