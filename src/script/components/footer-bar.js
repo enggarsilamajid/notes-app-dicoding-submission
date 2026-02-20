@@ -1,4 +1,4 @@
-class AppBar extends HTMLElement {
+class FooterBar extends HTMLElement {
   _shadowRoot = null;
   _style = null;
  
@@ -13,21 +13,12 @@ class AppBar extends HTMLElement {
     this._style.textContent = `
       :host {
         display: block;
-        width: 100%;
-        
-        color: white;
-        
-        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
       }
  
       div {
         padding: 24px 20px;
-      }
  
-      .brand-name {
-        margin: 0;
-      
-        font-size: 1.7em;
+        text-align: center;
       }
     `;
   }
@@ -47,10 +38,10 @@ class AppBar extends HTMLElement {
     this._shadowRoot.appendChild(this._style);
     this._shadowRoot.innerHTML += `      
       <div>
-        <h1 class="brand-name">Sport Club Finder</h1>
+        Club Finder &copy; 2023
       </div>
     `;
   }
 }
  
-customElements.define('app-bar', AppBar);
+customElements.define('footer-bar', FooterBar);
