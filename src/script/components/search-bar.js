@@ -37,7 +37,7 @@ class SearchBar extends HTMLElement {
       }
 
       .floating-form {
-        background-color: white;
+        background-color: var(--text);
         padding: 16px;
         border-radius: 5px;
 
@@ -64,7 +64,7 @@ class SearchBar extends HTMLElement {
         padding: 14px 10px 0 10px;
         border-inline: none;
         border-block-start: none;
-        border-block-end: 1px solid cornflowerblue;
+        border-block-end: 1px solid var(--primary);
 
         font-size: 1rem;
       }
@@ -77,8 +77,7 @@ class SearchBar extends HTMLElement {
         line-height: 60px;
         font-size: 1em;
         font-weight: 700;
-        text-transform: uppercase;
-        color: cornflowerblue;
+        color: var(--primary);
 
         position: absolute;
         top: 0;
@@ -109,7 +108,7 @@ class SearchBar extends HTMLElement {
         <div class="search-form">
           <div class="form-group">
             <input id="name" type="search" placeholder=" " />
-            <label for="name">Note's Title</label>
+            <label for="name">Search Note's Title ... </label>
           </div>
         </div>
       </div>

@@ -76,7 +76,7 @@ main {
 }
 
 .floating-form {
-  background-color: white;
+  background-color: var(--text);
   padding: 16px;
   border-radius: 5px;
   position: sticky;
@@ -101,7 +101,7 @@ main {
   padding: 14px 10px 0 10px;
   border-inline: none;
   border-block-start: none;
-  border-block-end: 1px solid cornflowerblue;
+  border-block-end: 1px solid var(--primary);
   font-size: 1em;
 }
 
@@ -113,8 +113,7 @@ main {
   line-height: 60px;
   font-size: 1em;
   font-weight: 700;
-  text-transform: uppercase;
-  color: cornflowerblue;
+  color: var(--primary);
   white-space: nowrap;
   position: absolute;
   top: 0;
@@ -129,25 +128,6 @@ main {
   left: 10px;
   top: -16px;
   font-size: 0.8em;
-}
-
-.search-form button {
-  border: 0;
-  padding-inline: 24px;
-  background-color: cornflowerblue;
-  text-transform: uppercase;
-  font-size: 1rem;
-  color: white;
-  cursor: pointer;
-  transition: 100ms linear;
-}
-
-.search-form button:hover {
-  background-color: #4485ff;
-}
-
-.search-form button:active {
-  background-color: #6c9aee;
 }
 
 /* Search bar */
