@@ -42,7 +42,7 @@ class NoteForm extends HTMLElement {
       </style>
 
       <div class="form-container">
-        <h2>Tambah Catatan</h2>
+        <h2>New Note</h2>
 
         <input type="text" id="title" placeholder="Title" />
         <div id="titleError" class="error"></div>
