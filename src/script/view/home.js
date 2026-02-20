@@ -94,6 +94,8 @@ const home = () => {
 
     NotesData.toggleArchive(noteId);
 
+    Utils.showElement(searchBarContainerElement);
+    Utils.showElement(titleSectionElement);
     showNotes();
   });
 
