@@ -129,12 +129,12 @@ class NotesData {
 
   // tambah
   static getNoteById(id) {
-    return this._notes.find(note => note.id === id);
+    return this.getAll().find(note => note.id === id);
   }
 
   // tambah
   static toggleArchive(id) {
-    const note = this._notes.find(note => note.id === id);
+    const note = this.getAll().find(note => note.id === id);
     if (note) {
       note.archived = !note.archived;
     }
