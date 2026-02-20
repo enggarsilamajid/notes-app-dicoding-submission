@@ -72,7 +72,12 @@ const home = () => {
 
   // tambah
   const renderDetail = (note) => {
-    hideAllChildren();
+    if (!note) {
+      console.log('Note tidak ditemukan');
+      return;
+    }
+
+    Utils.emptyElement(noteListContainerElement);
 
     const detail = document.createElement('note-detail');
     detail.note = note;
