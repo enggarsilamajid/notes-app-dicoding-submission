@@ -2,10 +2,11 @@ import Utils from '../utils.js';
 import NotesData from '../data/local/notes.js';
 
 const home = () => {
-  const searchFormElement = document.querySelector('search-bar');
+  const searchBarElement = document.querySelector('search-bar');
   const noteListContainerElement = document.querySelector('#noteListContainer');
   const noteLoadingElement = noteListContainerElement.querySelector('.search-loading');
   const noteNotFoundElement = noteListContainerElement.querySelector('.not-found');
+  const noteQueryWaitingElement = noteListContainerElement.querySelector('.query-waiting');
   const noteListElement = noteListContainerElement.querySelector('note-list');
 
   const hideAllChildren = () => {
@@ -56,12 +57,17 @@ const home = () => {
   };
 
   const onSearchHandler = (event) => {
-    event.preventDefault();
     const { query } = event.detail;
     showNotes(query);
   };
 
-  searchFormElement.addEventListener('search', onSearchHandler);
+  const initializeView = () => {
+    hideAllChildren();
+  };
+
+  searchBarElement.addEventListener('search', onSearchHandler);
+
+  initializeView();
   showNotes();
 };
 
