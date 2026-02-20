@@ -14,7 +14,6 @@
 
 body {
   font-family: sans-serif;
-  background-color: var(--primary);
 }
 
 /* GLOBAL */
@@ -24,6 +23,7 @@ body {
   padding-block: 32px;
   padding-inline: 16px;
   margin-inline: auto;
+  background-color: var(--primary);
 }
 
 .card {
