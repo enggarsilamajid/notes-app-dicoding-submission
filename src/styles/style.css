@@ -39,7 +39,9 @@ label {
 }
 
 section>.title-section {
-  top: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-block-start: 2rem;
   font-size: 1.2em;
 }
