@@ -40,7 +40,6 @@ label {
 
 section>.title-section {
   margin-block-start: 2rem;
-  display: grid;
   font-size: 1.2em;
 }
 
@@ -172,6 +171,32 @@ main {
   font-size: 1.5rem;
   font-weight: lighter;
   color: var(--text);
+}
+
+/* New Note Button */
+#addNoteBtn {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#addNoteBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+#addNoteBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 }
 
 /* End of Main */
