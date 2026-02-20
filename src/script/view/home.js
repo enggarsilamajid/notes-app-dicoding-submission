@@ -11,7 +11,7 @@ const home = () => {
   const showNotesData = (query) => {
     showLoading();
 
-    const result = NotesData.searchClub(query);
+    const result = NotesData.searchNote(query);
     displayResult(result);
 
     showNoteList();
