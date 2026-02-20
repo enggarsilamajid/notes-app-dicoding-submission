@@ -60,7 +60,7 @@ const home = () => {
 
   searchBarElement.addEventListener('search', onSearchHandler);
   // ASLI
-  // showNotes();
+  showNotes();
 
   // tambah
   document.addEventListener('open-detail', (event) => {
