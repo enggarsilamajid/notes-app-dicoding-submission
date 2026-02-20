@@ -77,11 +77,7 @@ class NoteItem extends HTMLElement {
     this._shadowRoot.appendChild(this._style);
     this._shadowRoot.innerHTML += `
       <div class="card">
-        // <img 
-        //   class="fan-art-club"
-        //   src="${this._club.strTeamBadge}" 
-        //   alt="Fan Art: ${this._club.strTeam}"
-        // >
+        
         <div class="note-info">
           <div class="note-info__title">
             <h2>${this._note.title}</h2>
