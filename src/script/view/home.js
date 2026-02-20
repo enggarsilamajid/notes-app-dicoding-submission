@@ -4,9 +4,7 @@ import NotesData from '../data/local/notes.js';
 const home = () => {
   const searchBarElement = document.querySelector('search-bar');
   const noteListContainerElement = document.querySelector('#noteListContainer');
-  const noteLoadingElement = noteListContainerElement.querySelector('.search-loading');
   const noteNotFoundElement = noteListContainerElement.querySelector('.not-found');
-  const noteQueryWaitingElement = noteListContainerElement.querySelector('.query-waiting');
   const noteListElement = noteListContainerElement.querySelector('note-list');
 
   const hideAllChildren = () => {
@@ -32,20 +30,19 @@ const home = () => {
     Utils.showElement(noteListElement);
   };
 
-  const showLoading = () => {
-    hideAllChildren();
-    Utils.showElement(noteLoadingElement);
-  };
-
   const showNotFound = () => {
     hideAllChildren();
     Utils.showElement(noteNotFoundElement);
   };
 
   const showNotes = (query = '') => {
-    showLoading();
-
     const result = NotesData.searchNote(query);
+
+    if (!query) {
+      displayResult(result);
+      showNoteList();
+      return;
+    }
 
     if (result.length === 0) {
       showNotFound();
@@ -61,13 +58,9 @@ const home = () => {
     showNotes(query);
   };
 
-  const initializeView = () => {
-    hideAllChildren();
-  };
-
   searchBarElement.addEventListener('search', onSearchHandler);
 
-  initializeView();
+  // langsung tampil semua saat load
   showNotes();
 };
 
