@@ -116,14 +116,14 @@ class NotesData {
       return this.getAll();
     }
 
+    const loweredQuery = query.toLowerCase().replace(/\s/g, '');
+
     return notesData.filter((note) => {
-      const loweredCaseNoteTitle = (note.title || '').toLowerCase();
-      const jammedNoteTitle = loweredCaseNoteTitle.replace(/\s/g, '');
+      const loweredTitle = (note.title || '')
+        .toLowerCase()
+        .replace(/\s/g, '');
 
-      const loweredCaseQuery = query.toLowerCase();
-      const jammedQuery = loweredCaseQuery.replace(/\s/g, '');
-
-      return jammedNoteTitle.includes(jammedQuery);
+      return loweredTitle.includes(loweredQuery);
     });
   }
 }
