@@ -1,3 +1,5 @@
+import Utils from "../utils";
+
 class NoteItem extends HTMLElement {
   _shadowRoot = null;
   _style = null;
@@ -41,14 +43,6 @@ class NoteItem extends HTMLElement {
         overflow: hidden;
       }
  
-    //   .fan-art-club {
-    //     width: 100%;
-    //     max-height: 450px;
-        
-    //     object-fit: cover;
-    //     object-position: center;
-    //   }
- 
       .note-info {
         padding: 16px 24px;
       }
@@ -86,11 +80,11 @@ class NoteItem extends HTMLElement {
           <div class="note-info__title">
             <h2>${this._note.title}</h2>
           </div>
-          <div class="note-info__date">
-            <p>${this._note.createdAt}</p>
-          </div>
           <div class="note-info__description">
             <p>${this._note.body}</p>
+          </div>
+          <div class="note-info__date">
+            <p>${Utils.formatDate(this._note.createdAt)}</p>
           </div>
         </div>
       </div>

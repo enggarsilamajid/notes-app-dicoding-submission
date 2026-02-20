@@ -16,6 +16,16 @@ class Utils {
   static isValidInteger(newValue) {
     return Number.isNaN(newValue) || Number.isFinite(newValue);
   }
+
+  static formatDate(dateString) {
+    const date = new Date(dateString);
+
+    return new Intl.DateTimeFormat('id-ID', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    }).format(date);
+  }
 }
 
 export default Utils;
