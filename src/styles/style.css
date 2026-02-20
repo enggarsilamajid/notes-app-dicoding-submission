@@ -76,7 +76,7 @@ main {
 }
 
 .floating-form {
-  background-color: var(--text);
+  background-color: white;
   padding: 16px;
   border-radius: 5px;
   position: sticky;
@@ -101,7 +101,7 @@ main {
   padding: 14px 10px 0 10px;
   border-inline: none;
   border-block-start: none;
-  border-block-end: 1px solid var(--primary);
+  border-block-end: 1px solid cornflowerblue;
   font-size: 1em;
 }
 
@@ -113,7 +113,8 @@ main {
   line-height: 60px;
   font-size: 1em;
   font-weight: 700;
-  color: var(--primary);
+  text-transform: uppercase;
+  color: cornflowerblue;
   white-space: nowrap;
   position: absolute;
   top: 0;
