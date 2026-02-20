@@ -1,5 +1,5 @@
 import Utils from '../utils.js';
-import Notes from '../data/local/notes.js';
+import NotesData from '../data/local/notes.js';
 
 const home = () => {
   const searchFormElement = document.querySelector('search-bar');
@@ -11,7 +11,7 @@ const home = () => {
   const showNotesData = (query) => {
     showLoading();
 
-    const result = Notes.searchClub(query);
+    const result = NotesData.searchClub(query);
     displayResult(result);
 
     showNoteList();

@@ -106,7 +106,7 @@ const notesData = [
   },
 ];
 
-class Notes {
+class NotesData {
   static getAll() {
     return notesData;
   }
@@ -124,4 +124,4 @@ class Notes {
   }
 }
 
-export default Notes;
+export default NotesData;
