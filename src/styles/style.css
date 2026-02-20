@@ -48,9 +48,9 @@ section>.title-section {
 
 /* Start of Header */
 header {
-  background-color: var(--text);
+  background-color: var(--secondary);
 
-  color: var(--secondary);
+  color: var(--text);
 }
 
 .app-bar {
