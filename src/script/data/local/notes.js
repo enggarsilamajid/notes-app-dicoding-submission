@@ -149,6 +149,14 @@ class NotesData {
 
     notesData.unshift(newNote);
   }
+
+  static getActiveNotes() {
+    return notesData.filter(note => !note.archived);
+  }
+
+  static getArchivedNotes() {
+    return notesData.filter(note => note.archived);
+  }
 }
 
 export default NotesData;

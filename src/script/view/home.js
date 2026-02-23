@@ -8,6 +8,8 @@ const home = () => {
   const searchBarContainerElement = document.querySelector('#searchBarContainer');
   const titleSectionElement = document.querySelector('.title-section');
 
+  const noteFilterElement = document.querySelector('note-filter');
+
   const searchBarElement = document.querySelector('search-bar');
   const noteListContainerElement = document.querySelector('#noteListContainer');
   const noteNotFoundElement =
@@ -103,6 +105,19 @@ const home = () => {
       notFound: noteNotFoundElement,
       returnToList: returnToListView,
     });
+  });
+
+  // Change display active notes or archived notes
+  noteFilterElement.addEventListener('filter-change', (event) => {
+    const { filter } = event.detail;
+
+    if (filter === 'active') {
+      displayResult(NotesData.getActiveNotes());
+    } else {
+      displayResult(NotesData.getArchivedNotes());
+    }
+
+    showNoteList();
   });
 };
 
