@@ -1,5 +1,5 @@
 import Utils from '../utils.js';
-import NotesData from '../data/local/notes.js';
+import NotesAPI from '../data/api/notes-api.js';
 
 const renderAddForm = ({
   container,
@@ -9,7 +9,6 @@ const renderAddForm = ({
   notFound,
   returnToList,
 }) => {
-  // Hide list related elements
   searchBar.classList.add('view-hidden');
   titleSection.classList.add('view-hidden');
   Utils.hideElement(noteList);
@@ -20,10 +19,22 @@ const renderAddForm = ({
 
   container.appendChild(form);
 
-  const addHandler = (event) => {
-    NotesData.addNote(event.detail);
-    cleanup();
-    returnToList();
+  const addHandler = async (event) => {
+    const { title, body } = event.detail;
+
+    container.innerHTML =
+      `<loading-indicator></loading-indicator>`;
+
+    try {
+      await NotesAPI.addNote({ title, body });
+
+      cleanup();
+      returnToList();
+
+    } catch (error) {
+      container.innerHTML =
+        `<p>Gagal menambahkan catatan</p>`;
+    }
   };
 
   const cancelHandler = () => {
@@ -35,7 +46,8 @@ const renderAddForm = ({
     document.removeEventListener('add-note', addHandler);
     document.removeEventListener('cancel-add-note', cancelHandler);
 
-    const existingForm = document.querySelector('#noteFormView');
+    const existingForm =
+      document.querySelector('#noteFormView');
     if (existingForm) existingForm.remove();
   };
 

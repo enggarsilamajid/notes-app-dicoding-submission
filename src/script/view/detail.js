@@ -1,5 +1,5 @@
 import Utils from '../utils.js';
-import NotesData from '../data/local/notes.js';
+import NotesAPI from '../data/api/notes-api.js';
 
 const renderDetail = ({
   note,
@@ -10,7 +10,6 @@ const renderDetail = ({
   notFound,
   returnToList,
 }) => {
-  // Hide list related elements
   searchBar.classList.add('view-hidden');
   titleSection.classList.add('view-hidden');
   Utils.hideElement(noteList);
@@ -22,10 +21,24 @@ const renderDetail = ({
 
   container.appendChild(detail);
 
-  const toggleArchiveHandler = (event) => {
-    NotesData.toggleArchive(event.detail.id);
-    cleanup();
-    returnToList();
+  const toggleArchiveHandler = async (event) => {
+    container.innerHTML =
+      `<loading-indicator></loading-indicator>`;
+
+    try {
+      if (note.archived) {
+        await NotesAPI.unarchiveNote(event.detail.id);
+      } else {
+        await NotesAPI.archiveNote(event.detail.id);
+      }
+
+      cleanup();
+      returnToList();
+
+    } catch (error) {
+      container.innerHTML =
+        `<p>Gagal mengubah status arsip</p>`;
+    }
   };
 
   const backHandler = () => {
@@ -37,7 +50,8 @@ const renderDetail = ({
     document.removeEventListener('toggle-archive', toggleArchiveHandler);
     document.removeEventListener('back-to-list', backHandler);
 
-    const existingDetail = document.querySelector('#noteDetailView');
+    const existingDetail =
+      document.querySelector('#noteDetailView');
     if (existingDetail) existingDetail.remove();
   };
 

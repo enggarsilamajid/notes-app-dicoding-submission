@@ -1,5 +1,5 @@
 import Utils from '../utils.js';
-import NotesData from '../data/local/notes.js';
+import NotesAPI from '../data/api/notes-api.js';
 import renderDetail from './detail.js';
 import renderAddForm from './add-note.js';
 
@@ -11,12 +11,8 @@ const createStore = () => {
 
   return {
     getState: () => state,
-
     setState: (newState) => {
-      state = {
-        ...state,
-        ...newState,
-      };
+      state = { ...state, ...newState };
     },
   };
 };
@@ -29,7 +25,6 @@ const home = () => {
   const titleSectionElement = document.querySelector('.title-section');
 
   const noteFilterElement = document.querySelector('note-filter');
-
   const searchBarElement = document.querySelector('search-bar');
   const noteListContainerElement = document.querySelector('#noteListContainer');
   const noteNotFoundElement =
@@ -41,6 +36,12 @@ const home = () => {
     Array.from(noteListContainerElement.children).forEach((element) => {
       Utils.hideElement(element);
     });
+  };
+
+  const showLoading = () => {
+    hideAllChildren();
+    noteListContainerElement.innerHTML =
+      `<loading-indicator></loading-indicator>`;
   };
 
   const displayResult = (notes) => {
@@ -65,70 +66,55 @@ const home = () => {
     Utils.showElement(noteNotFoundElement);
   };
 
-  const render = () => {
+  const render = async () => {
     const { filter, query } = store.getState();
 
-    let notes;
+    showLoading();
 
-    if (filter === 'active') {
-      notes = NotesData.getActiveNotes();
-    } else {
-      notes = NotesData.getArchivedNotes();
+    try {
+      let notes =
+        filter === 'active'
+          ? await NotesAPI.getNotes()
+          : await NotesAPI.getArchivedNotes();
+
+      if (query) {
+        notes = notes.filter((note) =>
+          note.title.toLowerCase().includes(query.toLowerCase())
+        );
+      }
+
+      if (!notes || notes.length === 0) {
+        showNotFound();
+        return;
+      }
+
+      displayResult(notes);
+      showNoteList();
+
+    } catch (error) {
+      noteListContainerElement.innerHTML =
+        `<p>Gagal memuat data</p>`;
     }
-
-    if (query) {
-      notes = notes.filter((note) =>
-        note.title.toLowerCase().includes(query.toLowerCase())
-      );
-    }
-
-    if (notes.length === 0) {
-      showNotFound();
-      return;
-    }
-
-    displayResult(notes);
-    showNoteList();
   };
 
   const onSearchHandler = (event) => {
-    const { query } = event.detail;
-
-    store.setState({
-      query,
-    });
-
+    store.setState({ query: event.detail.query });
     render();
   };
 
   const returnToListView = () => {
     searchBarContainerElement.classList.remove('view-hidden');
     titleSectionElement.classList.remove('view-hidden');
-
     render();
   };
 
-  // Initial load
   searchBarElement.addEventListener('search', onSearchHandler);
-  render();
 
-  // Open Detail
-  document.addEventListener('open-detail', (event) => {
-    const noteId = event.detail.id;
-    const selectedNote = NotesData.getNoteById(noteId);
-
-    renderDetail({
-      note: selectedNote,
-      container: noteListContainerElement,
-      searchBar: searchBarContainerElement,
-      titleSection: titleSectionElement,
-      noteList: noteListElement,
-      notFound: noteNotFoundElement,
-      returnToList: returnToListView,
-    });
+  noteFilterElement.addEventListener('filter-change', (event) => {
+    store.setState({ filter: event.detail.filter });
+    render();
   });
 
-  // Open Add Form
   addNoteButton.addEventListener('click', () => {
     renderAddForm({
       container: noteListContainerElement,
@@ -140,14 +126,31 @@ const home = () => {
     });
   });
 
-  // Change display active notes or archived notes
-  noteFilterElement.addEventListener('filter-change', (event) => {
-    store.setState({
-      filter: event.detail.filter,
-    });
+  document.addEventListener('open-detail', async (event) => {
+    const noteId = event.detail.id;
 
-    render();
+    showLoading();
+
+    try {
+      const selectedNote = await NotesAPI.getNoteById(noteId);
+
+      renderDetail({
+        note: selectedNote,
+        container: noteListContainerElement,
+        searchBar: searchBarContainerElement,
+        titleSection: titleSectionElement,
+        noteList: noteListElement,
+        notFound: noteNotFoundElement,
+        returnToList: returnToListView,
+      });
+
+    } catch (error) {
+      noteListContainerElement.innerHTML =
+        `<p>Gagal memuat detail</p>`;
+    }
   });
+
+  render();
 };
 
 export default home;
