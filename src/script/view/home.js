@@ -75,7 +75,7 @@ const home = () => {
 
   // Initial load
 searchBarElement.addEventListener('search', onSearchHandler);
-
+// shownotes();
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     await NotesData.fetchNotes();
