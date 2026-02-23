@@ -74,8 +74,17 @@ const home = () => {
   };
 
   // Initial load
-  searchBarElement.addEventListener('search', onSearchHandler);
-  showNotes();
+searchBarElement.addEventListener('search', onSearchHandler);
+
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await NotesData.fetchNotes();
+    showNotes();
+  } catch (error) {
+    console.error('Gagal mengambil data dari API', error);
+    showNotFound();
+  }
+});
 
   // Open Detail
   document.addEventListener('open-detail', (event) => {
