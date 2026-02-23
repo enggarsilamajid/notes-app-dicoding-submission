@@ -35,11 +35,11 @@ class NoteFilter extends HTMLElement {
 
       <div class="filter-container">
         <button id="activeBtn" class="${this.active === 'active' ? 'active' : ''}">
-          Active Notes
+          Active
         </button>
 
         <button id="archivedBtn" class="${this.active === 'archived' ? 'active' : ''}">
-          Archived Notes
+          Archived
         </button>
       </div>
     `;
