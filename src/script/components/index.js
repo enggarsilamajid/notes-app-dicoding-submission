@@ -6,3 +6,4 @@ import './note-item.js';
 import './note-detail.js';
 import './note-form.js';
 import './note-filter.js';
+import './loading-indicator.js';
