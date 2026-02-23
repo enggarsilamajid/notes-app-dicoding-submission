@@ -6,121 +6,66 @@ class NoteForm extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    this.setupValidation();
   }
 
   render() {
     this.shadowRoot.innerHTML = `
       <style>
-        .form-container {
+        form {
           padding: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
         }
 
         input, textarea {
-          width: 100%;
           padding: 8px;
-          margin-bottom: 4px;
-          box-sizing: border-box;
-        }
-
-        .error {
-          font-size: 12px;
-          color: var(--text);
-          margin-bottom: 10px;
-          min-height: 14px;
+          font-size: 14px;
         }
 
         button {
-          padding: 8px 16px;
+          padding: 8px 12px;
           cursor: pointer;
-        }
-
-        button:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
         }
       </style>
 
-      <div class="form-container">
-        <h2>New Note</h2>
+      <form id="form">
+        <input type="text" id="title" placeholder="Judul" required />
+        <textarea id="body" placeholder="Isi catatan" required></textarea>
 
-        <input type="text" id="title" placeholder="Title" />
-        <div id="titleError" class="error"></div>
-
-        <textarea id="body" rows="5" placeholder="Body"></textarea>
-        <div id="bodyError" class="error"></div>
-
-        <button id="saveBtn" disabled>Save</button>
-        <button id="cancelBtn">Cancel</button>
-      </div>
+        <div>
+          <button type="submit">Tambah</button>
+          <button type="button" id="cancelBtn">Batal</button>
+        </div>
+      </form>
     `;
-  }
 
-  setupValidation() {
-    const titleInput = this.shadowRoot.querySelector('#title');
-    const bodyInput = this.shadowRoot.querySelector('#body');
-    const saveBtn = this.shadowRoot.querySelector('#saveBtn');
+    const form = this.shadowRoot.querySelector('#form');
+    const cancelBtn = this.shadowRoot.querySelector('#cancelBtn');
 
-    const titleError = this.shadowRoot.querySelector('#titleError');
-    const bodyError = this.shadowRoot.querySelector('#bodyError');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-    const validate = () => {
-      let isValid = true;
+      const title = this.shadowRoot.querySelector('#title').value;
+      const body = this.shadowRoot.querySelector('#body').value;
 
-      // Title validation
-      if (!titleInput.value.trim()) {
-        titleError.textContent = 'Title is required';
-        isValid = false;
-      } else if (titleInput.value.trim().length < 3) {
-        titleError.textContent = 'At least 3 characters';
-        isValid = false;
-      } else {
-        titleError.textContent = '';
-      }
-
-      // Body validation
-      if (!bodyInput.value.trim()) {
-        bodyError.textContent = 'Body is required';
-        isValid = false;
-      } else if (bodyInput.value.trim().length < 5) {
-        bodyError.textContent = 'At least 5 characters';
-        isValid = false;
-      } else {
-        bodyError.textContent = '';
-      }
-
-      saveBtn.disabled = !isValid;
-    };
-
-    // Realtime validation
-    titleInput.addEventListener('input', validate);
-    bodyInput.addEventListener('input', validate);
-
-    // Submit handler
-    saveBtn.addEventListener('click', () => {
       this.dispatchEvent(
         new CustomEvent('add-note', {
-          detail: {
-            title: titleInput.value.trim(),
-            body: bodyInput.value.trim(),
-          },
+          detail: { title, body },
           bubbles: true,
           composed: true,
         })
       );
     });
 
-    // Cancel handler
-    this.shadowRoot
-      .querySelector('#cancelBtn')
-      .addEventListener('click', () => {
-        this.dispatchEvent(
-          new CustomEvent('cancel-add-note', {
-            bubbles: true,
-            composed: true,
-          })
-        );
-      });
+    cancelBtn.addEventListener('click', () => {
+      this.dispatchEvent(
+        new CustomEvent('cancel-add-note', {
+          bubbles: true,
+          composed: true,
+        })
+      );
+    });
   }
 }
 

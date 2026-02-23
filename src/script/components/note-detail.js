@@ -1,60 +1,60 @@
-import Utils from '../utils.js';
-
 class NoteDetail extends HTMLElement {
-  _shadowRoot = null;
-  _note = null;
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this._note = null;
+  }
 
   set note(value) {
     this._note = value;
     this.render();
   }
 
-  constructor() {
-    super();
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-  }
-
   render() {
-    this._shadowRoot.innerHTML = `
+    if (!this._note) return;
+
+    const { id, title, body, createdAt, archived } = this._note;
+
+    this.shadowRoot.innerHTML = `
       <style>
         .container {
           padding: 20px;
         }
 
         button {
-          margin-top: 20px;
-          padding: 8px 16px;
+          margin-right: 8px;
+          padding: 8px 12px;
           cursor: pointer;
         }
       </style>
 
       <div class="container">
-        <h2>${this._note.title}</h2>
-        <p>${Utils.formatDate(this._note.createdAt)}</p>
-        <p>${this._note.body}</p>
+        <h2>${title}</h2>
+        <p><small>${new Date(createdAt).toLocaleString()}</small></p>
+        <p>${body}</p>
 
-        <button class="archive-btn">
-          ${this._note.archived ? 'Unarchive' : 'Archive'}
+        <button id="archiveBtn">
+          ${archived ? 'Unarchive' : 'Archive'}
         </button>
 
-        <button class="back-btn">Back</button>
+        <button id="backBtn">Kembali</button>
       </div>
     `;
 
-    this._shadowRoot
-      .querySelector('.archive-btn')
+    this.shadowRoot
+      .querySelector('#archiveBtn')
       .addEventListener('click', () => {
         this.dispatchEvent(
           new CustomEvent('toggle-archive', {
-            detail: { id: this._note.id },
+            detail: { id },
             bubbles: true,
             composed: true,
           })
         );
       });
 
-    this._shadowRoot
-      .querySelector('.back-btn')
+    this.shadowRoot
+      .querySelector('#backBtn')
       .addEventListener('click', () => {
         this.dispatchEvent(
           new CustomEvent('back-to-list', {

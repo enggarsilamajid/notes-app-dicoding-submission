@@ -1,31 +1,12 @@
-import Utils from "../utils.js";
-
 class NoteItem extends HTMLElement {
-  _shadowRoot = null;
-  _style = null;
-  _note = {
-    id: null,
-    title: null,
-    body: null,
-    createdAt: null,
-    archived: null,
-  };
-
   constructor() {
     super();
-
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._style = document.createElement('style');
-  }
-
-  _emptyContent() {
-    this._shadowRoot.innerHTML = '';
+    this.attachShadow({ mode: 'open' });
+    this._note = null;
   }
 
   set note(value) {
     this._note = value;
-
-    // Render ulang
     this.render();
   }
 
@@ -33,74 +14,57 @@ class NoteItem extends HTMLElement {
     return this._note;
   }
 
-  _updateStyle() {
-    this._style.textContent = `
-      :host {
-        display: block;
-        border-radius: 8px;
-        
-        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
-        overflow: hidden;
-      }
- 
-      .note-info {
-        padding: 16px 24px;
-      }
- 
-      .note-info__title h2 {
-        font-weight: lighter;
-      }
-
-      .note-info__date p {
-        font-size: .8em;
-      }
-
-      .note-info__description p {
-        display: -webkit-box;
-        margin-top: 10px;
-        
-        overflow: hidden;
- 
-        text-overflow: ellipsis;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 5; /* number of lines to show */
-      }
-    `;
-  }
-
   render() {
-    this._emptyContent();
-    this._updateStyle();
+    if (!this._note) return;
 
-    this._shadowRoot.appendChild(this._style);
-    this._shadowRoot.innerHTML += `
+    const { id, title, body, createdAt, archived } = this._note;
+
+    this.shadowRoot.innerHTML = `
+      <style>
+        .card {
+          padding: 16px;
+          border-radius: 8px;
+          background: white;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+          cursor: pointer;
+        }
+
+        .title {
+          font-weight: bold;
+          margin-bottom: 8px;
+        }
+
+        .date {
+          font-size: 12px;
+          color: gray;
+          margin-bottom: 8px;
+        }
+
+        .archived {
+          font-size: 11px;
+          color: red;
+        }
+      </style>
+
       <div class="card">
-        
-        <div class="note-info">
-          <div class="note-info__title">
-            <h2>${this._note.title}</h2>
-          </div>
-          <div class="note-info__description">
-            <p>${this._note.body}</p>
-          </div>
-          <div class="note-info__date">
-            <p>${Utils.formatDate(this._note.createdAt)}</p>
-          </div>
-        </div>
+        <div class="title">${title}</div>
+        <div class="date">${new Date(createdAt).toLocaleString()}</div>
+        <div>${body.slice(0, 100)}...</div>
+        ${archived ? `<div class="archived">Archived</div>` : ''}
       </div>
     `;
 
-    const card = this._shadowRoot.querySelector('.card');
-
-    card.addEventListener('click', () => {
-      this.dispatchEvent(
-        new CustomEvent('open-detail', {
-          detail: { id: this._note.id },
-          bubbles: true,
-          composed: true,
-        })
-      );
-    });
+    this.shadowRoot
+      .querySelector('.card')
+      .addEventListener('click', () => {
+        this.dispatchEvent(
+          new CustomEvent('open-detail', {
+            detail: { id },
+            bubbles: true,
+            composed: true,
+          })
+        );
+      });
   }
 }
 
