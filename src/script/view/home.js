@@ -3,7 +3,27 @@ import NotesData from '../data/local/notes.js';
 import renderDetail from './detail.js';
 import renderAddForm from './add-note.js';
 
+const createStore = () => {
+  let state = {
+    filter: 'active',
+    query: '',
+  };
+
+  return {
+    getState: () => state,
+
+    setState: (newState) => {
+      state = {
+        ...state,
+        ...newState,
+      };
+    },
+  };
+};
+
 const home = () => {
+  const store = createStore();
+
   const addNoteButton = document.querySelector('#addNoteBtn');
   const searchBarContainerElement = document.querySelector('#searchBarContainer');
   const titleSectionElement = document.querySelector('.title-section');
@@ -45,39 +65,52 @@ const home = () => {
     Utils.showElement(noteNotFoundElement);
   };
 
-  const showNotes = (query = '') => {
-    const result = NotesData.searchNote(query);
+  const render = () => {
+    const { filter, query } = store.getState();
 
-    if (!query) {
-      displayResult(result);
-      showNoteList();
-      return;
+    let notes;
+
+    if (filter === 'active') {
+      notes = NotesData.getActiveNotes();
+    } else {
+      notes = NotesData.getArchivedNotes();
     }
 
-    if (result.length === 0) {
+    if (query) {
+      notes = notes.filter((note) =>
+        note.title.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+
+    if (notes.length === 0) {
       showNotFound();
       return;
     }
 
-    displayResult(result);
+    displayResult(notes);
     showNoteList();
   };
 
   const onSearchHandler = (event) => {
     const { query } = event.detail;
-    showNotes(query);
+
+    store.setState({
+      query,
+    });
+
+    render();
   };
 
   const returnToListView = () => {
     searchBarContainerElement.classList.remove('view-hidden');
     titleSectionElement.classList.remove('view-hidden');
 
-    showNotes();
+    render();
   };
 
   // Initial load
   searchBarElement.addEventListener('search', onSearchHandler);
-  showNotes();
+  render();
 
   // Open Detail
   document.addEventListener('open-detail', (event) => {
@@ -109,15 +142,11 @@ const home = () => {
 
   // Change display active notes or archived notes
   noteFilterElement.addEventListener('filter-change', (event) => {
-    const { filter } = event.detail;
+    store.setState({
+      filter: event.detail.filter,
+    });
 
-    if (filter === 'active') {
-      displayResult(NotesData.getActiveNotes());
-    } else {
-      displayResult(NotesData.getArchivedNotes());
-    }
-
-    showNoteList();
+    render();
   });
 };
 
