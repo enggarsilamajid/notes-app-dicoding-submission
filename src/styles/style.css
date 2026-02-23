@@ -40,7 +40,7 @@ label {
 
 section>.title-section {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   margin-block-start: 2rem;
   font-size: 1.2em;
