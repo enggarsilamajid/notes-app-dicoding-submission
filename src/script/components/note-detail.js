@@ -8,6 +8,10 @@ class NoteDetail extends HTMLElement {
     this._note = value;
     this.render();
   }
+  
+  get note() {
+    return this._note;
+  }
 
   constructor() {
     super();
