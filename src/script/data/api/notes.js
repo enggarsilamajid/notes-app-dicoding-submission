@@ -1,28 +1,45 @@
 const BASE_URL = 'https://notes-api.dicoding.dev/v2';
 
 class NotesData {
-  static _notes = [];
+  static _activeNotes = [];
+  static _archivedNotes = [];
 
   static async fetchNotes() {
-    const response = await fetch(`${BASE_URL}/notes`);
-    const result = await response.json();
+    const [activeResponse, archivedResponse] = await Promise.all([
+      fetch(`${BASE_URL}/notes`),
+      fetch(`${BASE_URL}/notes/archived`),
+    ]);
 
-    this._notes = result.data;
-    return this._notes;
+    const activeResult = await activeResponse.json();
+    const archivedResult = await archivedResponse.json();
+
+    this._activeNotes = activeResult.data;
+    this._archivedNotes = archivedResult.data;
+
+    return {
+      active: this._activeNotes,
+      archived: this._archivedNotes,
+    };
   }
 
-  static getAll() {
-    return this._notes;
+  static getActive() {
+    return this._activeNotes;
+  }
+
+  static getArchived() {
+    return this._archivedNotes;
   }
 
   static searchNote(query) {
+    const notes = this.getActive();
+
     if (!query || query.trim() === '') {
-      return this.getAll();
+      return notes;
     }
 
     const loweredQuery = query.toLowerCase().replace(/\s/g, '');
 
-    return this._notes.filter((note) => {
+    return notes.filter((note) => {
       const loweredTitle = (note.title || '')
         .toLowerCase()
         .replace(/\s/g, '');

@@ -21,16 +21,33 @@ const home = () => {
     });
   };
 
-  const displayResult = (notes) => {
+  const displayResult = (activeNotes, archivedNotes) => {
     Utils.emptyElement(noteListElement);
 
-    const noteItemElements = notes.map((note) => {
-      const noteItemElement = document.createElement('note-item');
-      noteItemElement.note = note;
-      return noteItemElement;
+    const activeTitle = document.createElement('h2');
+    activeTitle.textContent = 'Active Notes';
+
+    const archivedTitle = document.createElement('h2');
+    archivedTitle.textContent = 'Archived Notes';
+
+    const activeItems = activeNotes.map((note) => {
+      const el = document.createElement('note-item');
+      el.note = note;
+      return el;
     });
 
-    noteListElement.append(...noteItemElements);
+    const archivedItems = archivedNotes.map((note) => {
+      const el = document.createElement('note-item');
+      el.note = note;
+      return el;
+    });
+
+    noteListElement.append(
+      activeTitle,
+      ...activeItems,
+      archivedTitle,
+      ...archivedItems
+    );
   };
 
   const showNoteList = () => {
@@ -44,20 +61,18 @@ const home = () => {
   };
 
   const showNotes = (query = '') => {
-    const result = NotesData.searchNote(query);
+    const active = query
+      ? NotesData.searchNote(query)
+      : NotesData.getActive();
 
-    if (!query) {
-      displayResult(result);
-      showNoteList();
-      return;
-    }
+    const archived = NotesData.getArchived();
 
-    if (result.length === 0) {
+    if (active.length === 0 && archived.length === 0) {
       showNotFound();
       return;
     }
 
-    displayResult(result);
+    displayResult(active, archived);
     showNoteList();
   };
 
