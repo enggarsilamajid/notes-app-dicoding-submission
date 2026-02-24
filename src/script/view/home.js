@@ -21,35 +21,6 @@ const home = () => {
     });
   };
 
-  const displayResult = (activeNotes, archivedNotes) => {
-    Utils.emptyElement(noteListElement);
-
-    const activeTitle = document.createElement('h2');
-    activeTitle.textContent = 'Active Notes';
-
-    const archivedTitle = document.createElement('h2');
-    archivedTitle.textContent = 'Archived Notes';
-
-    const activeItems = activeNotes.map((note) => {
-      const el = document.createElement('note-item');
-      el.note = note;
-      return el;
-    });
-
-    const archivedItems = archivedNotes.map((note) => {
-      const el = document.createElement('note-item');
-      el.note = note;
-      return el;
-    });
-
-    noteListElement.append(
-      activeTitle,
-      ...activeItems,
-      archivedTitle,
-      ...archivedItems
-    );
-  };
-
   const showNoteList = () => {
     hideAllChildren();
     Utils.showElement(noteListElement);
