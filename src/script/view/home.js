@@ -21,12 +21,16 @@ const home = () => {
 
   const showLoading = () => {
     hideAllChildren();
-    loadingElement.style.display = 'block';
-  }
+    loadingElement.show();
+  };
 
   const hideAllChildren = () => {
     Array.from(noteListContainerElement.children).forEach((element) => {
-      element.style.display = 'none';
+      if (element.tagName === 'LOADING-INDICATOR') {
+        element.hide();
+      } else {
+        element.style.display = 'none';
+      }
     });
   };
 
@@ -129,5 +133,6 @@ const home = () => {
     });
   });
 };
+
 
 export default home;
