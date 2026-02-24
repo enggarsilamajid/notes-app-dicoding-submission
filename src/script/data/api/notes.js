@@ -66,6 +66,34 @@ class NotesData {
 
     return result.message;
   }
+
+  static async archiveNote(id) {
+    const response = await fetch(`${BASE_URL}/notes/${id}/archive`, {
+      method: 'POST',
+    });
+
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      throw new Error(result.message);
+    }
+
+    return result.message;
+  }
+
+  static async unarchiveNote(id) {
+    const response = await fetch(`${BASE_URL}/notes/${id}/unarchive`, {
+      method: 'POST',
+    });
+
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      throw new Error(result.message);
+    }
+
+    return result.message;
+  }
 }
 
 export default NotesData;

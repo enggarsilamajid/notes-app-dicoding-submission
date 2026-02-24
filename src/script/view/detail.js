@@ -36,11 +36,25 @@ const renderDetail = ({
     }
   }
 
-  const toggleArchiveHandler = (event) => {
-    NotesData.toggleArchive(event.detail.id);
-    cleanup();
-    returnToList();
-  };
+  const toggleArchiveHandler = async (event) => {
+    try {
+      const noteId = event.detail.id;
+
+      if (note.archived) {
+        await NotesData.unarchiveNote(noteId);
+      } else {
+        await NotesData.archiveNote(noteId);
+      }
+
+      await NotesData.fetchNotes();
+
+      cleanup();
+      returnToList();
+    } catch (error) {
+      console.error('Failed to change status', error);
+      alert('Failed to change status');
+    }
+  }
 
   const backHandler = () => {
     cleanup();
