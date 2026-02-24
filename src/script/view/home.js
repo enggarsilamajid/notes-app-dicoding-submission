@@ -21,7 +21,9 @@ const home = () => {
 
   const showLoading = () => {
     hideAllChildren();
-    Utils.showElement(loadingElement);
+    if (loadingElement) {
+      Utils.showElement(loadingElement);
+    }
   }
 
   const hideAllChildren = () => {
