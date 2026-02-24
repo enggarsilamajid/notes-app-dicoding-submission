@@ -21,25 +21,23 @@ const home = () => {
 
   const showLoading = () => {
     hideAllChildren();
-    if (loadingElement) {
-      Utils.showElement(loadingElement);
-    }
+    loadingElement.style.display = 'block';
   }
 
   const hideAllChildren = () => {
     Array.from(noteListContainerElement.children).forEach((element) => {
-      Utils.hideElement(element);
+      element.style.display = 'none';
     });
   };
 
   const showNoteList = () => {
     hideAllChildren();
-    Utils.showElement(noteListElement);
+  noteListElement.style.display = 'block';
   };
 
   const showNotFound = () => {
     hideAllChildren();
-    Utils.showElement(noteNotFoundElement);
+    noteNotFoundElement.style.display = 'block';
   };
 
   const showNotes = (query = '') => {
