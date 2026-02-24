@@ -1,5 +1,5 @@
 import Utils from '../utils.js';
-import NotesData from '../data/local/notes.js';
+import NotesData from '../data/api/notes.js';
 import renderDetail from './detail.js';
 import renderAddForm from './add-note.js';
 
