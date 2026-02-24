@@ -10,10 +10,19 @@ const home = () => {
 
   const searchBarElement = document.querySelector('search-bar');
   const noteListContainerElement = document.querySelector('#noteListContainer');
+
   const noteNotFoundElement =
     noteListContainerElement.querySelector('.not-found');
   const noteListElement =
     noteListContainerElement.querySelector('note-list');
+
+  const loadingElement =
+    noteListContainerElement.querySelector('loading-indicator');
+
+  const showLoading = () => {
+    hideAllChildren();
+    Utils.showElement(loadingElement);
+  }
 
   const hideAllChildren = () => {
     Array.from(noteListContainerElement.children).forEach((element) => {
@@ -79,6 +88,7 @@ const home = () => {
   // Initial load
   const init = async () => {
     try {
+      showLoading();
       await NotesData.fetchNotes();
       showNotes();
     } catch (error) {
