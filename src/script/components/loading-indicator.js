@@ -1,8 +1,12 @@
-class  LoadingIndicator extends HTMLElement {
+class LoadingIndicator extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
+  }
+
+  connectedCallback() {
     this.render();
+    this.hide(); // default hidden
   }
 
   render() {
@@ -12,6 +16,10 @@ class  LoadingIndicator extends HTMLElement {
           display: block;
           text-align: center;
           padding: 40px 0;
+        }
+
+        .hidden {
+          display: none;
         }
 
         .spinner {
@@ -27,16 +35,21 @@ class  LoadingIndicator extends HTMLElement {
         @keyframes spin {
           to { transform: rotate(360deg); }
         }
-
-        p {
-          font-size: 14px;
-          color: #666;
-        }
       </style>
 
-      <div class="spinner"></div>
-      <p>Loading...</p>
+      <div class="wrapper">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
     `;
+  }
+
+  show() {
+    this.style.display = 'block';
+  }
+
+  hide() {
+    this.style.display = 'none';
   }
 }
 
