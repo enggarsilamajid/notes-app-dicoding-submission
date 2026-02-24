@@ -22,6 +22,20 @@ const renderDetail = ({
 
   container.appendChild(detail);
 
+  const deleteHandler = async (event) => {
+    try {
+      await NotesData.deleteNote(event.detail.id);
+
+      await NotesData.fetchNotes();
+
+      cleanup();
+      returnToList();
+    } catch (error) {
+      console.error('Failed to delete note', error);
+      alert('Failed to delete note');
+    }
+  }
+
   const toggleArchiveHandler = (event) => {
     NotesData.toggleArchive(event.detail.id);
     cleanup();
@@ -35,6 +49,7 @@ const renderDetail = ({
 
   const cleanup = () => {
     document.removeEventListener('toggle-archive', toggleArchiveHandler);
+    document.removeEventListener('delete-note', deleteHandler);
     document.removeEventListener('back-to-list', backHandler);
 
     const existingDetail = document.querySelector('#noteDetailView');
@@ -42,6 +57,7 @@ const renderDetail = ({
   };
 
   document.addEventListener('toggle-archive', toggleArchiveHandler);
+  document.addEventListener('delete-note', deleteHandler);
   document.addEventListener('back-to-list', backHandler);
 };
 

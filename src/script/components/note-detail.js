@@ -37,6 +37,8 @@ class NoteDetail extends HTMLElement {
           ${this._note.archived ? 'Unarchive' : 'Archive'}
         </button>
 
+        <button class="delete-btn">Delete</button>
+
         <button class="back-btn">Back</button>
       </div>
     `;
@@ -49,6 +51,16 @@ class NoteDetail extends HTMLElement {
             detail: { id: this._note.id },
             bubbles: true,
             composed: true,
+          })
+        );
+      });
+
+    this._shadowRoot
+      .querySelector('.delete-btn')
+      .addEventListener('click', () => {
+        document.dispatchEvent(
+          new CustomEvent('delete-note', {
+            detail: { id: this.note.id },
           })
         );
       });

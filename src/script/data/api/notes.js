@@ -52,6 +52,20 @@ class NotesData {
 
     return result.data;
   }
+
+  static async deleteNote(id) {
+    const response = await fetch(`${BASE_URL}/notes/${id}`, {
+      method: 'DELETE',
+    });
+
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      throw new Error(result.message);
+    }
+
+    return result.message;
+  }
 }
 
 export default NotesData;
