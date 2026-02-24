@@ -74,17 +74,19 @@ const home = () => {
   };
 
   // Initial load
-searchBarElement.addEventListener('search', onSearchHandler);
-// shownotes();
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    await NotesData.fetchNotes();
-    showNotes();
-  } catch (error) {
-    console.error('Gagal mengambil data dari API', error);
-    showNotFound();
-  }
-});
+  const init = async () => {
+    try {
+      await NotesData.fetchNotes();
+      showNotes();
+    } catch (error) {
+      console.error('Gagal mengambil data dari API', error);
+      showNotFound();
+    }
+  };
+
+  searchBarElement.addEventListener('search', onSearchHandler);
+
+  init();
 
   // Open Detail
   document.addEventListener('open-detail', (event) => {
