@@ -34,6 +34,24 @@ class NotesData {
   static getNoteById(id) {
     return this._notes.find(note => note.id === id);
   }
+
+  static async addNote({ title, body }) {
+    const response = await fetch(`${BASE_URL}/notes`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ title, body }),
+    });
+
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      throw new Error(result.message);
+    }
+
+    return result.data;
+  }
 }
 
 export default NotesData;

@@ -79,7 +79,7 @@ const home = () => {
       await NotesData.fetchNotes();
       showNotes();
     } catch (error) {
-      console.error('Gagal mengambil data dari API', error);
+      console.error('Failed to get data from API', error);
       showNotFound();
     }
   };

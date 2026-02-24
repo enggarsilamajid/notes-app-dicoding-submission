@@ -20,10 +20,19 @@ const renderAddForm = ({
 
   container.appendChild(form);
 
-  const addHandler = (event) => {
-    NotesData.addNote(event.detail);
-    cleanup();
-    returnToList();
+  const addHandler = async (event) => {
+    try {
+      await NotesData.addNote(event.detail);
+
+      // Ambil ulang data terbaru dari server
+      await NotesData.fetchNotes();
+
+      cleanup();
+      returnToList();
+    } catch (error) {
+      console.error('Failed to add new note:', error);
+      alert('Failed to add new note');
+    }
   };
 
   const cancelHandler = () => {
