@@ -64,7 +64,7 @@ class NoteDetail extends HTMLElement {
       .addEventListener('click', () => {
         document.dispatchEvent(
           new CustomEvent('delete-note', {
-            detail: { id: this.note.id },
+            detail: { id: this._note.id },
           })
         );
       });
