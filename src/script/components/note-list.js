@@ -65,11 +65,39 @@ class NoteList extends HTMLElement {
   render() {
     this._emptyContent();
     this._updateStyle();
- 
+
     this._shadowRoot.appendChild(this._style);
+
     this._shadowRoot.innerHTML += `
-      <div class="list">
-        <slot></slot>
+      <style>
+        h2 {
+          margin: 24px 0 12px;
+          font-size: 18px;
+        }
+
+        .section {
+          margin-bottom: 32px;
+        }
+
+        .list {
+          display: grid;
+          grid-template-columns: ${'1fr '.repeat(this.column)};
+          gap: ${this.gutter}px;
+        }
+      </style>
+
+      <div class="section">
+        <h2>Active Notes</h2>
+        <div class="list">
+          <slot name="active"></slot>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Archived Notes</h2>
+        <div class="list">
+          <slot name="archived"></slot>
+        </div>
       </div>
     `;
   }

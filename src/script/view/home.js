@@ -72,7 +72,24 @@ const home = () => {
       return;
     }
 
-    displayResult(active, archived);
+    Utils.emptyElement(noteListElement);
+
+    const activeItems = active.map(note => {
+      const el = document.createElement('note-item');
+      el.note = note;
+      el.slot = 'active';
+      return el;
+    });
+
+    const archivedItems = archived.map(note => {
+      const el = document.createElement('note-item');
+      el.note = note;
+      el.slot = 'archived';
+      return el;
+    });
+
+    noteListElement.append(...activeItems, ...archivedItems);
+
     showNoteList();
   };
 
