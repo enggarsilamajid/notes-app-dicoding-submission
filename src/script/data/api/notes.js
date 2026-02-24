@@ -49,7 +49,12 @@ class NotesData {
   }
 
   static getNoteById(id) {
-    return this._notes.find(note => note.id === id);
+    const allNotes = [
+      ...this._activeNotes,
+      ...this._archivedNotes,
+    ];
+
+    return allNotes.find(note => note.id === id);
   }
 
   static async addNote({ title, body }) {
