@@ -13,35 +13,24 @@ const home = () => {
 
   const noteNotFoundElement =
     noteListContainerElement.querySelector('.not-found');
+
   const noteListElement =
     noteListContainerElement.querySelector('note-list');
 
-  const loadingElement =
-    noteListContainerElement.querySelector('loading-indicator');
-
-  const showLoading = () => {
-    hideAllChildren();
-    loadingElement.show();
-  };
-
   const hideAllChildren = () => {
     Array.from(noteListContainerElement.children).forEach((element) => {
-      if (element.tagName === 'LOADING-INDICATOR') {
-        element.hide();
-      } else {
-        element.style.display = 'none';
-      }
+      Utils.hideElement(element);
     });
   };
 
   const showNoteList = () => {
     hideAllChildren();
-  noteListElement.style.display = 'block';
+    Utils.showElement(noteListElement);
   };
 
   const showNotFound = () => {
     hideAllChildren();
-    noteNotFoundElement.style.display = 'block';
+    Utils.showElement(noteNotFoundElement);
   };
 
   const showNotes = (query = '') => {
@@ -58,14 +47,14 @@ const home = () => {
 
     Utils.emptyElement(noteListElement);
 
-    const activeItems = active.map(note => {
+    const activeItems = active.map((note) => {
       const el = document.createElement('note-item');
       el.note = note;
       el.slot = 'active';
       return el;
     });
 
-    const archivedItems = archived.map(note => {
+    const archivedItems = archived.map((note) => {
       const el = document.createElement('note-item');
       el.note = note;
       el.slot = 'archived';
@@ -92,7 +81,6 @@ const home = () => {
   // Initial load
   const init = async () => {
     try {
-      showLoading();
       await NotesData.fetchNotes();
       showNotes();
     } catch (error) {
@@ -133,6 +121,5 @@ const home = () => {
     });
   });
 };
-
 
 export default home;
