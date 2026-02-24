@@ -19,21 +19,30 @@ const renderAddForm = ({
   form.id = 'noteFormView';
 
   container.appendChild(form);
+  const loadingElement = container.querySelector('loading-indicator');
 
   const addHandler = async (event) => {
-    try {
-      await NotesData.addNote(event.detail);
+  try {
+    if (loadingElement) loadingElement.show();
 
-      // Ambil ulang data terbaru dari server
-      await NotesData.fetchNotes();
+    const saveBtn = form.shadowRoot.querySelector('#saveBtn');
+    if (saveBtn) saveBtn.disabled = true;
 
-      cleanup();
-      returnToList();
-    } catch (error) {
-      console.error('Failed to add new note:', error);
-      alert('Failed to add new note');
-    }
-  };
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    await NotesData.addNote(event.detail);
+
+    await NotesData.fetchNotes();
+
+    cleanup();
+    returnToList();
+  } catch (error) {
+    console.error('Failed to add new note:', error);
+    alert('Failed to add new note');
+  } finally {
+    if (loadingElement) loadingElement.hide();
+  }
+};
 
   const cancelHandler = () => {
     cleanup();
