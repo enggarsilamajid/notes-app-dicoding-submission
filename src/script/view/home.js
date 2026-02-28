@@ -17,12 +17,10 @@ const home = () => {
   const noteListElement =
     noteListContainerElement.querySelector('note-list');
 
-  // Tambahkan loader (pastikan ada di HTML)
-  const loaderElement = document.querySelector('loading-indicator');
-
   const hideAllChildren = () => {
-    Utils.hideElement(noteListElement);
-    Utils.hideElement(noteNotFoundElement);
+    Array.from(noteListContainerElement.children).forEach((element) => {
+      Utils.hideElement(element);
+    });
   };
 
   const showNoteList = () => {
@@ -47,7 +45,7 @@ const home = () => {
       return;
     }
 
-    Utils.empty(noteListElement);
+    Utils.emptyElement(noteListElement);
 
     const activeItems = active.map((note) => {
       const el = document.createElement('note-item');
@@ -79,13 +77,9 @@ const home = () => {
     showNotes();
   };
 
-  // Initial load dengan loading
   const init = async () => {
     try {
-      await Utils.withLoading(loaderElement, async () => {
-        await NotesData.fetchNotes();
-      });
-
+      await NotesData.fetchNotes();
       showNotes();
     } catch (error) {
       console.error('Failed to get data from API', error);
@@ -97,7 +91,6 @@ const home = () => {
 
   init();
 
-  // Open Detail
   document.addEventListener('open-detail', (event) => {
     const noteId = event.detail.id;
     const selectedNote = NotesData.getNoteById(noteId);
@@ -113,7 +106,6 @@ const home = () => {
     });
   });
 
-  // Open Add Form
   addNoteButton.addEventListener('click', () => {
     renderAddForm({
       container: noteListContainerElement,

@@ -9,8 +9,6 @@ const renderAddForm = ({
   notFound,
   returnToList,
 }) => {
-
-  // Hide list elements
   searchBar.classList.add('view-hidden');
   titleSection.classList.add('view-hidden');
   Utils.hideElement(noteList);
@@ -21,17 +19,13 @@ const renderAddForm = ({
 
   container.appendChild(form);
 
-  const loadingElement = container.querySelector('loading-indicator');
-
   const addHandler = async (event) => {
     try {
-      await Utils.withLoading(loadingElement, async () => {
-        await NotesData.addNote(event.detail);
-      });
+      await NotesData.addNote(event.detail);
+      await NotesData.fetchNotes();
 
       cleanup();
       returnToList();
-
     } catch (error) {
       console.error('Failed to add new note:', error);
       alert('Failed to add new note');
