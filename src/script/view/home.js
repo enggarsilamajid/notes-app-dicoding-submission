@@ -44,36 +44,23 @@ const home = () => {
   };
 
   const showNotes = (query = '') => {
-  const allNotes = query
-    ? NotesData.searchNote(query)
-    : NotesData.getAll();
+  const allNotes = NotesData.getAll();
 
-  if (allNotes.length === 0) {
+  if (!allNotes || allNotes.length === 0) {
     showNotFound();
     return;
   }
 
-  Utils.emptyElement(noteListElement);
+  const result = query
+    ? NotesData.searchNote(query)
+    : allNotes;
 
-  const activeNotes = allNotes.filter(note => !note.archived);
-  const archivedNotes = allNotes.filter(note => note.archived);
+  if (result.length === 0) {
+    showNotFound();
+    return;
+  }
 
-  const activeElements = activeNotes.map((note) => {
-    const el = document.createElement('note-item');
-    el.note = note;
-    el.slot = 'active';   // ← WAJIB
-    return el;
-  });
-
-  const archivedElements = archivedNotes.map((note) => {
-    const el = document.createElement('note-item');
-    el.note = note;
-    el.slot = 'archived'; // ← WAJIB
-    return el;
-  });
-
-  noteListElement.append(...activeElements, ...archivedElements);
-
+  displayResult(result);
   showNoteList();
 };
 
