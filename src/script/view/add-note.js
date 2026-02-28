@@ -9,7 +9,8 @@ const renderAddForm = ({
   notFound,
   returnToList,
 }) => {
-  // Hide list related elements
+
+  // Hide list elements
   searchBar.classList.add('view-hidden');
   titleSection.classList.add('view-hidden');
   Utils.hideElement(noteList);
@@ -19,30 +20,23 @@ const renderAddForm = ({
   form.id = 'noteFormView';
 
   container.appendChild(form);
+
   const loadingElement = container.querySelector('loading-indicator');
 
   const addHandler = async (event) => {
-  try {
-    if (loadingElement) loadingElement.show();
+    try {
+      await Utils.withLoading(loadingElement, async () => {
+        await NotesData.addNote(event.detail);
+      });
 
-    const saveBtn = form.shadowRoot.querySelector('#saveBtn');
-    if (saveBtn) saveBtn.disabled = true;
+      cleanup();
+      returnToList();
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    await NotesData.addNote(event.detail);
-
-    await NotesData.fetchNotes();
-
-    cleanup();
-    returnToList();
-  } catch (error) {
-    console.error('Failed to add new note:', error);
-    alert('Failed to add new note');
-  } finally {
-    if (loadingElement) loadingElement.hide();
-  }
-};
+    } catch (error) {
+      console.error('Failed to add new note:', error);
+      alert('Failed to add new note');
+    }
+  };
 
   const cancelHandler = () => {
     cleanup();
