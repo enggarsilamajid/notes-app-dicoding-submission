@@ -1,3 +1,4 @@
+berikut file home.js:
 import Utils from '../utils.js';
 import NotesData from '../data/api/notes.js';
 import renderDetail from './detail.js';
@@ -10,10 +11,8 @@ const home = () => {
 
   const searchBarElement = document.querySelector('search-bar');
   const noteListContainerElement = document.querySelector('#noteListContainer');
-
   const noteNotFoundElement =
     noteListContainerElement.querySelector('.not-found');
-
   const noteListElement =
     noteListContainerElement.querySelector('note-list');
 
@@ -21,6 +20,18 @@ const home = () => {
     Array.from(noteListContainerElement.children).forEach((element) => {
       Utils.hideElement(element);
     });
+  };
+
+  const displayResult = (notes) => {
+    Utils.emptyElement(noteListElement);
+
+    const noteItemElements = notes.map((note) => {
+      const noteItemElement = document.createElement('note-item');
+      noteItemElement.note = note;
+      return noteItemElement;
+    });
+
+    noteListElement.append(...noteItemElements);
   };
 
   const showNoteList = () => {
@@ -34,35 +45,20 @@ const home = () => {
   };
 
   const showNotes = (query = '') => {
-    const active = query
-      ? NotesData.searchNote(query)
-      : NotesData.getActive();
+    const result = NotesData.searchNote(query);
 
-    const archived = NotesData.getArchived();
+    if (!query) {
+      displayResult(result);
+      showNoteList();
+      return;
+    }
 
-    if (active.length === 0 && archived.length === 0) {
+    if (result.length === 0) {
       showNotFound();
       return;
     }
 
-    Utils.emptyElement(noteListElement);
-
-    const activeItems = active.map((note) => {
-      const el = document.createElement('note-item');
-      el.note = note;
-      el.slot = 'active';
-      return el;
-    });
-
-    const archivedItems = archived.map((note) => {
-      const el = document.createElement('note-item');
-      el.note = note;
-      el.slot = 'archived';
-      return el;
-    });
-
-    noteListElement.append(...activeItems, ...archivedItems);
-
+    displayResult(result);
     showNoteList();
   };
 
@@ -74,23 +70,24 @@ const home = () => {
   const returnToListView = () => {
     searchBarContainerElement.classList.remove('view-hidden');
     titleSectionElement.classList.remove('view-hidden');
+
     showNotes();
   };
 
-  const init = async () => {
-    try {
-      await NotesData.fetchNotes();
-      showNotes();
-    } catch (error) {
-      console.error('Failed to get data from API', error);
-      showNotFound();
-    }
-  };
+  // Initial load
+searchBarElement.addEventListener('search', onSearchHandler);
+// shownotes();
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await NotesData.fetchNotes();
+    showNotes();
+  } catch (error) {
+    console.error('Gagal mengambil data dari API', error);
+    showNotFound();
+  }
+});
 
-  searchBarElement.addEventListener('search', onSearchHandler);
-
-  init();
-
+  // Open Detail
   document.addEventListener('open-detail', (event) => {
     const noteId = event.detail.id;
     const selectedNote = NotesData.getNoteById(noteId);
@@ -106,6 +103,7 @@ const home = () => {
     });
   });
 
+  // Open Add Form
   addNoteButton.addEventListener('click', () => {
     renderAddForm({
       container: noteListContainerElement,
