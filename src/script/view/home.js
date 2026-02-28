@@ -44,18 +44,38 @@ const home = () => {
   };
 
   const showNotes = (query = '') => {
-    const result = query
-      ? NotesData.searchNote(query)
-      : NotesData.getActive();
+  const allNotes = query
+    ? NotesData.searchNote(query)
+    : NotesData.getAll();
 
-    if (result.length === 0) {
-      showNotFound();
-      return;
-    }
+  if (allNotes.length === 0) {
+    showNotFound();
+    return;
+  }
 
-    displayResult(result);
-    showNoteList();
-  };
+  Utils.emptyElement(noteListElement);
+
+  const activeNotes = allNotes.filter(note => !note.archived);
+  const archivedNotes = allNotes.filter(note => note.archived);
+
+  const activeElements = activeNotes.map((note) => {
+    const el = document.createElement('note-item');
+    el.note = note;
+    el.slot = 'active';   // ← WAJIB
+    return el;
+  });
+
+  const archivedElements = archivedNotes.map((note) => {
+    const el = document.createElement('note-item');
+    el.note = note;
+    el.slot = 'archived'; // ← WAJIB
+    return el;
+  });
+
+  noteListElement.append(...activeElements, ...archivedElements);
+
+  showNoteList();
+};
 
   const onSearchHandler = (event) => {
     const { query } = event.detail;
