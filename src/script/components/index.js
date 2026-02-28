@@ -5,4 +5,4 @@ import './note-list.js';
 import './note-item.js';
 import './note-detail.js';
 import './note-form.js';
-import './components/loading-indicator.js';
+// import './components/loading-indicator.js';
