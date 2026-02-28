@@ -1,30 +1,41 @@
 class Utils {
-  static emptyElement(element) {
-    element.innerHTML = '';
-  }
-
   static showElement(element) {
-    element.style.display = 'block'
-    element.hidden = false;
+    if (element) {
+      element.style.display = '';
+    }
   }
 
   static hideElement(element) {
-    element.style.display = 'none';
-    element.hidden = true;
+    if (element) {
+      element.style.display = 'none';
+    }
   }
 
-  static isValidInteger(newValue) {
-    return Number.isNaN(newValue) || Number.isFinite(newValue);
+  static empty(element) {
+    if (element) {
+      element.innerHTML = '';
+    }
   }
 
-  static formatDate(dateString) {
-    const date = new Date(dateString);
+  static showLoading(loaderElement) {
+    if (loaderElement && typeof loaderElement.show === 'function') {
+      loaderElement.show();
+    }
+  }
 
-    return new Intl.DateTimeFormat('id-ID', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    }).format(date);
+  static hideLoading(loaderElement) {
+    if (loaderElement && typeof loaderElement.hide === 'function') {
+      loaderElement.hide();
+    }
+  }
+
+  static async withLoading(loaderElement, asyncCallback) {
+    try {
+      this.showLoading(loaderElement);
+      return await asyncCallback();
+    } finally {
+      this.hideLoading(loaderElement);
+    }
   }
 }
 
