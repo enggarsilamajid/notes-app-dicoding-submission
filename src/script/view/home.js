@@ -44,13 +44,9 @@ const home = () => {
   };
 
   const showNotes = (query = '') => {
-    const result = NotesData.searchNote(query);
-
-    if (!query) {
-      displayResult(result);
-      showNoteList();
-      return;
-    }
+    const result = query
+      ? NotesData.searchNote(query)
+      : NotesData.getActive();
 
     if (result.length === 0) {
       showNotFound();
