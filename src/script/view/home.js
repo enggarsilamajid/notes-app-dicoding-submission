@@ -21,11 +21,8 @@ const home = () => {
   const loaderElement = document.querySelector('loading-indicator');
 
   const hideAllChildren = () => {
-    Array.from(noteListContainerElement.children).forEach((element) => {
-      if (element !== loaderElement) {
-        Utils.hideElement(element);
-      }
-    });
+    Utils.hideElement(noteListElement);
+    Utils.hideElement(noteNotFoundElement);
   };
 
   const showNoteList = () => {
