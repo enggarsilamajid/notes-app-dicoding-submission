@@ -17,11 +17,11 @@ class Utils {
     }
   }
 
-  static showLoading(loaderElement) {
+  /* static showLoading(loaderElement) {
     if (loaderElement && typeof loaderElement.show === 'function') {
       loaderElement.show();
     }
-  }
+  } */
 
   static hideLoading(loaderElement) {
     if (loaderElement && typeof loaderElement.hide === 'function') {
