@@ -17,9 +17,14 @@ const home = () => {
   const noteListElement =
     noteListContainerElement.querySelector('note-list');
 
+  // Tambahkan loader (pastikan ada di HTML)
+  const loaderElement = document.querySelector('loading-indicator');
+
   const hideAllChildren = () => {
     Array.from(noteListContainerElement.children).forEach((element) => {
-      Utils.hideElement(element);
+      if (element !== loaderElement) {
+        Utils.hideElement(element);
+      }
     });
   };
 
@@ -45,7 +50,7 @@ const home = () => {
       return;
     }
 
-    Utils.emptyElement(noteListElement);
+    Utils.empty(noteListElement);
 
     const activeItems = active.map((note) => {
       const el = document.createElement('note-item');
@@ -74,14 +79,16 @@ const home = () => {
   const returnToListView = () => {
     searchBarContainerElement.classList.remove('view-hidden');
     titleSectionElement.classList.remove('view-hidden');
-
     showNotes();
   };
 
-  // Initial load
+  // Initial load dengan loading
   const init = async () => {
     try {
-      await NotesData.fetchNotes();
+      await Utils.withLoading(loaderElement, async () => {
+        await NotesData.fetchNotes();
+      });
+
       showNotes();
     } catch (error) {
       console.error('Failed to get data from API', error);
