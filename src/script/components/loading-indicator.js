@@ -6,16 +6,29 @@ class LoadingIndicator extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    this.hide(); // default hidden
+  }
+
+  static get observedAttributes() {
+    return ['active'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'active') {
+      this.updateVisibility();
+    }
   }
 
   render() {
     this.shadowRoot.innerHTML = `
       <style>
         :host {
-          display: block;
+          display: none;
           text-align: center;
           padding: 40px 0;
+        }
+
+        :host([active]) {
+          display: block;
         }
 
         .spinner {
@@ -43,12 +56,16 @@ class LoadingIndicator extends HTMLElement {
     `;
   }
 
+  updateVisibility() {
+    // otomatis di-handle oleh CSS attribute selector
+  }
+
   show() {
-    this.style.display = 'block';
+    this.setAttribute('active', '');
   }
 
   hide() {
-    this.style.display = 'none';
+    this.removeAttribute('active');
   }
 }
 
