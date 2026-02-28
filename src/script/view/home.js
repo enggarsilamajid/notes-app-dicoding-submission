@@ -46,14 +46,14 @@ const home = () => {
   const showNotes = (query = '') => {
   const allNotes = NotesData.getAll();
 
-  if (!allNotes || allNotes.length === 0) {
-    showNotFound();
-    return;
-  }
+  // Jika belum ada data sama sekali (misalnya API kosong)
+  if (!allNotes) return;
 
   const result = query
     ? NotesData.searchNote(query)
     : allNotes;
+
+  Utils.emptyElement(noteListElement);
 
   if (result.length === 0) {
     showNotFound();
