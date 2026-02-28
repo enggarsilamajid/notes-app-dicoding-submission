@@ -13,23 +13,27 @@ class NoteList extends HTMLElement {
  
   constructor() {
     super();
- 
     this._shadowRoot = this.attachShadow({ mode: 'open' });
     this._style = document.createElement('style');
- 
     this.render();
   }
  
   _updateStyle() {
     this._style.textContent = `
-      :host {
-        display: block;
+      :host { display: block; }
+
+      h2 {
+        margin: 24px 0 12px;
+        font-size: 18px;
       }
-      
+
+      .section {
+        margin-bottom: 32px;
+      }
+
       .list {
         display: grid;
         grid-template-columns: ${'1fr '.repeat(this.column)};
-      
         gap: ${this.gutter}px;
       }
     `;
@@ -38,7 +42,6 @@ class NoteList extends HTMLElement {
   set column(value) {
     const newValue = Number(value);
     if (!Utils.isValidInteger(newValue)) return;
- 
     this._column = value;
   }
  
@@ -49,10 +52,8 @@ class NoteList extends HTMLElement {
   set gutter(value) {
     const newValue = Number(value);
     if (!Utils.isValidInteger(newValue)) return;
- 
     this._gutter = value;
   }
- 
  
   get gutter() {
     return this._gutter;
@@ -65,27 +66,9 @@ class NoteList extends HTMLElement {
   render() {
     this._emptyContent();
     this._updateStyle();
-
+ 
     this._shadowRoot.appendChild(this._style);
-
     this._shadowRoot.innerHTML += `
-      <style>
-        h2 {
-          margin: 24px 0 12px;
-          font-size: 18px;
-        }
-
-        .section {
-          margin-bottom: 32px;
-        }
-
-        .list {
-          display: grid;
-          grid-template-columns: ${'1fr '.repeat(this.column)};
-          gap: ${this.gutter}px;
-        }
-      </style>
-
       <div class="section">
         <h2>Active Notes</h2>
         <div class="list">
