@@ -15,9 +15,9 @@ class NotesData {
     return this._notes;
   }
 
-  static searchNote(query) {
+ static searchNote(query) {
   if (!query || query.trim() === '') {
-    return this.getNotes();  // ✅ BENAR
+    return this.getNotes(); // HARUS ini
   }
 
   const loweredQuery = query.toLowerCase().replace(/\s/g, '');

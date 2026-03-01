@@ -7,6 +7,7 @@ const home = () => {
   const addNoteButton = document.querySelector('#addNoteBtn');
   const searchBarContainerElement = document.querySelector('#searchBarContainer');
   const titleSectionElement = document.querySelector('.title-section');
+  const loadingElement = noteListContainerElement.querySelector('.search-loading');
 
   const searchBarElement = document.querySelector('search-bar');
   const noteListContainerElement = document.querySelector('#noteListContainer');
@@ -16,22 +17,18 @@ const home = () => {
     noteListContainerElement.querySelector('note-list');
 
   const hideAllChildren = () => {
-    Array.from(noteListContainerElement.children).forEach((element) => {
-      Utils.hideElement(element);
-    });
-  };
+  Utils.hideElement(noteListElement);
+  Utils.hideElement(noteNotFoundElement);
+};
 
   const displayResult = (notes) => {
-    Utils.emptyElement(noteListElement);
-
-    const noteItemElements = notes.map((note) => {
-      const noteItemElement = document.createElement('note-item');
-      noteItemElement.note = note;
-      return noteItemElement;
-    });
-
-    noteListElement.append(...noteItemElements);
-  };
+  noteListElement.innerHTML = notes.map(note => `
+    <div style="border:1px solid #ccc; margin:8px; padding:8px;">
+      <h3>${note.title}</h3>
+      <p>${note.body}</p>
+    </div>
+  `).join('');
+};
 
   const showNoteList = () => {
     hideAllChildren();
@@ -76,10 +73,14 @@ const home = () => {
   // Initial load
 const init = async () => {
   try {
+    Utils.showElement(loadingElement);
+
     await NotesData.fetchNotes();
+
+    Utils.hideElement(loadingElement);
     showNotes();
   } catch (error) {
-    console.error('Gagal mengambil data dari API', error);
+    Utils.hideElement(loadingElement);
     showNotFound();
   }
 };
