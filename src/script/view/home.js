@@ -1,4 +1,4 @@
-import NotesData from '../api/notes.js';
+import NotesData from "../data/api/notes.js";
 
 async function loadNotes() {
   try {
