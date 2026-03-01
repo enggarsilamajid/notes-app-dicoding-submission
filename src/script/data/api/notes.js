@@ -1,42 +1,39 @@
 const BASE_URL = 'https://notes-api.dicoding.dev/v2';
 
-const NotesApi = {
-  async getNotes() {
+class NotesData {
+  static _notes = [];
+
+  static async fetchNotes() {
     const response = await fetch(`${BASE_URL}/notes`);
     const result = await response.json();
-    return result.data;
-  },
 
-  async addNote({ title, body }) {
-    const response = await fetch(`${BASE_URL}/notes`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ title, body })
-    });
+    this._notes = result.data;
+    return this._notes;
+  }
 
-    const result = await response.json();
-    return result.data;
-  },
+  static getAll() {
+    return this._notes;
+  }
 
-  async deleteNote(id) {
-    await fetch(`${BASE_URL}/notes/${id}`, {
-      method: 'DELETE'
-    });
-  },
+  static searchNote(query) {
+    if (!query || query.trim() === '') {
+      return this.getAll();
+    }
 
-  async archiveNote(id) {
-    await fetch(`${BASE_URL}/notes/${id}/archive`, {
-      method: 'POST'
-    });
-  },
+    const loweredQuery = query.toLowerCase().replace(/\s/g, '');
 
-  async unarchiveNote(id) {
-    await fetch(`${BASE_URL}/notes/${id}/unarchive`, {
-      method: 'POST'
+    return this._notes.filter((note) => {
+      const loweredTitle = (note.title || '')
+        .toLowerCase()
+        .replace(/\s/g, '');
+
+      return loweredTitle.includes(loweredQuery);
     });
   }
-};
 
-export default NotesApi;
+  static getNoteById(id) {
+    return this._notes.find(note => note.id === id);
+  }
+}
+
+export default NotesData;
