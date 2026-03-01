@@ -100,5 +100,3 @@ document.addEventListener('DOMContentLoaded', async () => {
 };
 
 export default home;
-
-pad folder view terdapat file add-note.js dan detail.js
