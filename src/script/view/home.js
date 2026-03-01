@@ -1,5 +1,5 @@
 import Utils from '../utils.js';
-import NotesData from '../data/local/notes.js';
+import NotesData from '../data/api/notes.js';
 import renderDetail from './detail.js';
 import renderAddForm from './add-note.js';
 
@@ -74,8 +74,19 @@ const home = () => {
   };
 
   // Initial load
-  searchBarElement.addEventListener('search', onSearchHandler);
-  showNotes();
+const init = async () => {
+  try {
+    await NotesData.fetchNotes();
+    showNotes();
+  } catch (error) {
+    console.error('Gagal mengambil data dari API', error);
+    showNotFound();
+  }
+};
+
+searchBarElement.addEventListener('search', onSearchHandler);
+
+init();
 
   // Open Detail
   document.addEventListener('open-detail', (event) => {
