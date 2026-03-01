@@ -11,7 +11,7 @@ class NotesData {
     return this._notes;
   }
 
-  static getAll() {
+  static getNotes() {
     return this._notes;
   }
 
