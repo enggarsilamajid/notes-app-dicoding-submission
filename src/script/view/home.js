@@ -1,15 +1,105 @@
-import NotesData from "../data/api/notes.js";
+import Utils from '../utils.js'; 
+import NotesData from '../data/api/notes.js';
+import renderDetail from './detail.js';
+import renderAddForm from './add-note.js';
 
-async function loadNotes() {
+const home = () => {
+  const addNoteButton = document.querySelector('#addNoteBtn');
+  const searchBarContainerElement = document.querySelector('#searchBarContainer');
+  const titleSectionElement = document.querySelector('.title-section');
+
+  const searchBarElement = document.querySelector('search-bar');
+  const noteListContainerElement = document.querySelector('#noteListContainer');
+  const noteNotFoundElement =
+    noteListContainerElement.querySelector('.not-found');
+  const noteListElement =
+    noteListContainerElement.querySelector('note-list');
+
+  const hideAllChildren = () => {
+    Array.from(noteListContainerElement.children).forEach((element) => {
+      Utils.hideElement(element);
+    });
+  };
+
+  const displayResult = (notes) => {
+    Utils.emptyElement(noteListElement);
+
+    const noteItemElements = notes.map((note) => {
+      const noteItemElement = document.createElement('note-item');
+      noteItemElement.note = note;
+      return noteItemElement;
+    });
+
+    noteListElement.append(...noteItemElements);
+  };
+
+  const showNoteList = () => {
+    hideAllChildren();
+    Utils.showElement(noteListElement);
+  };
+
+  const showNotFound = () => {
+    hideAllChildren();
+    Utils.showElement(noteNotFoundElement);
+  };
+
+  const showNotes = (query = '') => {
+    const result = NotesData.searchNote(query);
+
+    if (!query) {
+      displayResult(result);
+      showNoteList();
+      return;
+    }
+
+    if (result.length === 0) {
+      showNotFound();
+      return;
+    }
+
+    displayResult(result);
+    showNoteList();
+  };
+
+  const onSearchHandler = (event) => {
+    const { query } = event.detail;
+    showNotes(query);
+  };
+
+  const returnToListView = () => {
+    searchBarContainerElement.classList.remove('view-hidden');
+    titleSectionElement.classList.remove('view-hidden');
+
+    showNotes();
+  };
+
+  // Initial load
+  // Initial load
+searchBarElement.addEventListener('search', onSearchHandler);
+
+document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const notes = await NotesData.getNotes();
-
-    const noteListElement = document.querySelector('note-list');
-    noteListElement.notes = notes;
-
+    await NotesData.fetchNotes();
+    showNotes();
   } catch (error) {
-    console.error('Gagal mengambil data', error);
+    console.error('Gagal mengambil data dari API', error);
+    showNotFound();
   }
-}
+});
 
-document.addEventListener('DOMContentLoaded', loadNotes);
+  // Open Add Form
+  addNoteButton.addEventListener('click', () => {
+    renderAddForm({
+      container: noteListContainerElement,
+      searchBar: searchBarContainerElement,
+      titleSection: titleSectionElement,
+      noteList: noteListElement,
+      notFound: noteNotFoundElement,
+      returnToList: returnToListView,
+    });
+  });
+};
+
+export default home;
+
+pad folder view terdapat file add-note.js dan detail.js
