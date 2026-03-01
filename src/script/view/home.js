@@ -74,9 +74,7 @@ const home = () => {
   };
 
   // Initial load
-searchBarElement.addEventListener('search', onSearchHandler);
-
-document.addEventListener('DOMContentLoaded', async () => {
+const init = async () => {
   try {
     await NotesData.fetchNotes();
     showNotes();
@@ -84,7 +82,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Gagal mengambil data dari API', error);
     showNotFound();
   }
-});
+};
+
+init();
 
   // Open Add Form
   addNoteButton.addEventListener('click', () => {
