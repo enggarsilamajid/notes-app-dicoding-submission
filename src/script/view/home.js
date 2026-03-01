@@ -74,7 +74,6 @@ const home = () => {
   };
 
   // Initial load
-  // Initial load
 searchBarElement.addEventListener('search', onSearchHandler);
 
 document.addEventListener('DOMContentLoaded', async () => {
