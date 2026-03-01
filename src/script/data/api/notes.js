@@ -16,20 +16,20 @@ class NotesData {
   }
 
   static searchNote(query) {
-    if (!query || query.trim() === '') {
-      return this.getAll();
-    }
-
-    const loweredQuery = query.toLowerCase().replace(/\s/g, '');
-
-    return this._notes.filter((note) => {
-      const loweredTitle = (note.title || '')
-        .toLowerCase()
-        .replace(/\s/g, '');
-
-      return loweredTitle.includes(loweredQuery);
-    });
+  if (!query || query.trim() === '') {
+    return this.getNotes();  // ✅ BENAR
   }
+
+  const loweredQuery = query.toLowerCase().replace(/\s/g, '');
+
+  return this._notes.filter((note) => {
+    const loweredTitle = (note.title || '')
+      .toLowerCase()
+      .replace(/\s/g, '');
+
+    return loweredTitle.includes(loweredQuery);
+  });
+}
 
   static getNoteById(id) {
     return this._notes.find(note => note.id === id);
