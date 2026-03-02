@@ -1,5 +1,5 @@
 import Utils from '../utils.js';
-import NotesData from '../data/local/notes.js';
+import NotesData from '../data/api/notes.js';
 
 const renderAddForm = ({
   container,
