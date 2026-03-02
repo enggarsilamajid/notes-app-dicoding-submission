@@ -20,11 +20,16 @@ const renderAddForm = ({
 
   container.appendChild(form);
 
-  const addHandler = (event) => {
-    NotesData.addNote(event.detail);
+  const addHandler = async (event) => {
+  try {
+    await NotesData.addNote(event.detail);
+    await NotesData.fetchNotes(); // refresh data dari API
     cleanup();
     returnToList();
-  };
+  } catch (error) {
+    console.error('Gagal menambahkan note', error);
+  }
+};
 
   const cancelHandler = () => {
     cleanup();
