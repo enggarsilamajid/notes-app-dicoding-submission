@@ -22,12 +22,17 @@ const renderAddForm = ({
 
   const addHandler = async (event) => {
   try {
+    Utils.showLoading();
+
     await NotesData.addNote(event.detail);
-    await NotesData.fetchNotes(); // refresh data dari API
+    await NotesData.fetchNotes();
+
     cleanup();
     returnToList();
   } catch (error) {
     console.error('Gagal menambahkan note', error);
+  } finally {
+    Utils.hideLoading();
   }
 };
 

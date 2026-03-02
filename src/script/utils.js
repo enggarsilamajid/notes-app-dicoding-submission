@@ -26,6 +26,18 @@ class Utils {
       year: 'numeric',
     }).format(date);
   }
+
+  static showLoading() {
+  if (!document.querySelector('loading-indicator')) {
+    const loader = document.createElement('loading-indicator');
+    document.body.appendChild(loader);
+  }
+}
+
+static hideLoading() {
+  const loader = document.querySelector('loading-indicator');
+  if (loader) loader.remove();
+}
 }
 
 export default Utils;

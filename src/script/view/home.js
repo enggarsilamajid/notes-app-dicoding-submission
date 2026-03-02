@@ -76,13 +76,15 @@ const home = () => {
   // Initial load
 const init = async () => {
   try {
-    const data = await NotesData.fetchNotes();
-    alert(`Jumlah data dari API: ${data.length}`);
+    Utils.showLoading();
+
+    await NotesData.fetchNotes();
     showNotes();
   } catch (error) {
-    alert('Fetch gagal');
-    console.error(error);
+    console.error('Gagal mengambil data dari API', error);
     showNotFound();
+  } finally {
+    Utils.hideLoading();
   }
 };
 
