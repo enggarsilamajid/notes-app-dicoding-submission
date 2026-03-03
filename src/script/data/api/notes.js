@@ -55,6 +55,24 @@ class NotesData {
 
   return result.data;
 }
+
+static async toggleArchive(id, archived) {
+  const endpoint = archived
+    ? `${BASE_URL}/notes/${id}/unarchive`
+    : `${BASE_URL}/notes/${id}/archive`;
+
+  const response = await fetch(endpoint, {
+    method: 'POST',
+  });
+
+  const result = await response.json();
+
+  if (result.status !== 'success') {
+    throw new Error(result.message);
+  }
+
+  return result;
+}
 }
 
 export default NotesData;
