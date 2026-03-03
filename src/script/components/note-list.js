@@ -60,7 +60,6 @@ class NoteList extends HTMLElement {
         margin-top: 24px;
         margin-bottom: 12px;
         padding-bottom: 6px;
-        color: #6366f1;
       }
 
       .empty-message {
