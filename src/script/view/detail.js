@@ -35,3 +35,5 @@ const toggleArchiveHandler = async (event) => {
     Utils.hideLoading();
   }
 };
+
+export default detail;
