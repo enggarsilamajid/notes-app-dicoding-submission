@@ -21,18 +21,6 @@ const home = () => {
     });
   };
 
-  const displayResult = (notes) => {
-    Utils.emptyElement(noteListElement);
-
-    const noteItemElements = notes.map((note) => {
-      const noteItemElement = document.createElement('note-item');
-      noteItemElement.note = note;
-      return noteItemElement;
-    });
-
-    noteListElement.append(...noteItemElements);
-  };
-
   const showNoteList = () => {
     hideAllChildren();
     Utils.showElement(noteListElement);
@@ -43,22 +31,56 @@ const home = () => {
     Utils.showElement(noteNotFoundElement);
   };
 
-  const showNotes = (query = '') => {
-    const result = NotesData.searchNote(query);
+  // 🔥 TAMPILKAN ACTIVE & ARCHIVED TERPISAH
+  const renderSeparatedNotes = (notes) => {
+    Utils.emptyElement(noteListElement);
 
-    if (!query) {
-      displayResult(result);
-      showNoteList();
-      return;
-    }
-
-    if (result.length === 0) {
+    if (!notes || notes.length === 0) {
       showNotFound();
       return;
     }
 
-    displayResult(result);
+    const activeNotes = notes.filter(note => !note.archived);
+    const archivedNotes = notes.filter(note => note.archived);
+
+    // Active Section
+    if (activeNotes.length > 0) {
+      const activeTitle = document.createElement('h3');
+      activeTitle.textContent = 'Active Notes';
+      noteListElement.appendChild(activeTitle);
+
+      activeNotes.forEach(note => {
+        const item = document.createElement('note-item');
+        item.note = note;
+        noteListElement.appendChild(item);
+      });
+    }
+
+    // Archived Section
+    if (archivedNotes.length > 0) {
+      const archivedTitle = document.createElement('h3');
+      archivedTitle.textContent = 'Archived Notes';
+      noteListElement.appendChild(archivedTitle);
+
+      archivedNotes.forEach(note => {
+        const item = document.createElement('note-item');
+        item.note = note;
+        noteListElement.appendChild(item);
+      });
+    }
+
     showNoteList();
+  };
+
+  const showNotes = (query = '') => {
+    const result = NotesData.searchNote(query);
+
+    if (query && result.length === 0) {
+      showNotFound();
+      return;
+    }
+
+    renderSeparatedNotes(result);
   };
 
   const onSearchHandler = (event) => {
@@ -69,28 +91,27 @@ const home = () => {
   const returnToListView = () => {
     searchBarContainerElement.classList.remove('view-hidden');
     titleSectionElement.classList.remove('view-hidden');
-
     showNotes();
   };
 
-  // Initial load
-const init = async () => {
-  try {
-    Utils.showLoading();
+  // 🔥 INITIAL LOAD — LANGSUNG TAMPIL DUA SECTION
+  const init = async () => {
+    try {
+      Utils.showLoading();
 
-    await NotesData.fetchNotes();
-    showNotes();
-  } catch (error) {
-    console.error('Gagal mengambil data dari API', error);
-    showNotFound();
-  } finally {
-    Utils.hideLoading();
-  }
-};
+      await NotesData.fetchNotes();
+      showNotes(); // tanpa query → tampil semua terpisah
+    } catch (error) {
+      console.error('Gagal mengambil data dari API', error);
+      showNotFound();
+    } finally {
+      Utils.hideLoading();
+    }
+  };
 
-searchBarElement.addEventListener('search', onSearchHandler);
+  searchBarElement.addEventListener('search', onSearchHandler);
 
-init();
+  init();
 
   // Open Detail
   document.addEventListener('open-detail', (event) => {
