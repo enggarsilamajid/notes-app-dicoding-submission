@@ -39,9 +39,9 @@ class NoteItem extends HTMLElement {
         display: block;
         border-radius: 8px;
         
-        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 2px 0 var(--text);
         overflow: hidden;
-      }
+  
  
       .note-info {
         padding: 16px 24px;
