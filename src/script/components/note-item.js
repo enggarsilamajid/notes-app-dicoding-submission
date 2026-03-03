@@ -37,7 +37,7 @@ class NoteItem extends HTMLElement {
       :host {
         display: block;
         border-radius: 8px;
-        padding: 0 1.2em;
+        margin: 0 1.2em;
         box-shadow: 0 0 2px 0 var(--text);
         overflow: hidden;
   
