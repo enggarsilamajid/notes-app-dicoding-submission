@@ -53,12 +53,17 @@ const renderDetail = ({
     Utils.showLoading();
 
     await NotesData.deleteNote(id);
+
     await NotesData.fetchNotes();
 
-    returnToListView();
+    searchBarContainerElement.classList.remove("view-hidden");
+    titleSectionElement.classList.remove("view-hidden");
+
+    showNotes();
+
   } catch (error) {
-    console.error("Failed to delete note", error);
-    alert("Failed to delete note");
+    console.error("DELETE ERROR:", error);
+    alert("Failed delete note");
   } finally {
     Utils.hideLoading();
   }
