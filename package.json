@@ -1,0 +1,30 @@
+{
+  "name": "notes-app-dicoding-submission",
+  "version": "1.0.0",
+  "description": "Submission for Dicoding Course",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enggarsilamajid/notes-app-dicoding-submission.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enggarsilamajid/notes-app-dicoding-submission/issues"
+  },
+  "homepage": "https://github.com/enggarsilamajid/notes-app-dicoding-submission#readme",
+  "devDependencies": {
+    "css-loader": "^7.1.4",
+    "html-webpack-plugin": "^5.6.6",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.105.3",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.3"
+  }
+}
