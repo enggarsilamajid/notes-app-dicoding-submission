@@ -4,12 +4,19 @@ class NotesData {
   static _notes = [];
 
   static async fetchNotes() {
-    const response = await fetch(`${BASE_URL}/notes`);
-    const result = await response.json();
+  const activeResponse = await fetch(`${BASE_URL}/notes`);
+  const activeResult = await activeResponse.json();
 
-    this._notes = result.data;
-    return this._notes;
-  }
+  const archivedResponse = await fetch(`${BASE_URL}/notes/archived`);
+  const archivedResult = await archivedResponse.json();
+
+  this._notes = [
+    ...activeResult.data,
+    ...archivedResult.data,
+  ];
+
+  return this._notes;
+}
 
   static getAll() {
     return this._notes;
@@ -73,6 +80,7 @@ static async toggleArchive(id, archived) {
 
   return result;
 }
+
 }
 
 export default NotesData;

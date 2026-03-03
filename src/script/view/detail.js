@@ -1,28 +1,13 @@
 import Utils from '../utils.js';
 import NotesData from '../data/api/notes.js';
 
-const renderDetail = ({
-  note,
-  container,
-  searchBar,
-  titleSection,
-  noteList,
-  notFound,
-  returnToList,
-}) => {
-  // Hide list related elements
-  searchBar.classList.add('view-hidden');
-  titleSection.classList.add('view-hidden');
-  Utils.hideElement(noteList);
-  Utils.hideElement(notFound);
+const detail = document.createElement('note-detail');
+detail.note = note;
+detail.id = 'noteDetailView';
 
-  const detail = document.createElement('note-detail');
-  detail.note = note;
-  detail.id = 'noteDetailView';
+container.appendChild(detail);
 
-  container.appendChild(detail);
-
-  const toggleArchiveHandler = async (event) => {
+const toggleArchiveHandler = async (event) => {
   const { id } = event.detail;
 
   try {
@@ -35,7 +20,13 @@ const renderDetail = ({
 
     const updatedNote = NotesData.getNoteById(id);
 
-    // 🔥 UPDATE COMPONENT TANPA RENDER ULANG
+    // Guard safety (walaupun seharusnya tidak undefined lagi)
+    if (!updatedNote) {
+      returnToList();
+      return;
+    }
+
+    // 🔥 Ini kunci utamanya
     detail.note = updatedNote;
 
   } catch (error) {
@@ -44,14 +35,3 @@ const renderDetail = ({
     Utils.hideLoading();
   }
 };
-
-  const backHandler = () => {
-    cleanup();
-    returnToList();
-  };
-
-  document.addEventListener('toggle-archive', toggleArchiveHandler);
-  document.addEventListener('back-to-list', backHandler);
-};
-
-export default renderDetail;
