@@ -76,20 +76,19 @@ class NotesData {
   }
 
   static async deleteNote(id) {
-    const response = await fetch(`${BASE_URL}/notes/${id}`, {
-      method: "DELETE",
-    });
+  const response = await fetch(`${BASE_URL}/notes/${id}`, {
+    method: "DELETE",
+  });
 
-    const result = await response.json();
-
-    if (result.status !== "success") {
-      throw new Error(result.message);
-    }
-
-    this._notes = this._notes.filter((note) => note.id !== id);
-
-    return result;
+  if (!response.ok) {
+    throw new Error("Failed to delete note");
   }
+
+  // Tidak perlu parse JSON kalau tidak dipakai
+  this._notes = this._notes.filter((note) => note.id !== id);
+
+  return true;
+}
 }
 
 export default NotesData;

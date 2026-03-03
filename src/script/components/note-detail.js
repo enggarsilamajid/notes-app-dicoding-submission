@@ -60,7 +60,7 @@ class NoteDetail extends HTMLElement {
     this._shadowRoot
       .querySelector("#delete-btn")
       .addEventListener("click", () => {
-        const confirmDelete = confirm("Yakin ingin menghapus catatan ini?");
+        const confirmDelete = confirm("Delete this note?");
         if (!confirmDelete) return;
 
         this.dispatchEvent(
