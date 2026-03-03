@@ -9,7 +9,6 @@ const renderAddForm = ({
   notFound,
   returnToList,
 }) => {
-  // Hide list related elements
   searchBar.classList.add('view-hidden');
   titleSection.classList.add('view-hidden');
   Utils.hideElement(noteList);
