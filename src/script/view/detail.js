@@ -22,11 +22,37 @@ const renderDetail = ({
 
   container.appendChild(detail);
 
-  const toggleArchiveHandler = (event) => {
-    NotesData.toggleArchive(event.detail.id);
-    cleanup();
-    returnToList();
-  };
+  const toggleArchiveHandler = async (event) => {
+  const { id } = event.detail;
+
+  try {
+    Utils.showLoading();
+
+    const note = NotesData.getNoteById(id);
+
+    await NotesData.toggleArchive(id, note.archived);
+    await NotesData.fetchNotes();
+
+    // ambil data terbaru
+    const updatedNote = NotesData.getNoteById(id);
+
+    // render ulang detail dengan data terbaru
+    renderDetail({
+      note: updatedNote,
+      container,
+      searchBar,
+      titleSection,
+      noteList,
+      notFound,
+      returnToList,
+    });
+
+  } catch (error) {
+    console.error(error);
+  } finally {
+    Utils.hideLoading();
+  }
+};
 
   const backHandler = () => {
     cleanup();
