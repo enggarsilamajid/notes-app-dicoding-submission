@@ -28,24 +28,15 @@ const renderDetail = ({
   try {
     Utils.showLoading();
 
-    const note = NotesData.getNoteById(id);
+    const currentNote = NotesData.getNoteById(id);
 
-    await NotesData.toggleArchive(id, note.archived);
+    await NotesData.toggleArchive(id, currentNote.archived);
     await NotesData.fetchNotes();
 
-    // ambil data terbaru
     const updatedNote = NotesData.getNoteById(id);
 
-    // render ulang detail dengan data terbaru
-    renderDetail({
-      note: updatedNote,
-      container,
-      searchBar,
-      titleSection,
-      noteList,
-      notFound,
-      returnToList,
-    });
+    // 🔥 UPDATE COMPONENT TANPA RENDER ULANG
+    detail.note = updatedNote;
 
   } catch (error) {
     console.error(error);
@@ -57,14 +48,6 @@ const renderDetail = ({
   const backHandler = () => {
     cleanup();
     returnToList();
-  };
-
-  const cleanup = () => {
-    document.removeEventListener('toggle-archive', toggleArchiveHandler);
-    document.removeEventListener('back-to-list', backHandler);
-
-    const existingDetail = document.querySelector('#noteDetailView');
-    if (existingDetail) existingDetail.remove();
   };
 
   document.addEventListener('toggle-archive', toggleArchiveHandler);
