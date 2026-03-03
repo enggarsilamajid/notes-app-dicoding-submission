@@ -14,18 +14,17 @@ class NoteItem extends HTMLElement {
   constructor() {
     super();
 
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._style = document.createElement('style');
+    this._shadowRoot = this.attachShadow({ mode: "open" });
+    this._style = document.createElement("style");
   }
 
   _emptyContent() {
-    this._shadowRoot.innerHTML = '';
+    this._shadowRoot.innerHTML = "";
   }
 
   set note(value) {
     this._note = value;
 
-    // Render ulang
     this.render();
   }
 
@@ -38,9 +37,10 @@ class NoteItem extends HTMLElement {
       :host {
         display: block;
         border-radius: 8px;
-        
+        padding: 0 1.2em;
         box-shadow: 0 0 2px 0 var(--text);
         overflow: hidden;
+        cursor: pointer;
   
  
       .note-info {
@@ -90,18 +90,18 @@ class NoteItem extends HTMLElement {
       </div>
     `;
 
-    const card = this._shadowRoot.querySelector('.card');
+    const card = this._shadowRoot.querySelector(".card");
 
-    card.addEventListener('click', () => {
+    card.addEventListener("click", () => {
       this.dispatchEvent(
-        new CustomEvent('open-detail', {
+        new CustomEvent("open-detail", {
           detail: { id: this._note.id },
           bubbles: true,
           composed: true,
-        })
+        }),
       );
     });
   }
 }
 
-customElements.define('note-item', NoteItem);
+customElements.define("note-item", NoteItem);

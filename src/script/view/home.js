@@ -1,19 +1,20 @@
-import Utils from '../utils.js';
-import NotesData from '../data/api/notes.js';
-import renderDetail from './detail.js';
-import renderAddForm from './add-note.js';
+import Utils from "../utils.js";
+import NotesData from "../data/api/notes.js";
+import renderDetail from "./detail.js";
+import renderAddForm from "./add-note.js";
 
 const home = () => {
-  const addNoteButton = document.querySelector('#addNoteBtn');
-  const searchBarContainerElement = document.querySelector('#searchBarContainer');
-  const titleSectionElement = document.querySelector('.title-section');
+  const addNoteButton = document.querySelector("#addNoteBtn");
+  const searchBarContainerElement = document.querySelector(
+    "#searchBarContainer",
+  );
+  const titleSectionElement = document.querySelector(".title-section");
 
-  const searchBarElement = document.querySelector('search-bar');
-  const noteListContainerElement = document.querySelector('#noteListContainer');
+  const searchBarElement = document.querySelector("search-bar");
+  const noteListContainerElement = document.querySelector("#noteListContainer");
   const noteNotFoundElement =
-    noteListContainerElement.querySelector('.not-found');
-  const noteListElement =
-    noteListContainerElement.querySelector('note-list');
+    noteListContainerElement.querySelector(".not-found");
+  const noteListElement = noteListContainerElement.querySelector("note-list");
 
   const hideAllChildren = () => {
     Array.from(noteListContainerElement.children).forEach((element) => {
@@ -31,7 +32,7 @@ const home = () => {
     Utils.showElement(noteNotFoundElement);
   };
 
-  const showNotes = (query = '') => {
+  const showNotes = (query = "") => {
     const result = NotesData.searchNote(query);
 
     if (query && result.length === 0) {
@@ -49,8 +50,8 @@ const home = () => {
   };
 
   const returnToListView = () => {
-    searchBarContainerElement.classList.remove('view-hidden');
-    titleSectionElement.classList.remove('view-hidden');
+    searchBarContainerElement.classList.remove("view-hidden");
+    titleSectionElement.classList.remove("view-hidden");
     showNotes();
   };
 
@@ -60,17 +61,17 @@ const home = () => {
       await NotesData.fetchNotes();
       showNotes();
     } catch (error) {
-      console.error('Failed get notes from API', error);
+      console.error("Failed get notes from API", error);
       showNotFound();
     } finally {
       Utils.hideLoading();
     }
   };
 
-  searchBarElement.addEventListener('search', onSearchHandler);
+  searchBarElement.addEventListener("search", onSearchHandler);
   init();
 
-  document.addEventListener('open-detail', (event) => {
+  document.addEventListener("open-detail", (event) => {
     const noteId = event.detail.id;
     const selectedNote = NotesData.getNoteById(noteId);
 
@@ -85,7 +86,7 @@ const home = () => {
     });
   });
 
-  addNoteButton.addEventListener('click', () => {
+  addNoteButton.addEventListener("click", () => {
     renderAddForm({
       container: noteListContainerElement,
       searchBar: searchBarContainerElement,
@@ -94,6 +95,28 @@ const home = () => {
       notFound: noteNotFoundElement,
       returnToList: returnToListView,
     });
+  });
+
+  document.addEventListener("delete-note", async (event) => {
+    const { id } = event.detail;
+
+    try {
+      Utils.showLoading();
+
+      await NotesData.deleteNote(id);
+      await NotesData.fetchNotes();
+
+      // Hapus detail view jika ada
+      const existingDetail = document.querySelector("#noteDetailView");
+      if (existingDetail) existingDetail.remove();
+
+      returnToListView();
+    } catch (error) {
+      console.error("DELETE ERROR:", error);
+      alert("Failed delete note");
+    } finally {
+      Utils.hideLoading();
+    }
   });
 };
 

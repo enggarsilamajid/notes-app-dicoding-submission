@@ -2,32 +2,32 @@ class SearchBar extends HTMLElement {
   _shadowRoot = null;
   _style = null;
 
-  _searchEvent = 'search';
+  _searchEvent = "search";
 
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._style = document.createElement('style');
+    this._shadowRoot = this.attachShadow({ mode: "open" });
+    this._style = document.createElement("style");
     this.render();
   }
 
   connectedCallback() {
-    const input = this._shadowRoot.querySelector('input');
+    const input = this._shadowRoot.querySelector("input");
 
-    input.addEventListener('input', (event) => {
+    input.addEventListener("input", (event) => {
       const query = event.target.value;
 
       this.dispatchEvent(
         new CustomEvent(this._searchEvent, {
           detail: { query },
           bubbles: true,
-        })
+        }),
       );
     });
   }
 
   _emptyContent() {
-    this._shadowRoot.innerHTML = '';
+    this._shadowRoot.innerHTML = "";
   }
 
   _updateStyle() {
@@ -116,4 +116,4 @@ class SearchBar extends HTMLElement {
   }
 }
 
-customElements.define('search-bar', SearchBar);
+customElements.define("search-bar", SearchBar);
