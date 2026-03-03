@@ -33,44 +33,66 @@ const home = () => {
 
   // 🔥 TAMPILKAN ACTIVE & ARCHIVED TERPISAH
   const renderSeparatedNotes = (notes) => {
-    Utils.emptyElement(noteListElement);
+  Utils.emptyElement(noteListElement);
 
-    if (!notes || notes.length === 0) {
-      showNotFound();
-      return;
-    }
+  if (!notes) {
+    showNotFound();
+    return;
+  }
 
-    const activeNotes = notes.filter(note => !note.archived);
-    const archivedNotes = notes.filter(note => note.archived);
+  const activeNotes = notes.filter(note => !note.archived);
+  const archivedNotes = notes.filter(note => note.archived);
 
-    // Active Section
-    if (activeNotes.length > 0) {
-      const activeTitle = document.createElement('h3');
-      activeTitle.textContent = 'Active Notes';
-      noteListElement.appendChild(activeTitle);
+  // =====================
+  // ACTIVE SECTION
+  // =====================
+  const activeSection = document.createElement('div');
 
-      activeNotes.forEach(note => {
-        const item = document.createElement('note-item');
-        item.note = note;
-        noteListElement.appendChild(item);
-      });
-    }
+  const activeTitle = document.createElement('h3');
+  activeTitle.textContent = 'Active Notes';
+  activeSection.appendChild(activeTitle);
 
-    // Archived Section
-    if (archivedNotes.length > 0) {
-      const archivedTitle = document.createElement('h3');
-      archivedTitle.textContent = 'Archived Notes';
-      noteListElement.appendChild(archivedTitle);
+  if (activeNotes.length === 0) {
+    const emptyMessage = document.createElement('p');
+    emptyMessage.textContent = 'No active notes';
+    emptyMessage.classList.add('empty-message');
+    activeSection.appendChild(emptyMessage);
+  } else {
+    activeNotes.forEach(note => {
+      const item = document.createElement('note-item');
+      item.note = note;
+      activeSection.appendChild(item);
+    });
+  }
 
-      archivedNotes.forEach(note => {
-        const item = document.createElement('note-item');
-        item.note = note;
-        noteListElement.appendChild(item);
-      });
-    }
+  noteListElement.appendChild(activeSection);
 
-    showNoteList();
-  };
+  // =====================
+  // ARCHIVED SECTION
+  // =====================
+  const archivedSection = document.createElement('div');
+
+  const archivedTitle = document.createElement('h3');
+  archivedTitle.textContent = 'Archived Notes';
+  archivedSection.appendChild(archivedTitle);
+
+  if (archivedNotes.length === 0) {
+    const emptyMessage = document.createElement('p');
+    emptyMessage.textContent = 'No archived notes';
+    emptyMessage.classList.add('empty-message');
+    archivedSection.appendChild(emptyMessage);
+  } else {
+    archivedNotes.forEach(note => {
+      const item = document.createElement('note-item');
+      item.note = note;
+      archivedSection.appendChild(item);
+    });
+  }
+
+  noteListElement.appendChild(archivedSection);
+
+  showNoteList();
+};
 
   const showNotes = (query = '') => {
     const result = NotesData.searchNote(query);
