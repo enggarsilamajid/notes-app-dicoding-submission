@@ -10,7 +10,6 @@ const renderDetail = ({
   notFound,
   returnToList,
 }) => {
-  // Sembunyikan elemen list
   searchBar.classList.add('view-hidden');
   titleSection.classList.add('view-hidden');
   Utils.hideElement(noteList);
@@ -22,9 +21,6 @@ const renderDetail = ({
 
   container.appendChild(detail);
 
-  // ==========================
-  // TOGGLE ARCHIVE (FIXED)
-  // ==========================
   const toggleArchiveHandler = async (event) => {
     const { id } = event.detail;
 
@@ -37,10 +33,8 @@ const renderDetail = ({
         throw new Error('Note tidak ditemukan');
       }
 
-      // kirim status archived saat ini
       await NotesData.toggleArchive(id, currentNote.archived);
 
-      // fetch ulang agar sinkron
       await NotesData.fetchNotes();
 
       cleanup();
@@ -53,17 +47,11 @@ const renderDetail = ({
     }
   };
 
-  // ==========================
-  // BACK BUTTON
-  // ==========================
   const backHandler = () => {
     cleanup();
     returnToList();
   };
 
-  // ==========================
-  // CLEANUP
-  // ==========================
   const cleanup = () => {
     document.removeEventListener('toggle-archive', toggleArchiveHandler);
     document.removeEventListener('back-to-list', backHandler);
@@ -72,9 +60,6 @@ const renderDetail = ({
     if (existingDetail) existingDetail.remove();
   };
 
-  // ==========================
-  // EVENT LISTENER
-  // ==========================
   document.addEventListener('toggle-archive', toggleArchiveHandler);
   document.addEventListener('back-to-list', backHandler);
 };
