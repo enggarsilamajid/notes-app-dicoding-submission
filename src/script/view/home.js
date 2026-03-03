@@ -31,7 +31,6 @@ const home = () => {
     Utils.showElement(noteNotFoundElement);
   };
 
-  // 🔥 TAMPILKAN ACTIVE & ARCHIVED TERPISAH
   const renderSeparatedNotes = (notes) => {
   Utils.emptyElement(noteListElement);
 
@@ -43,9 +42,6 @@ const home = () => {
   const activeNotes = notes.filter(note => !note.archived);
   const archivedNotes = notes.filter(note => note.archived);
 
-  // =====================
-  // ACTIVE SECTION
-  // =====================
   const activeSection = document.createElement('div');
 
   const activeTitle = document.createElement('h3');
@@ -67,9 +63,6 @@ const home = () => {
 
   noteListElement.appendChild(activeSection);
 
-  // =====================
-  // ARCHIVED SECTION
-  // =====================
   const archivedSection = document.createElement('div');
 
   const archivedTitle = document.createElement('h3');
@@ -116,13 +109,12 @@ const home = () => {
     showNotes();
   };
 
-  // 🔥 INITIAL LOAD — LANGSUNG TAMPIL DUA SECTION
   const init = async () => {
     try {
       Utils.showLoading();
 
       await NotesData.fetchNotes();
-      showNotes(); // tanpa query → tampil semua terpisah
+      showNotes();
     } catch (error) {
       console.error('Gagal mengambil data dari API', error);
       showNotFound();
@@ -135,7 +127,6 @@ const home = () => {
 
   init();
 
-  // Open Detail
   document.addEventListener('open-detail', (event) => {
     const noteId = event.detail.id;
     const selectedNote = NotesData.getNoteById(noteId);
@@ -151,7 +142,6 @@ const home = () => {
     });
   });
 
-  // Open Add Form
   addNoteButton.addEventListener('click', () => {
     renderAddForm({
       container: noteListContainerElement,
