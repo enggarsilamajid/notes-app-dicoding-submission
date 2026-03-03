@@ -2,9 +2,11 @@
   "name": "notes-app-dicoding-submission",
   "version": "1.0.0",
   "description": "Submission for Dicoding Course",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -13,7 +15,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/enggarsilamajid/notes-app-dicoding-submission/issues"
   },
