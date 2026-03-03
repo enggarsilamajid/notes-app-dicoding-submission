@@ -1,2 +1,879 @@
-(()=>{var n={919(n,e,t){"use strict";t.d(e,{A:()=>s});var o=t(354),r=t.n(o),i=t(314),a=t.n(i)()(r());a.push([n.id,":root {\n  --primary: #37353E;\n  --secondary: #44444E;\n  --additional: #715A5A;\n  --text: #D3DAD9;\n}\n\n* {\n  padding: 0;\n  margin: 0;\n\n  box-sizing: border-box;\n}\n\nbody {\n  font-family: sans-serif;\n  background-color: var(--primary);\n  color: var(--text);\n}\n\n/* GLOBAL */\n.container {\n  max-width: 800px;\n\n  padding-block: 32px;\n  padding-inline: 16px;\n  margin-inline: auto;\n}\n\n.card {\n  border-radius: 8px;\n\n  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);\n  overflow: hidden;\n}\n\nlabel {\n  display: block;\n}\n\nsection>.title-section {\n  display: grid;\n  grid-template-columns: 1fr auto;\n  align-items: center;\n  margin-block-start: 2rem;\n  font-size: 1.2em;\n}\n\nsection>.title-section>h2 {\n  justify-self: start;\n}\n\n#addNoteBtn {\n  justify-self: end;\n}\n\n.view-hidden {\n  display: none !important;\n}\n\n/* GLOBAL */\n\n/* Start of Header */\nheader {\n  background-color: var(--secondary);\n  \n  color: var(--text);\n}\n\n.app-bar {\n  padding: 24px 20px;\n}\n\n.app-bar .brand-name {\n  margin: 0;\n\n  font-size: 1.7em;\n}\n\n/* End of Header */\n\n/* Start of Main */\nmain {\n  min-height: 100vh;\n}\n\n/* Search bar */\n.search-bar-container {\n  display: inline;\n}\n\n.floating-form {\n  background-color: white;\n  padding: 16px;\n  border-radius: 5px;\n  position: sticky;\n  top: 10px;\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);\n}\n\n.search-form {\n  display: flex;\n  gap: 16px;\n}\n\n.search-form .form-group {\n  flex-grow: 1;\n  position: relative;\n}\n\n.search-form .form-group input {\n  display: block;\n  width: 100%;\n  height: 60px;\n  padding: 14px 10px 0 10px;\n  border-inline: none;\n  border-block-start: none;\n  border-block-end: 1px solid var(--primary);\n  font-size: 1em;\n}\n\n.search-form .form-group input:focus-visible {\n  outline: 0;\n}\n\n.search-form .form-group label {\n  line-height: 60px;\n  font-size: 1em;\n  font-weight: 700;\n  color: var(--primary);\n  white-space: nowrap;\n  position: absolute;\n  top: 0;\n  left: 20px;\n  user-select: none;\n  pointer-events: none;\n  transition: 150ms all ease-in-out;\n}\n\n.search-form .form-group input:focus-visible ~ label,\n.search-form .form-group input:valid ~ label {\n  left: 10px;\n  top: -16px;\n  font-size: 0.8em;\n}\n\n/* Search bar */\n\n.note-list-container {\n  margin-block-start: 32px;\n}\n\n.note-list .list {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 16px;\n}\n\n.note-list .list .card .note-info {\n  padding: 16px 24px;\n}\n\n.note-list .list .card .note-info__title h2 {\n  font-weight: lighter;\n}\n\n.note-list .list .card .note-info__date p {\n  font-size: 3em;\n}\n\n.note-list .list .card .note-info__description p {\n  display: -webkit-box;\n  margin-top: 10px;\n\n  overflow: hidden;\n\n  text-overflow: ellipsis;\n  -webkit-box-orient: vertical;\n  /* -webkit-line-clamp: 5; */\n  /* number of lines to show */\n}\n\n.note-list-container .placeholder {\n  margin-block: 1rem;\n\n  font-size: 1.5rem;\n  font-weight: lighter;\n  color: var(--text);\n}\n\n/* New Note Button */\n#addNoteBtn {\n  background: linear-gradient(135deg, #4f46e5, #6366f1);\n  color: white;\n  border: none;\n  padding: 8px 16px;\n  border-radius: 8px;\n  font-weight: 600;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  transition: all 0.2s ease;\n  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);\n}\n\n#addNoteBtn:hover {\n  transform: translateY(-2px);\n  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);\n}\n\n#addNoteBtn:active {\n  transform: translateY(0);\n  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);\n}\n\n#addNoteBtn .icon {\n  font-size: 18px;\n  font-weight: bold;\n}\n\n/* End of Main */\n\n/* Start of Footer */\nfooter {\n  background-color: var(--text);\n\n  color: var(--secondary);\n}\n\nfooter .container {\n  padding-block: 16px;\n}\n\n.main-footer {\n  padding: 8px 16px;\n\n  text-align: center;\n}\n\n/* End of Footer */","",{version:3,sources:["webpack://./src/styles/style.css"],names:[],mappings:"AAAA;EACE,kBAAkB;EAClB,oBAAoB;EACpB,qBAAqB;EACrB,eAAe;AACjB;;AAEA;EACE,UAAU;EACV,SAAS;;EAET,sBAAsB;AACxB;;AAEA;EACE,uBAAuB;EACvB,gCAAgC;EAChC,kBAAkB;AACpB;;AAEA,WAAW;AACX;EACE,gBAAgB;;EAEhB,mBAAmB;EACnB,oBAAoB;EACpB,mBAAmB;AACrB;;AAEA;EACE,kBAAkB;;EAElB,wCAAwC;EACxC,gBAAgB;AAClB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,+BAA+B;EAC/B,mBAAmB;EACnB,wBAAwB;EACxB,gBAAgB;AAClB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;AACnB;;AAEA;EACE,wBAAwB;AAC1B;;AAEA,WAAW;;AAEX,oBAAoB;AACpB;EACE,kCAAkC;;EAElC,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;AACpB;;AAEA;EACE,SAAS;;EAET,gBAAgB;AAClB;;AAEA,kBAAkB;;AAElB,kBAAkB;AAClB;EACE,iBAAiB;AACnB;;AAEA,eAAe;AACf;EACE,eAAe;AACjB;;AAEA;EACE,uBAAuB;EACvB,aAAa;EACb,kBAAkB;EAClB,gBAAgB;EAChB,SAAS;EACT,0CAA0C;AAC5C;;AAEA;EACE,aAAa;EACb,SAAS;AACX;;AAEA;EACE,YAAY;EACZ,kBAAkB;AACpB;;AAEA;EACE,cAAc;EACd,WAAW;EACX,YAAY;EACZ,yBAAyB;EACzB,mBAAmB;EACnB,wBAAwB;EACxB,0CAA0C;EAC1C,cAAc;AAChB;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE,iBAAiB;EACjB,cAAc;EACd,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,MAAM;EACN,UAAU;EACV,iBAAiB;EACjB,oBAAoB;EACpB,iCAAiC;AACnC;;AAEA;;EAEE,UAAU;EACV,UAAU;EACV,gBAAgB;AAClB;;AAEA,eAAe;;AAEf;EACE,wBAAwB;AAC1B;;AAEA;EACE,aAAa;EACb,8BAA8B;EAC9B,SAAS;AACX;;AAEA;EACE,kBAAkB;AACpB;;AAEA;EACE,oBAAoB;AACtB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,oBAAoB;EACpB,gBAAgB;;EAEhB,gBAAgB;;EAEhB,uBAAuB;EACvB,4BAA4B;EAC5B,2BAA2B;EAC3B,4BAA4B;AAC9B;;AAEA;EACE,kBAAkB;;EAElB,iBAAiB;EACjB,oBAAoB;EACpB,kBAAkB;AACpB;;AAEA,oBAAoB;AACpB;EACE,qDAAqD;EACrD,YAAY;EACZ,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;EAClB,gBAAgB;EAChB,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,QAAQ;EACR,yBAAyB;EACzB,yCAAyC;AAC3C;;AAEA;EACE,2BAA2B;EAC3B,0CAA0C;AAC5C;;AAEA;EACE,wBAAwB;EACxB,yCAAyC;AAC3C;;AAEA;EACE,eAAe;EACf,iBAAiB;AACnB;;AAEA,gBAAgB;;AAEhB,oBAAoB;AACpB;EACE,6BAA6B;;EAE7B,uBAAuB;AACzB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;;EAEjB,kBAAkB;AACpB;;AAEA,kBAAkB",sourcesContent:[":root {\r\n  --primary: #37353E;\r\n  --secondary: #44444E;\r\n  --additional: #715A5A;\r\n  --text: #D3DAD9;\r\n}\r\n\r\n* {\r\n  padding: 0;\r\n  margin: 0;\r\n\r\n  box-sizing: border-box;\r\n}\r\n\r\nbody {\r\n  font-family: sans-serif;\r\n  background-color: var(--primary);\r\n  color: var(--text);\r\n}\r\n\r\n/* GLOBAL */\r\n.container {\r\n  max-width: 800px;\r\n\r\n  padding-block: 32px;\r\n  padding-inline: 16px;\r\n  margin-inline: auto;\r\n}\r\n\r\n.card {\r\n  border-radius: 8px;\r\n\r\n  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);\r\n  overflow: hidden;\r\n}\r\n\r\nlabel {\r\n  display: block;\r\n}\r\n\r\nsection>.title-section {\r\n  display: grid;\r\n  grid-template-columns: 1fr auto;\r\n  align-items: center;\r\n  margin-block-start: 2rem;\r\n  font-size: 1.2em;\r\n}\r\n\r\nsection>.title-section>h2 {\r\n  justify-self: start;\r\n}\r\n\r\n#addNoteBtn {\r\n  justify-self: end;\r\n}\r\n\r\n.view-hidden {\r\n  display: none !important;\r\n}\r\n\r\n/* GLOBAL */\r\n\r\n/* Start of Header */\r\nheader {\r\n  background-color: var(--secondary);\r\n  \r\n  color: var(--text);\r\n}\r\n\r\n.app-bar {\r\n  padding: 24px 20px;\r\n}\r\n\r\n.app-bar .brand-name {\r\n  margin: 0;\r\n\r\n  font-size: 1.7em;\r\n}\r\n\r\n/* End of Header */\r\n\r\n/* Start of Main */\r\nmain {\r\n  min-height: 100vh;\r\n}\r\n\r\n/* Search bar */\r\n.search-bar-container {\r\n  display: inline;\r\n}\r\n\r\n.floating-form {\r\n  background-color: white;\r\n  padding: 16px;\r\n  border-radius: 5px;\r\n  position: sticky;\r\n  top: 10px;\r\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);\r\n}\r\n\r\n.search-form {\r\n  display: flex;\r\n  gap: 16px;\r\n}\r\n\r\n.search-form .form-group {\r\n  flex-grow: 1;\r\n  position: relative;\r\n}\r\n\r\n.search-form .form-group input {\r\n  display: block;\r\n  width: 100%;\r\n  height: 60px;\r\n  padding: 14px 10px 0 10px;\r\n  border-inline: none;\r\n  border-block-start: none;\r\n  border-block-end: 1px solid var(--primary);\r\n  font-size: 1em;\r\n}\r\n\r\n.search-form .form-group input:focus-visible {\r\n  outline: 0;\r\n}\r\n\r\n.search-form .form-group label {\r\n  line-height: 60px;\r\n  font-size: 1em;\r\n  font-weight: 700;\r\n  color: var(--primary);\r\n  white-space: nowrap;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 20px;\r\n  user-select: none;\r\n  pointer-events: none;\r\n  transition: 150ms all ease-in-out;\r\n}\r\n\r\n.search-form .form-group input:focus-visible ~ label,\r\n.search-form .form-group input:valid ~ label {\r\n  left: 10px;\r\n  top: -16px;\r\n  font-size: 0.8em;\r\n}\r\n\r\n/* Search bar */\r\n\r\n.note-list-container {\r\n  margin-block-start: 32px;\r\n}\r\n\r\n.note-list .list {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\r\n  gap: 16px;\r\n}\r\n\r\n.note-list .list .card .note-info {\r\n  padding: 16px 24px;\r\n}\r\n\r\n.note-list .list .card .note-info__title h2 {\r\n  font-weight: lighter;\r\n}\r\n\r\n.note-list .list .card .note-info__date p {\r\n  font-size: 3em;\r\n}\r\n\r\n.note-list .list .card .note-info__description p {\r\n  display: -webkit-box;\r\n  margin-top: 10px;\r\n\r\n  overflow: hidden;\r\n\r\n  text-overflow: ellipsis;\r\n  -webkit-box-orient: vertical;\r\n  /* -webkit-line-clamp: 5; */\r\n  /* number of lines to show */\r\n}\r\n\r\n.note-list-container .placeholder {\r\n  margin-block: 1rem;\r\n\r\n  font-size: 1.5rem;\r\n  font-weight: lighter;\r\n  color: var(--text);\r\n}\r\n\r\n/* New Note Button */\r\n#addNoteBtn {\r\n  background: linear-gradient(135deg, #4f46e5, #6366f1);\r\n  color: white;\r\n  border: none;\r\n  padding: 8px 16px;\r\n  border-radius: 8px;\r\n  font-weight: 600;\r\n  cursor: pointer;\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 6px;\r\n  transition: all 0.2s ease;\r\n  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n#addNoteBtn:hover {\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);\r\n}\r\n\r\n#addNoteBtn:active {\r\n  transform: translateY(0);\r\n  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);\r\n}\r\n\r\n#addNoteBtn .icon {\r\n  font-size: 18px;\r\n  font-weight: bold;\r\n}\r\n\r\n/* End of Main */\r\n\r\n/* Start of Footer */\r\nfooter {\r\n  background-color: var(--text);\r\n\r\n  color: var(--secondary);\r\n}\r\n\r\nfooter .container {\r\n  padding-block: 16px;\r\n}\r\n\r\n.main-footer {\r\n  padding: 8px 16px;\r\n\r\n  text-align: center;\r\n}\r\n\r\n/* End of Footer */"],sourceRoot:""}]);const s=a},314(n){"use strict";n.exports=function(n){var e=[];return e.toString=function(){return this.map(function(e){var t="",o=void 0!==e[5];return e[4]&&(t+="@supports (".concat(e[4],") {")),e[2]&&(t+="@media ".concat(e[2]," {")),o&&(t+="@layer".concat(e[5].length>0?" ".concat(e[5]):""," {")),t+=n(e),o&&(t+="}"),e[2]&&(t+="}"),e[4]&&(t+="}"),t}).join("")},e.i=function(n,t,o,r,i){"string"==typeof n&&(n=[[null,n,void 0]]);var a={};if(o)for(var s=0;s<this.length;s++){var d=this[s][0];null!=d&&(a[d]=!0)}for(var l=0;l<n.length;l++){var c=[].concat(n[l]);o&&a[c[0]]||(void 0!==i&&(void 0===c[5]||(c[1]="@layer".concat(c[5].length>0?" ".concat(c[5]):""," {").concat(c[1],"}")),c[5]=i),t&&(c[2]?(c[1]="@media ".concat(c[2]," {").concat(c[1],"}"),c[2]=t):c[2]=t),r&&(c[4]?(c[1]="@supports (".concat(c[4],") {").concat(c[1],"}"),c[4]=r):c[4]="".concat(r)),e.push(c))}},e}},354(n){"use strict";n.exports=function(n){var e=n[1],t=n[3];if(!t)return e;if("function"==typeof btoa){var o=btoa(unescape(encodeURIComponent(JSON.stringify(t)))),r="sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(o),i="/*# ".concat(r," */");return[e].concat([i]).join("\n")}return[e].join("\n")}},72(n){"use strict";var e=[];function t(n){for(var t=-1,o=0;o<e.length;o++)if(e[o].identifier===n){t=o;break}return t}function o(n,o){for(var i={},a=[],s=0;s<n.length;s++){var d=n[s],l=o.base?d[0]+o.base:d[0],c=i[l]||0,A="".concat(l," ").concat(c);i[l]=c+1;var p=t(A),h={css:d[1],media:d[2],sourceMap:d[3],supports:d[4],layer:d[5]};if(-1!==p)e[p].references++,e[p].updater(h);else{var u=r(h,o);o.byIndex=s,e.splice(s,0,{identifier:A,updater:u,references:1})}a.push(A)}return a}function r(n,e){var t=e.domAPI(e);return t.update(n),function(e){if(e){if(e.css===n.css&&e.media===n.media&&e.sourceMap===n.sourceMap&&e.supports===n.supports&&e.layer===n.layer)return;t.update(n=e)}else t.remove()}}n.exports=function(n,r){var i=o(n=n||[],r=r||{});return function(n){n=n||[];for(var a=0;a<i.length;a++){var s=t(i[a]);e[s].references--}for(var d=o(n,r),l=0;l<i.length;l++){var c=t(i[l]);0===e[c].references&&(e[c].updater(),e.splice(c,1))}i=d}}},659(n){"use strict";var e={};n.exports=function(n,t){var o=function(n){if(void 0===e[n]){var t=document.querySelector(n);if(window.HTMLIFrameElement&&t instanceof window.HTMLIFrameElement)try{t=t.contentDocument.head}catch(n){t=null}e[n]=t}return e[n]}(n);if(!o)throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");o.appendChild(t)}},540(n){"use strict";n.exports=function(n){var e=document.createElement("style");return n.setAttributes(e,n.attributes),n.insert(e,n.options),e}},56(n,e,t){"use strict";n.exports=function(n){var e=t.nc;e&&n.setAttribute("nonce",e)}},825(n){"use strict";n.exports=function(n){if("undefined"==typeof document)return{update:function(){},remove:function(){}};var e=n.insertStyleElement(n);return{update:function(t){!function(n,e,t){var o="";t.supports&&(o+="@supports (".concat(t.supports,") {")),t.media&&(o+="@media ".concat(t.media," {"));var r=void 0!==t.layer;r&&(o+="@layer".concat(t.layer.length>0?" ".concat(t.layer):""," {")),o+=t.css,r&&(o+="}"),t.media&&(o+="}"),t.supports&&(o+="}");var i=t.sourceMap;i&&"undefined"!=typeof btoa&&(o+="\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(i))))," */")),e.styleTagTransform(o,n,e.options)}(e,n,t)},remove:function(){!function(n){if(null===n.parentNode)return!1;n.parentNode.removeChild(n)}(e)}}}},113(n){"use strict";n.exports=function(n,e){if(e.styleSheet)e.styleSheet.cssText=n;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(n))}}},800(){class n extends HTMLElement{_shadowRoot=null;_style=null;constructor(){super(),this._shadowRoot=this.attachShadow({mode:"open"}),this._style=document.createElement("style")}_updateStyle(){this._style.textContent="\n      :host {\n        display: block;\n        width: 100%;\n        \n        color: var(--text);\n        \n        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);\n      }\n \n      div {\n        padding: 24px 20px;\n      }\n \n      .brand-name {\n        margin: 0;\n      \n        font-size: 1.7em;\n      }\n    "}_emptyContent(){this._shadowRoot.innerHTML=""}connectedCallback(){this.render()}render(){this._emptyContent(),this._updateStyle(),this._shadowRoot.appendChild(this._style),this._shadowRoot.innerHTML+='      \n      <div>\n        <h1 class="brand-name">eng\'s Note App</h1>\n      </div>\n    '}}customElements.define("app-bar",n)},248(){class n extends HTMLElement{_shadowRoot=null;_style=null;constructor(){super(),this._shadowRoot=this.attachShadow({mode:"open"}),this._style=document.createElement("style")}_updateStyle(){this._style.textContent="\n      :host {\n        display: block;\n      }\n \n      div {\n        padding: 24px 20px;\n \n        text-align: center;\n      }\n    "}_emptyContent(){this._shadowRoot.innerHTML=""}connectedCallback(){this.render()}render(){this._emptyContent(),this._updateStyle(),this._shadowRoot.appendChild(this._style),this._shadowRoot.innerHTML+="      \n      <div>\n        enggarsilamajid &copy; 2026\n      </div>\n    "}}customElements.define("footer-bar",n)},847(){class n extends HTMLElement{constructor(){super(),this.attachShadow({mode:"open"})}connectedCallback(){this.render()}render(){this.shadowRoot.innerHTML='\n      <style>\n        .overlay {\n          position: fixed;\n          inset: 0;\n          background: rgba(0, 0, 0, 0.4);\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          z-index: 9999;\n        }\n\n        .spinner {\n          width: 50px;\n          height: 50px;\n          border: 5px solid #fff;\n          border-top: 5px solid transparent;\n          border-radius: 50%;\n          animation: spin 1s linear infinite;\n        }\n\n        @keyframes spin {\n          to { transform: rotate(360deg); }\n        }\n      </style>\n\n      <div class="overlay">\n        <div class="spinner"></div>\n      </div>\n    '}}customElements.define("loading-indicator",n)},578(){class n extends HTMLElement{constructor(){super(),this.attachShadow({mode:"open"})}connectedCallback(){this.render(),this.setupValidation()}render(){this.shadowRoot.innerHTML='\n      <style>\n        .form-container {\n          padding: 20px;\n        }\n\n        input, textarea {\n          width: 100%;\n          padding: 8px;\n          margin-bottom: 4px;\n          box-sizing: border-box;\n        }\n\n        .error {\n          font-size: 12px;\n          color: var(--text);\n          margin-bottom: 10px;\n          min-height: 14px;\n        }\n\n        button {\n          padding: 8px 16px;\n          cursor: pointer;\n        }\n\n        button:disabled {\n          opacity: 0.5;\n          cursor: not-allowed;\n        }\n      </style>\n\n      <div class="form-container">\n        <h2>New Note</h2>\n\n        <input type="text" id="title" placeholder="Title" />\n        <div id="titleError" class="error"></div>\n\n        <textarea id="body" rows="5" placeholder="Body"></textarea>\n        <div id="bodyError" class="error"></div>\n\n        <button id="saveBtn" disabled>Save</button>\n        <button id="cancelBtn">Cancel</button>\n      </div>\n    '}setupValidation(){const n=this.shadowRoot.querySelector("#title"),e=this.shadowRoot.querySelector("#body"),t=this.shadowRoot.querySelector("#saveBtn"),o=this.shadowRoot.querySelector("#titleError"),r=this.shadowRoot.querySelector("#bodyError"),i=()=>{let i=!0;n.value.trim()?n.value.trim().length<3?(o.textContent="At least 3 characters",i=!1):o.textContent="":(o.textContent="Title is required",i=!1),e.value.trim()?e.value.trim().length<5?(r.textContent="At least 5 characters",i=!1):r.textContent="":(r.textContent="Body is required",i=!1),t.disabled=!i};n.addEventListener("input",i),e.addEventListener("input",i),t.addEventListener("click",()=>{this.dispatchEvent(new CustomEvent("add-note",{detail:{title:n.value.trim(),body:e.value.trim()},bubbles:!0,composed:!0}))}),this.shadowRoot.querySelector("#cancelBtn").addEventListener("click",()=>{this.dispatchEvent(new CustomEvent("cancel-add-note",{bubbles:!0,composed:!0}))})}}customElements.define("note-form",n)},75(){class n extends HTMLElement{_shadowRoot=null;_style=null;_searchEvent="search";constructor(){super(),this._shadowRoot=this.attachShadow({mode:"open"}),this._style=document.createElement("style"),this.render()}connectedCallback(){this._shadowRoot.querySelector("input").addEventListener("input",n=>{const e=n.target.value;this.dispatchEvent(new CustomEvent(this._searchEvent,{detail:{query:e},bubbles:!0}))})}_emptyContent(){this._shadowRoot.innerHTML=""}_updateStyle(){this._style.textContent="\n      :host {\n        display: inline;\n      }\n\n      .floating-form {\n        background-color: white;\n        padding: 16px;\n        border-radius: 5px;\n\n        position: sticky;\n        top: 10px;\n\n        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);\n      }\n\n      .search-form {\n        display: flex;\n      }\n\n      .search-form .form-group {\n        flex-grow: 1;\n        position: relative;\n      }\n\n      .search-form .form-group input {\n        display: block;\n        width: 100%;\n        height: 60px;\n\n        padding: 14px 10px 0 10px;\n        border-inline: none;\n        border-block-start: none;\n        border-block-end: 1px solid var(--primary);\n\n        font-size: 1rem;\n      }\n\n      .search-form .form-group input:focus-visible {\n        outline: 0;\n      }\n\n      .search-form .form-group label {\n        line-height: 60px;\n        font-size: 1em;\n        font-weight: 700;\n        color: var(--primary);\n\n        position: absolute;\n        top: 0;\n        left: 20px;\n\n        user-select: none;\n        pointer-events: none;\n\n        transition: 150ms all ease-in-out;\n      }\n\n      .search-form .form-group input:focus-visible ~ label,\n      .search-form .form-group input:not(:placeholder-shown) ~ label {\n        left: 10px;\n        top: -16px;\n        font-size: 0.8em;\n      }\n    "}render(){this._emptyContent(),this._updateStyle(),this._shadowRoot.appendChild(this._style),this._shadowRoot.innerHTML+='\n      <div class="floating-form">\n        <div class="search-form">\n          <div class="form-group">\n            <input id="name" type="search" placeholder=" " />\n            <label for="name">Search Note\'s Title ... </label>\n          </div>\n        </div>\n      </div>\n    '}}customElements.define("search-bar",n)}},e={};function t(o){var r=e[o];if(void 0!==r)return r.exports;var i=e[o]={id:o,exports:{}};return n[o](i,i.exports,t),i.exports}t.n=n=>{var e=n&&n.__esModule?()=>n.default:()=>n;return t.d(e,{a:e}),e},t.d=(n,e)=>{for(var o in e)t.o(e,o)&&!t.o(n,o)&&Object.defineProperty(n,o,{enumerable:!0,get:e[o]})},t.o=(n,e)=>Object.prototype.hasOwnProperty.call(n,e),t.nc=void 0,(()=>{"use strict";var n=t(72),e=t.n(n),o=t(825),r=t.n(o),i=t(659),a=t.n(i),s=t(56),d=t.n(s),l=t(540),c=t.n(l),A=t(113),p=t.n(A),h=t(919),u={};u.styleTagTransform=p(),u.setAttributes=d(),u.insert=a().bind(null,"head"),u.domAPI=r(),u.insertStyleElement=c(),e()(h.A,u),h.A&&h.A.locals&&h.A.locals,t(800),t(75),t(248);const m=class{static emptyElement(n){n.innerHTML=""}static showElement(n){n.style.display="block",n.hidden=!1}static hideElement(n){n.style.display="none",n.hidden=!0}static isValidInteger(n){return Number.isNaN(n)||Number.isFinite(n)}static formatDate(n){const e=new Date(n);return new Intl.DateTimeFormat("id-ID",{day:"numeric",month:"long",year:"numeric"}).format(e)}static showLoading(){if(!document.querySelector("loading-indicator")){const n=document.createElement("loading-indicator");document.body.appendChild(n)}}static hideLoading(){const n=document.querySelector("loading-indicator");n&&n.remove()}};class f extends HTMLElement{_shadowRoot=null;_style=null;_notes=[];_column=2;_gutter=16;static get observedAttributes(){return["column","gutter"]}constructor(){super(),this._shadowRoot=this.attachShadow({mode:"open"}),this._style=document.createElement("style"),this.render()}set notes(n){this._notes=n||[],this.render()}get notes(){return this._notes}set column(n){const e=Number(n);m.isValidInteger(e)&&(this._column=e)}get column(){return this._column}set gutter(n){const e=Number(n);m.isValidInteger(e)&&(this._gutter=e)}get gutter(){return this._gutter}_updateStyle(){this._style.textContent=`\n      :host {\n        display: block;\n      }\n\n      h3 {\n        margin-top: 24px;\n        margin-bottom: 12px;\n        padding-bottom: 6px;\n      }\n\n      .empty-message {\n        font-style: italic;\n        color: #777;\n        margin-bottom: 16px;\n      }\n\n      .section {\n        margin-bottom: 32px;\n      }\n\n      .list {\n        display: grid;\n        grid-template-columns: ${"1fr ".repeat(this.column)};\n        gap: ${this.gutter}px;\n      }\n    `}_emptyContent(){this._shadowRoot.innerHTML=""}_renderSection(n,e,t){const o=document.createElement("div");o.classList.add("section");const r=document.createElement("h3");if(r.textContent=n,o.appendChild(r),0===e.length){const n=document.createElement("p");n.textContent=t,n.classList.add("empty-message"),o.appendChild(n)}else{const n=document.createElement("div");n.classList.add("list"),e.forEach(e=>{const t=document.createElement("note-item");t.note=e,n.appendChild(t)}),o.appendChild(n)}return o}render(){this._emptyContent(),this._updateStyle(),this._shadowRoot.appendChild(this._style);const n=document.createElement("div"),e=this._notes.filter(n=>!n.archived),t=this._notes.filter(n=>n.archived),o=this._renderSection("Active Notes",e,"No active notes"),r=this._renderSection("Archived Notes",t,"No archived notes");n.appendChild(o),n.appendChild(r),this._shadowRoot.appendChild(n)}attributeChangedCallback(n,e,t){switch(n){case"column":this.column=t;break;case"gutter":this.gutter=t}this.render()}}customElements.define("note-list",f);class E extends HTMLElement{_shadowRoot=null;_style=null;_note={id:null,title:null,body:null,createdAt:null,archived:null};constructor(){super(),this._shadowRoot=this.attachShadow({mode:"open"}),this._style=document.createElement("style")}_emptyContent(){this._shadowRoot.innerHTML=""}set note(n){this._note=n,this.render()}get note(){return this._note}_updateStyle(){this._style.textContent="\n      :host {\n        display: block;\n        border-radius: 8px;\n        \n        box-shadow: 0 0 2px 0 var(--text);\n        overflow: hidden;\n  \n \n      .note-info {\n        padding: 16px 24px;\n      }\n \n      .note-info__title h2 {\n        font-weight: lighter;\n      }\n\n      .note-info__date p {\n        font-size: .8em;\n      }\n\n      .note-info__description p {\n        display: -webkit-box;\n        margin-top: 10px;\n        \n        overflow: hidden;\n \n        text-overflow: ellipsis;\n        -webkit-box-orient: vertical;\n        -webkit-line-clamp: 5; /* number of lines to show */\n      }\n    "}render(){this._emptyContent(),this._updateStyle(),this._shadowRoot.appendChild(this._style),this._shadowRoot.innerHTML+=`\n      <div class="card">\n        \n        <div class="note-info">\n          <div class="note-info__title">\n            <h2>${this._note.title}</h2>\n          </div>\n          <div class="note-info__description">\n            <p>${this._note.body}</p>\n          </div>\n          <div class="note-info__date">\n            <p>${m.formatDate(this._note.createdAt)}</p>\n          </div>\n        </div>\n      </div>\n    `,this._shadowRoot.querySelector(".card").addEventListener("click",()=>{this.dispatchEvent(new CustomEvent("open-detail",{detail:{id:this._note.id},bubbles:!0,composed:!0}))})}}customElements.define("note-item",E);class g extends HTMLElement{_shadowRoot=null;_note=null;set note(n){this._note=n,this.render()}constructor(){super(),this._shadowRoot=this.attachShadow({mode:"open"})}render(){this._shadowRoot.innerHTML=`\n      <style>\n        .container {\n          padding: 20px;\n        }\n\n        button {\n          margin-top: 20px;\n          padding: 8px 16px;\n          cursor: pointer;\n        }\n      </style>\n\n      <div class="container">\n        <h2>${this._note.title}</h2>\n        <p>${m.formatDate(this._note.createdAt)}</p>\n        <p>${this._note.body}</p>\n\n        <button class="archive-btn">\n          ${this._note.archived?"Unarchive":"Archive"}\n        </button>\n\n        <button class="back-btn">Back</button>\n      </div>\n    `,this._shadowRoot.querySelector(".archive-btn").addEventListener("click",()=>{this.dispatchEvent(new CustomEvent("toggle-archive",{detail:{id:this._note.id},bubbles:!0,composed:!0}))}),this._shadowRoot.querySelector(".back-btn").addEventListener("click",()=>{this.dispatchEvent(new CustomEvent("back-to-list",{bubbles:!0,composed:!0}))})}}customElements.define("note-detail",g),t(578),t(847);const b="https://notes-api.dicoding.dev/v2",B=class{static _notes=[];static async fetchNotes(){const n=await fetch(`${b}/notes`),e=await n.json(),t=await fetch(`${b}/notes/archived`),o=await t.json();return this._notes=[...e.data,...o.data],this._notes}static getAll(){return this._notes}static searchNote(n){if(!n||""===n.trim())return this.getAll();const e=n.toLowerCase().replace(/\s/g,"");return this._notes.filter(n=>(n.title||"").toLowerCase().replace(/\s/g,"").includes(e))}static getNoteById(n){return this._notes.find(e=>e.id===n)}static async addNote({title:n,body:e}){const t=await fetch(`${b}/notes`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:n,body:e})}),o=await t.json();if("success"!==o.status)throw new Error(o.message);return o.data}static async toggleArchive(n,e){const t=e?`${b}/notes/${n}/unarchive`:`${b}/notes/${n}/archive`,o=await fetch(t,{method:"POST"}),r=await o.json();if("success"!==r.status)throw new Error(r.message);return r}},v=()=>{const n=document.querySelector("#addNoteBtn"),e=document.querySelector("#searchBarContainer"),t=document.querySelector(".title-section"),o=document.querySelector("search-bar"),r=document.querySelector("#noteListContainer"),i=r.querySelector(".not-found"),a=r.querySelector("note-list"),s=()=>{Array.from(r.children).forEach(n=>{m.hideElement(n)})},d=()=>{s(),m.showElement(i)},l=(n="")=>{const e=B.searchNote(n);n&&0===e.length?d():(a.notes=e,s(),m.showElement(a))},c=()=>{e.classList.remove("view-hidden"),t.classList.remove("view-hidden"),l()};o.addEventListener("search",n=>{const{query:e}=n.detail;l(e)}),(async()=>{try{m.showLoading(),await B.fetchNotes(),l()}catch(n){console.error("Failed get notes from API",n),d()}finally{m.hideLoading()}})(),document.addEventListener("open-detail",n=>{const o=n.detail.id;(({note:n,container:e,searchBar:t,titleSection:o,noteList:r,notFound:i,returnToList:a})=>{t.classList.add("view-hidden"),o.classList.add("view-hidden"),m.hideElement(r),m.hideElement(i);const s=document.createElement("note-detail");s.note=n,s.id="noteDetailView",e.appendChild(s);const d=async n=>{const{id:e}=n.detail;try{m.showLoading();const n=B.getNoteById(e);if(!n)throw new Error("Note tidak ditemukan");await B.toggleArchive(e,n.archived),await B.fetchNotes(),c(),a()}catch(n){console.error("Gagal toggle archive:",n)}finally{m.hideLoading()}},l=()=>{c(),a()},c=()=>{document.removeEventListener("toggle-archive",d),document.removeEventListener("back-to-list",l);const n=document.querySelector("#noteDetailView");n&&n.remove()};document.addEventListener("toggle-archive",d),document.addEventListener("back-to-list",l)})({note:B.getNoteById(o),container:r,searchBar:e,titleSection:t,noteList:a,notFound:i,returnToList:c})}),n.addEventListener("click",()=>{(({container:n,searchBar:e,titleSection:t,noteList:o,notFound:r,returnToList:i})=>{e.classList.add("view-hidden"),t.classList.add("view-hidden"),m.hideElement(o),m.hideElement(r);const a=document.createElement("note-form");a.id="noteFormView",n.appendChild(a);const s=async n=>{try{m.showLoading(),await B.addNote(n.detail),await B.fetchNotes(),l(),i()}catch(n){console.error("Gagal menambahkan note",n)}finally{m.hideLoading()}},d=()=>{l(),i()},l=()=>{document.removeEventListener("add-note",s),document.removeEventListener("cancel-add-note",d);const n=document.querySelector("#noteFormView");n&&n.remove()};document.addEventListener("add-note",s),document.addEventListener("cancel-add-note",d)})({container:r,searchBar:e,titleSection:t,noteList:a,notFound:i,returnToList:c})})};document.addEventListener("DOMContentLoaded",()=>{v()})})()})();
+(() => {
+  var n = {
+      919(n, e, t) {
+        "use strict";
+        t.d(e, { A: () => s });
+        var o = t(354),
+          r = t.n(o),
+          i = t(314),
+          a = t.n(i)()(r());
+        a.push([
+          n.id,
+          ":root {\n  --primary: #37353E;\n  --secondary: #44444E;\n  --additional: #715A5A;\n  --text: #D3DAD9;\n}\n\n* {\n  padding: 0;\n  margin: 0;\n\n  box-sizing: border-box;\n}\n\nbody {\n  font-family: sans-serif;\n  background-color: var(--primary);\n  color: var(--text);\n}\n\n/* GLOBAL */\n.container {\n  max-width: 800px;\n\n  padding-block: 32px;\n  padding-inline: 16px;\n  margin-inline: auto;\n}\n\n.card {\n  border-radius: 8px;\n\n  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);\n  overflow: hidden;\n}\n\nlabel {\n  display: block;\n}\n\nsection>.title-section {\n  display: grid;\n  grid-template-columns: 1fr auto;\n  align-items: center;\n  margin-block-start: 2rem;\n  font-size: 1.2em;\n}\n\nsection>.title-section>h2 {\n  justify-self: start;\n}\n\n#addNoteBtn {\n  justify-self: end;\n}\n\n.view-hidden {\n  display: none !important;\n}\n\n/* GLOBAL */\n\n/* Start of Header */\nheader {\n  background-color: var(--secondary);\n  \n  color: var(--text);\n}\n\n.app-bar {\n  padding: 24px 20px;\n}\n\n.app-bar .brand-name {\n  margin: 0;\n\n  font-size: 1.7em;\n}\n\n/* End of Header */\n\n/* Start of Main */\nmain {\n  min-height: 100vh;\n}\n\n/* Search bar */\n.search-bar-container {\n  display: inline;\n}\n\n.floating-form {\n  background-color: white;\n  padding: 16px;\n  border-radius: 5px;\n  position: sticky;\n  top: 10px;\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);\n}\n\n.search-form {\n  display: flex;\n  gap: 16px;\n}\n\n.search-form .form-group {\n  flex-grow: 1;\n  position: relative;\n}\n\n.search-form .form-group input {\n  display: block;\n  width: 100%;\n  height: 60px;\n  padding: 14px 10px 0 10px;\n  border-inline: none;\n  border-block-start: none;\n  border-block-end: 1px solid var(--primary);\n  font-size: 1em;\n}\n\n.search-form .form-group input:focus-visible {\n  outline: 0;\n}\n\n.search-form .form-group label {\n  line-height: 60px;\n  font-size: 1em;\n  font-weight: 700;\n  color: var(--primary);\n  white-space: nowrap;\n  position: absolute;\n  top: 0;\n  left: 20px;\n  user-select: none;\n  pointer-events: none;\n  transition: 150ms all ease-in-out;\n}\n\n.search-form .form-group input:focus-visible ~ label,\n.search-form .form-group input:valid ~ label {\n  left: 10px;\n  top: -16px;\n  font-size: 0.8em;\n}\n\n/* Search bar */\n\n.note-list-container {\n  margin-block-start: 32px;\n}\n\n.note-list .list {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 16px;\n}\n\n.note-list .list .card .note-info {\n  padding: 16px 24px;\n}\n\n.note-list .list .card .note-info__title h2 {\n  font-weight: lighter;\n}\n\n.note-list .list .card .note-info__date p {\n  font-size: 3em;\n}\n\n.note-list .list .card .note-info__description p {\n  display: -webkit-box;\n  margin-top: 10px;\n\n  overflow: hidden;\n\n  text-overflow: ellipsis;\n  -webkit-box-orient: vertical;\n  /* -webkit-line-clamp: 5; */\n  /* number of lines to show */\n}\n\n.note-list-container .placeholder {\n  margin-block: 1rem;\n\n  font-size: 1.5rem;\n  font-weight: lighter;\n  color: var(--text);\n}\n\n/* New Note Button */\n#addNoteBtn {\n  background: linear-gradient(135deg, #4f46e5, #6366f1);\n  color: white;\n  border: none;\n  padding: 8px 16px;\n  border-radius: 8px;\n  font-weight: 600;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  transition: all 0.2s ease;\n  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);\n}\n\n#addNoteBtn:hover {\n  transform: translateY(-2px);\n  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);\n}\n\n#addNoteBtn:active {\n  transform: translateY(0);\n  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);\n}\n\n#addNoteBtn .icon {\n  font-size: 18px;\n  font-weight: bold;\n}\n\n/* End of Main */\n\n/* Start of Footer */\nfooter {\n  background-color: var(--text);\n\n  color: var(--secondary);\n}\n\nfooter .container {\n  padding-block: 16px;\n}\n\n.main-footer {\n  padding: 8px 16px;\n\n  text-align: center;\n}\n\n/* End of Footer */",
+          "",
+          {
+            version: 3,
+            sources: ["webpack://./src/styles/style.css"],
+            names: [],
+            mappings:
+              "AAAA;EACE,kBAAkB;EAClB,oBAAoB;EACpB,qBAAqB;EACrB,eAAe;AACjB;;AAEA;EACE,UAAU;EACV,SAAS;;EAET,sBAAsB;AACxB;;AAEA;EACE,uBAAuB;EACvB,gCAAgC;EAChC,kBAAkB;AACpB;;AAEA,WAAW;AACX;EACE,gBAAgB;;EAEhB,mBAAmB;EACnB,oBAAoB;EACpB,mBAAmB;AACrB;;AAEA;EACE,kBAAkB;;EAElB,wCAAwC;EACxC,gBAAgB;AAClB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,+BAA+B;EAC/B,mBAAmB;EACnB,wBAAwB;EACxB,gBAAgB;AAClB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;AACnB;;AAEA;EACE,wBAAwB;AAC1B;;AAEA,WAAW;;AAEX,oBAAoB;AACpB;EACE,kCAAkC;;EAElC,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;AACpB;;AAEA;EACE,SAAS;;EAET,gBAAgB;AAClB;;AAEA,kBAAkB;;AAElB,kBAAkB;AAClB;EACE,iBAAiB;AACnB;;AAEA,eAAe;AACf;EACE,eAAe;AACjB;;AAEA;EACE,uBAAuB;EACvB,aAAa;EACb,kBAAkB;EAClB,gBAAgB;EAChB,SAAS;EACT,0CAA0C;AAC5C;;AAEA;EACE,aAAa;EACb,SAAS;AACX;;AAEA;EACE,YAAY;EACZ,kBAAkB;AACpB;;AAEA;EACE,cAAc;EACd,WAAW;EACX,YAAY;EACZ,yBAAyB;EACzB,mBAAmB;EACnB,wBAAwB;EACxB,0CAA0C;EAC1C,cAAc;AAChB;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE,iBAAiB;EACjB,cAAc;EACd,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,MAAM;EACN,UAAU;EACV,iBAAiB;EACjB,oBAAoB;EACpB,iCAAiC;AACnC;;AAEA;;EAEE,UAAU;EACV,UAAU;EACV,gBAAgB;AAClB;;AAEA,eAAe;;AAEf;EACE,wBAAwB;AAC1B;;AAEA;EACE,aAAa;EACb,8BAA8B;EAC9B,SAAS;AACX;;AAEA;EACE,kBAAkB;AACpB;;AAEA;EACE,oBAAoB;AACtB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,oBAAoB;EACpB,gBAAgB;;EAEhB,gBAAgB;;EAEhB,uBAAuB;EACvB,4BAA4B;EAC5B,2BAA2B;EAC3B,4BAA4B;AAC9B;;AAEA;EACE,kBAAkB;;EAElB,iBAAiB;EACjB,oBAAoB;EACpB,kBAAkB;AACpB;;AAEA,oBAAoB;AACpB;EACE,qDAAqD;EACrD,YAAY;EACZ,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;EAClB,gBAAgB;EAChB,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,QAAQ;EACR,yBAAyB;EACzB,yCAAyC;AAC3C;;AAEA;EACE,2BAA2B;EAC3B,0CAA0C;AAC5C;;AAEA;EACE,wBAAwB;EACxB,yCAAyC;AAC3C;;AAEA;EACE,eAAe;EACf,iBAAiB;AACnB;;AAEA,gBAAgB;;AAEhB,oBAAoB;AACpB;EACE,6BAA6B;;EAE7B,uBAAuB;AACzB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;;EAEjB,kBAAkB;AACpB;;AAEA,kBAAkB",
+            sourcesContent: [
+              ":root {\r\n  --primary: #37353E;\r\n  --secondary: #44444E;\r\n  --additional: #715A5A;\r\n  --text: #D3DAD9;\r\n}\r\n\r\n* {\r\n  padding: 0;\r\n  margin: 0;\r\n\r\n  box-sizing: border-box;\r\n}\r\n\r\nbody {\r\n  font-family: sans-serif;\r\n  background-color: var(--primary);\r\n  color: var(--text);\r\n}\r\n\r\n/* GLOBAL */\r\n.container {\r\n  max-width: 800px;\r\n\r\n  padding-block: 32px;\r\n  padding-inline: 16px;\r\n  margin-inline: auto;\r\n}\r\n\r\n.card {\r\n  border-radius: 8px;\r\n\r\n  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);\r\n  overflow: hidden;\r\n}\r\n\r\nlabel {\r\n  display: block;\r\n}\r\n\r\nsection>.title-section {\r\n  display: grid;\r\n  grid-template-columns: 1fr auto;\r\n  align-items: center;\r\n  margin-block-start: 2rem;\r\n  font-size: 1.2em;\r\n}\r\n\r\nsection>.title-section>h2 {\r\n  justify-self: start;\r\n}\r\n\r\n#addNoteBtn {\r\n  justify-self: end;\r\n}\r\n\r\n.view-hidden {\r\n  display: none !important;\r\n}\r\n\r\n/* GLOBAL */\r\n\r\n/* Start of Header */\r\nheader {\r\n  background-color: var(--secondary);\r\n  \r\n  color: var(--text);\r\n}\r\n\r\n.app-bar {\r\n  padding: 24px 20px;\r\n}\r\n\r\n.app-bar .brand-name {\r\n  margin: 0;\r\n\r\n  font-size: 1.7em;\r\n}\r\n\r\n/* End of Header */\r\n\r\n/* Start of Main */\r\nmain {\r\n  min-height: 100vh;\r\n}\r\n\r\n/* Search bar */\r\n.search-bar-container {\r\n  display: inline;\r\n}\r\n\r\n.floating-form {\r\n  background-color: white;\r\n  padding: 16px;\r\n  border-radius: 5px;\r\n  position: sticky;\r\n  top: 10px;\r\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);\r\n}\r\n\r\n.search-form {\r\n  display: flex;\r\n  gap: 16px;\r\n}\r\n\r\n.search-form .form-group {\r\n  flex-grow: 1;\r\n  position: relative;\r\n}\r\n\r\n.search-form .form-group input {\r\n  display: block;\r\n  width: 100%;\r\n  height: 60px;\r\n  padding: 14px 10px 0 10px;\r\n  border-inline: none;\r\n  border-block-start: none;\r\n  border-block-end: 1px solid var(--primary);\r\n  font-size: 1em;\r\n}\r\n\r\n.search-form .form-group input:focus-visible {\r\n  outline: 0;\r\n}\r\n\r\n.search-form .form-group label {\r\n  line-height: 60px;\r\n  font-size: 1em;\r\n  font-weight: 700;\r\n  color: var(--primary);\r\n  white-space: nowrap;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 20px;\r\n  user-select: none;\r\n  pointer-events: none;\r\n  transition: 150ms all ease-in-out;\r\n}\r\n\r\n.search-form .form-group input:focus-visible ~ label,\r\n.search-form .form-group input:valid ~ label {\r\n  left: 10px;\r\n  top: -16px;\r\n  font-size: 0.8em;\r\n}\r\n\r\n/* Search bar */\r\n\r\n.note-list-container {\r\n  margin-block-start: 32px;\r\n}\r\n\r\n.note-list .list {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\r\n  gap: 16px;\r\n}\r\n\r\n.note-list .list .card .note-info {\r\n  padding: 16px 24px;\r\n}\r\n\r\n.note-list .list .card .note-info__title h2 {\r\n  font-weight: lighter;\r\n}\r\n\r\n.note-list .list .card .note-info__date p {\r\n  font-size: 3em;\r\n}\r\n\r\n.note-list .list .card .note-info__description p {\r\n  display: -webkit-box;\r\n  margin-top: 10px;\r\n\r\n  overflow: hidden;\r\n\r\n  text-overflow: ellipsis;\r\n  -webkit-box-orient: vertical;\r\n  /* -webkit-line-clamp: 5; */\r\n  /* number of lines to show */\r\n}\r\n\r\n.note-list-container .placeholder {\r\n  margin-block: 1rem;\r\n\r\n  font-size: 1.5rem;\r\n  font-weight: lighter;\r\n  color: var(--text);\r\n}\r\n\r\n/* New Note Button */\r\n#addNoteBtn {\r\n  background: linear-gradient(135deg, #4f46e5, #6366f1);\r\n  color: white;\r\n  border: none;\r\n  padding: 8px 16px;\r\n  border-radius: 8px;\r\n  font-weight: 600;\r\n  cursor: pointer;\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 6px;\r\n  transition: all 0.2s ease;\r\n  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n#addNoteBtn:hover {\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);\r\n}\r\n\r\n#addNoteBtn:active {\r\n  transform: translateY(0);\r\n  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);\r\n}\r\n\r\n#addNoteBtn .icon {\r\n  font-size: 18px;\r\n  font-weight: bold;\r\n}\r\n\r\n/* End of Main */\r\n\r\n/* Start of Footer */\r\nfooter {\r\n  background-color: var(--text);\r\n\r\n  color: var(--secondary);\r\n}\r\n\r\nfooter .container {\r\n  padding-block: 16px;\r\n}\r\n\r\n.main-footer {\r\n  padding: 8px 16px;\r\n\r\n  text-align: center;\r\n}\r\n\r\n/* End of Footer */",
+            ],
+            sourceRoot: "",
+          },
+        ]);
+        const s = a;
+      },
+      314(n) {
+        "use strict";
+        n.exports = function (n) {
+          var e = [];
+          return (
+            (e.toString = function () {
+              return this.map(function (e) {
+                var t = "",
+                  o = void 0 !== e[5];
+                return (
+                  e[4] && (t += "@supports (".concat(e[4], ") {")),
+                  e[2] && (t += "@media ".concat(e[2], " {")),
+                  o &&
+                    (t += "@layer".concat(
+                      e[5].length > 0 ? " ".concat(e[5]) : "",
+                      " {",
+                    )),
+                  (t += n(e)),
+                  o && (t += "}"),
+                  e[2] && (t += "}"),
+                  e[4] && (t += "}"),
+                  t
+                );
+              }).join("");
+            }),
+            (e.i = function (n, t, o, r, i) {
+              "string" == typeof n && (n = [[null, n, void 0]]);
+              var a = {};
+              if (o)
+                for (var s = 0; s < this.length; s++) {
+                  var d = this[s][0];
+                  null != d && (a[d] = !0);
+                }
+              for (var l = 0; l < n.length; l++) {
+                var c = [].concat(n[l]);
+                (o && a[c[0]]) ||
+                  (void 0 !== i &&
+                    (void 0 === c[5] ||
+                      (c[1] = "@layer"
+                        .concat(c[5].length > 0 ? " ".concat(c[5]) : "", " {")
+                        .concat(c[1], "}")),
+                    (c[5] = i)),
+                  t &&
+                    (c[2]
+                      ? ((c[1] = "@media "
+                          .concat(c[2], " {")
+                          .concat(c[1], "}")),
+                        (c[2] = t))
+                      : (c[2] = t)),
+                  r &&
+                    (c[4]
+                      ? ((c[1] = "@supports ("
+                          .concat(c[4], ") {")
+                          .concat(c[1], "}")),
+                        (c[4] = r))
+                      : (c[4] = "".concat(r))),
+                  e.push(c));
+              }
+            }),
+            e
+          );
+        };
+      },
+      354(n) {
+        "use strict";
+        n.exports = function (n) {
+          var e = n[1],
+            t = n[3];
+          if (!t) return e;
+          if ("function" == typeof btoa) {
+            var o = btoa(unescape(encodeURIComponent(JSON.stringify(t)))),
+              r =
+                "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(
+                  o,
+                ),
+              i = "/*# ".concat(r, " */");
+            return [e].concat([i]).join("\n");
+          }
+          return [e].join("\n");
+        };
+      },
+      72(n) {
+        "use strict";
+        var e = [];
+        function t(n) {
+          for (var t = -1, o = 0; o < e.length; o++)
+            if (e[o].identifier === n) {
+              t = o;
+              break;
+            }
+          return t;
+        }
+        function o(n, o) {
+          for (var i = {}, a = [], s = 0; s < n.length; s++) {
+            var d = n[s],
+              l = o.base ? d[0] + o.base : d[0],
+              c = i[l] || 0,
+              A = "".concat(l, " ").concat(c);
+            i[l] = c + 1;
+            var p = t(A),
+              h = {
+                css: d[1],
+                media: d[2],
+                sourceMap: d[3],
+                supports: d[4],
+                layer: d[5],
+              };
+            if (-1 !== p) (e[p].references++, e[p].updater(h));
+            else {
+              var u = r(h, o);
+              ((o.byIndex = s),
+                e.splice(s, 0, { identifier: A, updater: u, references: 1 }));
+            }
+            a.push(A);
+          }
+          return a;
+        }
+        function r(n, e) {
+          var t = e.domAPI(e);
+          return (
+            t.update(n),
+            function (e) {
+              if (e) {
+                if (
+                  e.css === n.css &&
+                  e.media === n.media &&
+                  e.sourceMap === n.sourceMap &&
+                  e.supports === n.supports &&
+                  e.layer === n.layer
+                )
+                  return;
+                t.update((n = e));
+              } else t.remove();
+            }
+          );
+        }
+        n.exports = function (n, r) {
+          var i = o((n = n || []), (r = r || {}));
+          return function (n) {
+            n = n || [];
+            for (var a = 0; a < i.length; a++) {
+              var s = t(i[a]);
+              e[s].references--;
+            }
+            for (var d = o(n, r), l = 0; l < i.length; l++) {
+              var c = t(i[l]);
+              0 === e[c].references && (e[c].updater(), e.splice(c, 1));
+            }
+            i = d;
+          };
+        };
+      },
+      659(n) {
+        "use strict";
+        var e = {};
+        n.exports = function (n, t) {
+          var o = (function (n) {
+            if (void 0 === e[n]) {
+              var t = document.querySelector(n);
+              if (
+                window.HTMLIFrameElement &&
+                t instanceof window.HTMLIFrameElement
+              )
+                try {
+                  t = t.contentDocument.head;
+                } catch (n) {
+                  t = null;
+                }
+              e[n] = t;
+            }
+            return e[n];
+          })(n);
+          if (!o)
+            throw new Error(
+              "Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.",
+            );
+          o.appendChild(t);
+        };
+      },
+      540(n) {
+        "use strict";
+        n.exports = function (n) {
+          var e = document.createElement("style");
+          return (n.setAttributes(e, n.attributes), n.insert(e, n.options), e);
+        };
+      },
+      56(n, e, t) {
+        "use strict";
+        n.exports = function (n) {
+          var e = t.nc;
+          e && n.setAttribute("nonce", e);
+        };
+      },
+      825(n) {
+        "use strict";
+        n.exports = function (n) {
+          if ("undefined" == typeof document)
+            return { update: function () {}, remove: function () {} };
+          var e = n.insertStyleElement(n);
+          return {
+            update: function (t) {
+              !(function (n, e, t) {
+                var o = "";
+                (t.supports && (o += "@supports (".concat(t.supports, ") {")),
+                  t.media && (o += "@media ".concat(t.media, " {")));
+                var r = void 0 !== t.layer;
+                (r &&
+                  (o += "@layer".concat(
+                    t.layer.length > 0 ? " ".concat(t.layer) : "",
+                    " {",
+                  )),
+                  (o += t.css),
+                  r && (o += "}"),
+                  t.media && (o += "}"),
+                  t.supports && (o += "}"));
+                var i = t.sourceMap;
+                (i &&
+                  "undefined" != typeof btoa &&
+                  (o +=
+                    "\n/*# sourceMappingURL=data:application/json;base64,".concat(
+                      btoa(unescape(encodeURIComponent(JSON.stringify(i)))),
+                      " */",
+                    )),
+                  e.styleTagTransform(o, n, e.options));
+              })(e, n, t);
+            },
+            remove: function () {
+              !(function (n) {
+                if (null === n.parentNode) return !1;
+                n.parentNode.removeChild(n);
+              })(e);
+            },
+          };
+        };
+      },
+      113(n) {
+        "use strict";
+        n.exports = function (n, e) {
+          if (e.styleSheet) e.styleSheet.cssText = n;
+          else {
+            for (; e.firstChild; ) e.removeChild(e.firstChild);
+            e.appendChild(document.createTextNode(n));
+          }
+        };
+      },
+      800() {
+        class n extends HTMLElement {
+          _shadowRoot = null;
+          _style = null;
+          constructor() {
+            (super(),
+              (this._shadowRoot = this.attachShadow({ mode: "open" })),
+              (this._style = document.createElement("style")));
+          }
+          _updateStyle() {
+            this._style.textContent =
+              "\n      :host {\n        display: block;\n        width: 100%;\n        \n        color: var(--text);\n        \n        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);\n      }\n \n      div {\n        padding: 24px 20px;\n      }\n \n      .brand-name {\n        margin: 0;\n      \n        font-size: 1.7em;\n      }\n    ";
+          }
+          _emptyContent() {
+            this._shadowRoot.innerHTML = "";
+          }
+          connectedCallback() {
+            this.render();
+          }
+          render() {
+            (this._emptyContent(),
+              this._updateStyle(),
+              this._shadowRoot.appendChild(this._style),
+              (this._shadowRoot.innerHTML +=
+                '      \n      <div>\n        <h1 class="brand-name">eng\'s Note App</h1>\n      </div>\n    '));
+          }
+        }
+        customElements.define("app-bar", n);
+      },
+      248() {
+        class n extends HTMLElement {
+          _shadowRoot = null;
+          _style = null;
+          constructor() {
+            (super(),
+              (this._shadowRoot = this.attachShadow({ mode: "open" })),
+              (this._style = document.createElement("style")));
+          }
+          _updateStyle() {
+            this._style.textContent =
+              "\n      :host {\n        display: block;\n      }\n \n      div {\n        padding: 24px 20px;\n \n        text-align: center;\n      }\n    ";
+          }
+          _emptyContent() {
+            this._shadowRoot.innerHTML = "";
+          }
+          connectedCallback() {
+            this.render();
+          }
+          render() {
+            (this._emptyContent(),
+              this._updateStyle(),
+              this._shadowRoot.appendChild(this._style),
+              (this._shadowRoot.innerHTML +=
+                "      \n      <div>\n        enggarsilamajid &copy; 2026\n      </div>\n    "));
+          }
+        }
+        customElements.define("footer-bar", n);
+      },
+      847() {
+        class n extends HTMLElement {
+          constructor() {
+            (super(), this.attachShadow({ mode: "open" }));
+          }
+          connectedCallback() {
+            this.render();
+          }
+          render() {
+            this.shadowRoot.innerHTML =
+              '\n      <style>\n        .overlay {\n          position: fixed;\n          inset: 0;\n          background: rgba(0, 0, 0, 0.4);\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          z-index: 9999;\n        }\n\n        .spinner {\n          width: 50px;\n          height: 50px;\n          border: 5px solid #fff;\n          border-top: 5px solid transparent;\n          border-radius: 50%;\n          animation: spin 1s linear infinite;\n        }\n\n        @keyframes spin {\n          to { transform: rotate(360deg); }\n        }\n      </style>\n\n      <div class="overlay">\n        <div class="spinner"></div>\n      </div>\n    ';
+          }
+        }
+        customElements.define("loading-indicator", n);
+      },
+      578() {
+        class n extends HTMLElement {
+          constructor() {
+            (super(), this.attachShadow({ mode: "open" }));
+          }
+          connectedCallback() {
+            (this.render(), this.setupValidation());
+          }
+          render() {
+            this.shadowRoot.innerHTML =
+              '\n      <style>\n        .form-container {\n          padding: 20px;\n        }\n\n        input, textarea {\n          width: 100%;\n          padding: 8px;\n          margin-bottom: 4px;\n          box-sizing: border-box;\n        }\n\n        .error {\n          font-size: 12px;\n          color: var(--text);\n          margin-bottom: 10px;\n          min-height: 14px;\n        }\n\n        button {\n          padding: 8px 16px;\n          cursor: pointer;\n        }\n\n        button:disabled {\n          opacity: 0.5;\n          cursor: not-allowed;\n        }\n      </style>\n\n      <div class="form-container">\n        <h2>New Note</h2>\n\n        <input type="text" id="title" placeholder="Title" />\n        <div id="titleError" class="error"></div>\n\n        <textarea id="body" rows="5" placeholder="Body"></textarea>\n        <div id="bodyError" class="error"></div>\n\n        <button id="saveBtn" disabled>Save</button>\n        <button id="cancelBtn">Cancel</button>\n      </div>\n    ';
+          }
+          setupValidation() {
+            const n = this.shadowRoot.querySelector("#title"),
+              e = this.shadowRoot.querySelector("#body"),
+              t = this.shadowRoot.querySelector("#saveBtn"),
+              o = this.shadowRoot.querySelector("#titleError"),
+              r = this.shadowRoot.querySelector("#bodyError"),
+              i = () => {
+                let i = !0;
+                (n.value.trim()
+                  ? n.value.trim().length < 3
+                    ? ((o.textContent = "At least 3 characters"), (i = !1))
+                    : (o.textContent = "")
+                  : ((o.textContent = "Title is required"), (i = !1)),
+                  e.value.trim()
+                    ? e.value.trim().length < 5
+                      ? ((r.textContent = "At least 5 characters"), (i = !1))
+                      : (r.textContent = "")
+                    : ((r.textContent = "Body is required"), (i = !1)),
+                  (t.disabled = !i));
+              };
+            (n.addEventListener("input", i),
+              e.addEventListener("input", i),
+              t.addEventListener("click", () => {
+                this.dispatchEvent(
+                  new CustomEvent("add-note", {
+                    detail: { title: n.value.trim(), body: e.value.trim() },
+                    bubbles: !0,
+                    composed: !0,
+                  }),
+                );
+              }),
+              this.shadowRoot
+                .querySelector("#cancelBtn")
+                .addEventListener("click", () => {
+                  this.dispatchEvent(
+                    new CustomEvent("cancel-add-note", {
+                      bubbles: !0,
+                      composed: !0,
+                    }),
+                  );
+                }));
+          }
+        }
+        customElements.define("note-form", n);
+      },
+      75() {
+        class n extends HTMLElement {
+          _shadowRoot = null;
+          _style = null;
+          _searchEvent = "search";
+          constructor() {
+            (super(),
+              (this._shadowRoot = this.attachShadow({ mode: "open" })),
+              (this._style = document.createElement("style")),
+              this.render());
+          }
+          connectedCallback() {
+            this._shadowRoot
+              .querySelector("input")
+              .addEventListener("input", (n) => {
+                const e = n.target.value;
+                this.dispatchEvent(
+                  new CustomEvent(this._searchEvent, {
+                    detail: { query: e },
+                    bubbles: !0,
+                  }),
+                );
+              });
+          }
+          _emptyContent() {
+            this._shadowRoot.innerHTML = "";
+          }
+          _updateStyle() {
+            this._style.textContent =
+              "\n      :host {\n        display: inline;\n      }\n\n      .floating-form {\n        background-color: white;\n        padding: 16px;\n        border-radius: 5px;\n\n        position: sticky;\n        top: 10px;\n\n        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);\n      }\n\n      .search-form {\n        display: flex;\n      }\n\n      .search-form .form-group {\n        flex-grow: 1;\n        position: relative;\n      }\n\n      .search-form .form-group input {\n        display: block;\n        width: 100%;\n        height: 60px;\n\n        padding: 14px 10px 0 10px;\n        border-inline: none;\n        border-block-start: none;\n        border-block-end: 1px solid var(--primary);\n\n        font-size: 1rem;\n      }\n\n      .search-form .form-group input:focus-visible {\n        outline: 0;\n      }\n\n      .search-form .form-group label {\n        line-height: 60px;\n        font-size: 1em;\n        font-weight: 700;\n        color: var(--primary);\n\n        position: absolute;\n        top: 0;\n        left: 20px;\n\n        user-select: none;\n        pointer-events: none;\n\n        transition: 150ms all ease-in-out;\n      }\n\n      .search-form .form-group input:focus-visible ~ label,\n      .search-form .form-group input:not(:placeholder-shown) ~ label {\n        left: 10px;\n        top: -16px;\n        font-size: 0.8em;\n      }\n    ";
+          }
+          render() {
+            (this._emptyContent(),
+              this._updateStyle(),
+              this._shadowRoot.appendChild(this._style),
+              (this._shadowRoot.innerHTML +=
+                '\n      <div class="floating-form">\n        <div class="search-form">\n          <div class="form-group">\n            <input id="name" type="search" placeholder=" " />\n            <label for="name">Search Note\'s Title ... </label>\n          </div>\n        </div>\n      </div>\n    '));
+          }
+        }
+        customElements.define("search-bar", n);
+      },
+    },
+    e = {};
+  function t(o) {
+    var r = e[o];
+    if (void 0 !== r) return r.exports;
+    var i = (e[o] = { id: o, exports: {} });
+    return (n[o](i, i.exports, t), i.exports);
+  }
+  ((t.n = (n) => {
+    var e = n && n.__esModule ? () => n.default : () => n;
+    return (t.d(e, { a: e }), e);
+  }),
+    (t.d = (n, e) => {
+      for (var o in e)
+        t.o(e, o) &&
+          !t.o(n, o) &&
+          Object.defineProperty(n, o, { enumerable: !0, get: e[o] });
+    }),
+    (t.o = (n, e) => Object.prototype.hasOwnProperty.call(n, e)),
+    (t.nc = void 0),
+    (() => {
+      "use strict";
+      var n = t(72),
+        e = t.n(n),
+        o = t(825),
+        r = t.n(o),
+        i = t(659),
+        a = t.n(i),
+        s = t(56),
+        d = t.n(s),
+        l = t(540),
+        c = t.n(l),
+        A = t(113),
+        p = t.n(A),
+        h = t(919),
+        u = {};
+      ((u.styleTagTransform = p()),
+        (u.setAttributes = d()),
+        (u.insert = a().bind(null, "head")),
+        (u.domAPI = r()),
+        (u.insertStyleElement = c()),
+        e()(h.A, u),
+        h.A && h.A.locals && h.A.locals,
+        t(800),
+        t(75),
+        t(248));
+      const m = class {
+        static emptyElement(n) {
+          n.innerHTML = "";
+        }
+        static showElement(n) {
+          ((n.style.display = "block"), (n.hidden = !1));
+        }
+        static hideElement(n) {
+          ((n.style.display = "none"), (n.hidden = !0));
+        }
+        static isValidInteger(n) {
+          return Number.isNaN(n) || Number.isFinite(n);
+        }
+        static formatDate(n) {
+          const e = new Date(n);
+          return new Intl.DateTimeFormat("id-ID", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          }).format(e);
+        }
+        static showLoading() {
+          if (!document.querySelector("loading-indicator")) {
+            const n = document.createElement("loading-indicator");
+            document.body.appendChild(n);
+          }
+        }
+        static hideLoading() {
+          const n = document.querySelector("loading-indicator");
+          n && n.remove();
+        }
+      };
+      class f extends HTMLElement {
+        _shadowRoot = null;
+        _style = null;
+        _notes = [];
+        _column = 2;
+        _gutter = 16;
+        static get observedAttributes() {
+          return ["column", "gutter"];
+        }
+        constructor() {
+          (super(),
+            (this._shadowRoot = this.attachShadow({ mode: "open" })),
+            (this._style = document.createElement("style")),
+            this.render());
+        }
+        set notes(n) {
+          ((this._notes = n || []), this.render());
+        }
+        get notes() {
+          return this._notes;
+        }
+        set column(n) {
+          const e = Number(n);
+          m.isValidInteger(e) && (this._column = e);
+        }
+        get column() {
+          return this._column;
+        }
+        set gutter(n) {
+          const e = Number(n);
+          m.isValidInteger(e) && (this._gutter = e);
+        }
+        get gutter() {
+          return this._gutter;
+        }
+        _updateStyle() {
+          this._style.textContent = `\n      :host {\n        display: block;\n      }\n\n      h3 {\n        margin-top: 24px;\n        margin-bottom: 12px;\n        padding-bottom: 6px;\n      }\n\n      .empty-message {\n        font-style: italic;\n        color: #777;\n        margin-bottom: 16px;\n      }\n\n      .section {\n        margin-bottom: 32px;\n      }\n\n      .list {\n        display: grid;\n        grid-template-columns: ${"1fr ".repeat(this.column)};\n        gap: ${this.gutter}px;\n      }\n    `;
+        }
+        _emptyContent() {
+          this._shadowRoot.innerHTML = "";
+        }
+        _renderSection(n, e, t) {
+          const o = document.createElement("div");
+          o.classList.add("section");
+          const r = document.createElement("h3");
+          if (((r.textContent = n), o.appendChild(r), 0 === e.length)) {
+            const n = document.createElement("p");
+            ((n.textContent = t),
+              n.classList.add("empty-message"),
+              o.appendChild(n));
+          } else {
+            const n = document.createElement("div");
+            (n.classList.add("list"),
+              e.forEach((e) => {
+                const t = document.createElement("note-item");
+                ((t.note = e), n.appendChild(t));
+              }),
+              o.appendChild(n));
+          }
+          return o;
+        }
+        render() {
+          (this._emptyContent(),
+            this._updateStyle(),
+            this._shadowRoot.appendChild(this._style));
+          const n = document.createElement("div"),
+            e = this._notes.filter((n) => !n.archived),
+            t = this._notes.filter((n) => n.archived),
+            o = this._renderSection("Active Notes", e, "No active notes"),
+            r = this._renderSection("Archived Notes", t, "No archived notes");
+          (n.appendChild(o), n.appendChild(r), this._shadowRoot.appendChild(n));
+        }
+        attributeChangedCallback(n, e, t) {
+          switch (n) {
+            case "column":
+              this.column = t;
+              break;
+            case "gutter":
+              this.gutter = t;
+          }
+          this.render();
+        }
+      }
+      customElements.define("note-list", f);
+      class E extends HTMLElement {
+        _shadowRoot = null;
+        _style = null;
+        _note = {
+          id: null,
+          title: null,
+          body: null,
+          createdAt: null,
+          archived: null,
+        };
+        constructor() {
+          (super(),
+            (this._shadowRoot = this.attachShadow({ mode: "open" })),
+            (this._style = document.createElement("style")));
+        }
+        _emptyContent() {
+          this._shadowRoot.innerHTML = "";
+        }
+        set note(n) {
+          ((this._note = n), this.render());
+        }
+        get note() {
+          return this._note;
+        }
+        _updateStyle() {
+          this._style.textContent =
+            "\n      :host {\n        display: block;\n        border-radius: 8px;\n        \n        box-shadow: 0 0 2px 0 var(--text);\n        overflow: hidden;\n  \n \n      .note-info {\n        padding: 16px 24px;\n      }\n \n      .note-info__title h2 {\n        font-weight: lighter;\n      }\n\n      .note-info__date p {\n        font-size: .8em;\n      }\n\n      .note-info__description p {\n        display: -webkit-box;\n        margin-top: 10px;\n        \n        overflow: hidden;\n \n        text-overflow: ellipsis;\n        -webkit-box-orient: vertical;\n        -webkit-line-clamp: 5; /* number of lines to show */\n      }\n    ";
+        }
+        render() {
+          (this._emptyContent(),
+            this._updateStyle(),
+            this._shadowRoot.appendChild(this._style),
+            (this._shadowRoot.innerHTML += `\n      <div class="card">\n        \n        <div class="note-info">\n          <div class="note-info__title">\n            <h2>${this._note.title}</h2>\n          </div>\n          <div class="note-info__description">\n            <p>${this._note.body}</p>\n          </div>\n          <div class="note-info__date">\n            <p>${m.formatDate(this._note.createdAt)}</p>\n          </div>\n        </div>\n      </div>\n    `),
+            this._shadowRoot
+              .querySelector(".card")
+              .addEventListener("click", () => {
+                this.dispatchEvent(
+                  new CustomEvent("open-detail", {
+                    detail: { id: this._note.id },
+                    bubbles: !0,
+                    composed: !0,
+                  }),
+                );
+              }));
+        }
+      }
+      customElements.define("note-item", E);
+      class g extends HTMLElement {
+        _shadowRoot = null;
+        _note = null;
+        set note(n) {
+          ((this._note = n), this.render());
+        }
+        constructor() {
+          (super(), (this._shadowRoot = this.attachShadow({ mode: "open" })));
+        }
+        render() {
+          ((this._shadowRoot.innerHTML = `\n      <style>\n        .container {\n          padding: 20px;\n        }\n\n        button {\n          margin-top: 20px;\n          padding: 8px 16px;\n          cursor: pointer;\n        }\n      </style>\n\n      <div class="container">\n        <h2>${this._note.title}</h2>\n        <p>${m.formatDate(this._note.createdAt)}</p>\n        <p>${this._note.body}</p>\n\n        <button class="archive-btn">\n          ${this._note.archived ? "Unarchive" : "Archive"}\n        </button>\n\n        <button class="back-btn">Back</button>\n      </div>\n    `),
+            this._shadowRoot
+              .querySelector(".archive-btn")
+              .addEventListener("click", () => {
+                this.dispatchEvent(
+                  new CustomEvent("toggle-archive", {
+                    detail: { id: this._note.id },
+                    bubbles: !0,
+                    composed: !0,
+                  }),
+                );
+              }),
+            this._shadowRoot
+              .querySelector(".back-btn")
+              .addEventListener("click", () => {
+                this.dispatchEvent(
+                  new CustomEvent("back-to-list", {
+                    bubbles: !0,
+                    composed: !0,
+                  }),
+                );
+              }));
+        }
+      }
+      (customElements.define("note-detail", g), t(578), t(847));
+      const b = "https://notes-api.dicoding.dev/v2",
+        B = class {
+          static _notes = [];
+          static async fetchNotes() {
+            const n = await fetch(`${b}/notes`),
+              e = await n.json(),
+              t = await fetch(`${b}/notes/archived`),
+              o = await t.json();
+            return ((this._notes = [...e.data, ...o.data]), this._notes);
+          }
+          static getAll() {
+            return this._notes;
+          }
+          static searchNote(n) {
+            if (!n || "" === n.trim()) return this.getAll();
+            const e = n.toLowerCase().replace(/\s/g, "");
+            return this._notes.filter((n) =>
+              (n.title || "").toLowerCase().replace(/\s/g, "").includes(e),
+            );
+          }
+          static getNoteById(n) {
+            return this._notes.find((e) => e.id === n);
+          }
+          static async addNote({ title: n, body: e }) {
+            const t = await fetch(`${b}/notes`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title: n, body: e }),
+              }),
+              o = await t.json();
+            if ("success" !== o.status) throw new Error(o.message);
+            return o.data;
+          }
+          static async toggleArchive(n, e) {
+            const t = e
+                ? `${b}/notes/${n}/unarchive`
+                : `${b}/notes/${n}/archive`,
+              o = await fetch(t, { method: "POST" }),
+              r = await o.json();
+            if ("success" !== r.status) throw new Error(r.message);
+            return r;
+          }
+        },
+        v = () => {
+          const n = document.querySelector("#addNoteBtn"),
+            e = document.querySelector("#searchBarContainer"),
+            t = document.querySelector(".title-section"),
+            o = document.querySelector("search-bar"),
+            r = document.querySelector("#noteListContainer"),
+            i = r.querySelector(".not-found"),
+            a = r.querySelector("note-list"),
+            s = () => {
+              Array.from(r.children).forEach((n) => {
+                m.hideElement(n);
+              });
+            },
+            d = () => {
+              (s(), m.showElement(i));
+            },
+            l = (n = "") => {
+              const e = B.searchNote(n);
+              n && 0 === e.length
+                ? d()
+                : ((a.notes = e), s(), m.showElement(a));
+            },
+            c = () => {
+              (e.classList.remove("view-hidden"),
+                t.classList.remove("view-hidden"),
+                l());
+            };
+          (o.addEventListener("search", (n) => {
+            const { query: e } = n.detail;
+            l(e);
+          }),
+            (async () => {
+              try {
+                (m.showLoading(), await B.fetchNotes(), l());
+              } catch (n) {
+                (console.error("Failed get notes from API", n), d());
+              } finally {
+                m.hideLoading();
+              }
+            })(),
+            document.addEventListener("open-detail", (n) => {
+              const o = n.detail.id;
+              (({
+                note: n,
+                container: e,
+                searchBar: t,
+                titleSection: o,
+                noteList: r,
+                notFound: i,
+                returnToList: a,
+              }) => {
+                (t.classList.add("view-hidden"),
+                  o.classList.add("view-hidden"),
+                  m.hideElement(r),
+                  m.hideElement(i));
+                const s = document.createElement("note-detail");
+                ((s.note = n), (s.id = "noteDetailView"), e.appendChild(s));
+                const d = async (n) => {
+                    const { id: e } = n.detail;
+                    try {
+                      m.showLoading();
+                      const n = B.getNoteById(e);
+                      if (!n) throw new Error("Note tidak ditemukan");
+                      (await B.toggleArchive(e, n.archived),
+                        await B.fetchNotes(),
+                        c(),
+                        a());
+                    } catch (n) {
+                      console.error("Gagal toggle archive:", n);
+                    } finally {
+                      m.hideLoading();
+                    }
+                  },
+                  l = () => {
+                    (c(), a());
+                  },
+                  c = () => {
+                    (document.removeEventListener("toggle-archive", d),
+                      document.removeEventListener("back-to-list", l));
+                    const n = document.querySelector("#noteDetailView");
+                    n && n.remove();
+                  };
+                (document.addEventListener("toggle-archive", d),
+                  document.addEventListener("back-to-list", l));
+              })({
+                note: B.getNoteById(o),
+                container: r,
+                searchBar: e,
+                titleSection: t,
+                noteList: a,
+                notFound: i,
+                returnToList: c,
+              });
+            }),
+            n.addEventListener("click", () => {
+              (({
+                container: n,
+                searchBar: e,
+                titleSection: t,
+                noteList: o,
+                notFound: r,
+                returnToList: i,
+              }) => {
+                (e.classList.add("view-hidden"),
+                  t.classList.add("view-hidden"),
+                  m.hideElement(o),
+                  m.hideElement(r));
+                const a = document.createElement("note-form");
+                ((a.id = "noteFormView"), n.appendChild(a));
+                const s = async (n) => {
+                    try {
+                      (m.showLoading(),
+                        await B.addNote(n.detail),
+                        await B.fetchNotes(),
+                        l(),
+                        i());
+                    } catch (n) {
+                      console.error("Gagal menambahkan note", n);
+                    } finally {
+                      m.hideLoading();
+                    }
+                  },
+                  d = () => {
+                    (l(), i());
+                  },
+                  l = () => {
+                    (document.removeEventListener("add-note", s),
+                      document.removeEventListener("cancel-add-note", d));
+                    const n = document.querySelector("#noteFormView");
+                    n && n.remove();
+                  };
+                (document.addEventListener("add-note", s),
+                  document.addEventListener("cancel-add-note", d));
+              })({
+                container: r,
+                searchBar: e,
+                titleSection: t,
+                noteList: a,
+                notFound: i,
+                returnToList: c,
+              });
+            }));
+        };
+      document.addEventListener("DOMContentLoaded", () => {
+        v();
+      });
+    })());
+})();
 //# sourceMappingURL=bundle.js.map

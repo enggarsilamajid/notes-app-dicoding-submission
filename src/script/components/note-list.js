@@ -1,4 +1,4 @@
-import Utils from '../utils.js';
+import Utils from "../utils.js";
 
 class NoteList extends HTMLElement {
   _shadowRoot = null;
@@ -9,14 +9,14 @@ class NoteList extends HTMLElement {
   _gutter = 16;
 
   static get observedAttributes() {
-    return ['column', 'gutter'];
+    return ["column", "gutter"];
   }
 
   constructor() {
     super();
 
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._style = document.createElement('style');
+    this._shadowRoot = this.attachShadow({ mode: "open" });
+    this._style = document.createElement("style");
 
     this.render();
   }
@@ -74,35 +74,35 @@ class NoteList extends HTMLElement {
 
       .list {
         display: grid;
-        grid-template-columns: ${'1fr '.repeat(this.column)};
+        grid-template-columns: ${"1fr ".repeat(this.column)};
         gap: ${this.gutter}px;
       }
     `;
   }
 
   _emptyContent() {
-    this._shadowRoot.innerHTML = '';
+    this._shadowRoot.innerHTML = "";
   }
 
   _renderSection(title, notes, emptyMessage) {
-    const section = document.createElement('div');
-    section.classList.add('section');
+    const section = document.createElement("div");
+    section.classList.add("section");
 
-    const heading = document.createElement('h3');
+    const heading = document.createElement("h3");
     heading.textContent = title;
     section.appendChild(heading);
 
     if (notes.length === 0) {
-      const emptyText = document.createElement('p');
+      const emptyText = document.createElement("p");
       emptyText.textContent = emptyMessage;
-      emptyText.classList.add('empty-message');
+      emptyText.classList.add("empty-message");
       section.appendChild(emptyText);
     } else {
-      const grid = document.createElement('div');
-      grid.classList.add('list');
+      const grid = document.createElement("div");
+      grid.classList.add("list");
 
-      notes.forEach(note => {
-        const item = document.createElement('note-item');
+      notes.forEach((note) => {
+        const item = document.createElement("note-item");
         item.note = note;
         grid.appendChild(item);
       });
@@ -119,21 +119,21 @@ class NoteList extends HTMLElement {
 
     this._shadowRoot.appendChild(this._style);
 
-    const container = document.createElement('div');
+    const container = document.createElement("div");
 
-    const activeNotes = this._notes.filter(note => !note.archived);
-    const archivedNotes = this._notes.filter(note => note.archived);
+    const activeNotes = this._notes.filter((note) => !note.archived);
+    const archivedNotes = this._notes.filter((note) => note.archived);
 
     const activeSection = this._renderSection(
-      'Active Notes',
+      "Active Notes",
       activeNotes,
-      'No active notes'
+      "No active notes",
     );
 
     const archivedSection = this._renderSection(
-      'Archived Notes',
+      "Archived Notes",
       archivedNotes,
-      'No archived notes'
+      "No archived notes",
     );
 
     container.appendChild(activeSection);
@@ -144,10 +144,10 @@ class NoteList extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
-      case 'column':
+      case "column":
         this.column = newValue;
         break;
-      case 'gutter':
+      case "gutter":
         this.gutter = newValue;
         break;
     }
@@ -156,4 +156,4 @@ class NoteList extends HTMLElement {
   }
 }
 
-customElements.define('note-list', NoteList);
+customElements.define("note-list", NoteList);

@@ -1,5 +1,5 @@
-import Utils from '../utils.js';
-import NotesData from '../data/api/notes.js';
+import Utils from "../utils.js";
+import NotesData from "../data/api/notes.js";
 
 const renderDetail = ({
   note,
@@ -10,14 +10,14 @@ const renderDetail = ({
   notFound,
   returnToList,
 }) => {
-  searchBar.classList.add('view-hidden');
-  titleSection.classList.add('view-hidden');
+  searchBar.classList.add("view-hidden");
+  titleSection.classList.add("view-hidden");
   Utils.hideElement(noteList);
   Utils.hideElement(notFound);
 
-  const detail = document.createElement('note-detail');
+  const detail = document.createElement("note-detail");
   detail.note = note;
-  detail.id = 'noteDetailView';
+  detail.id = "noteDetailView";
 
   container.appendChild(detail);
 
@@ -30,7 +30,7 @@ const renderDetail = ({
       const currentNote = NotesData.getNoteById(id);
 
       if (!currentNote) {
-        throw new Error('Note tidak ditemukan');
+        throw new Error("Note is note found");
       }
 
       await NotesData.toggleArchive(id, currentNote.archived);
@@ -39,13 +39,30 @@ const renderDetail = ({
 
       cleanup();
       returnToList();
-
     } catch (error) {
-      console.error('Gagal toggle archive:', error);
+      console.error("Failed toggle archive:", error);
     } finally {
       Utils.hideLoading();
     }
   };
+
+  document.addEventListener("delete-note", async (event) => {
+  const { id } = event.detail;
+
+  try {
+    Utils.showLoading();
+
+    await NotesData.deleteNote(id);
+    await NotesData.fetchNotes();
+
+    returnToListView();
+  } catch (error) {
+    console.error("Failed to delete note", error);
+    alert("Failed to delete note");
+  } finally {
+    Utils.hideLoading();
+  }
+});
 
   const backHandler = () => {
     cleanup();
@@ -53,15 +70,15 @@ const renderDetail = ({
   };
 
   const cleanup = () => {
-    document.removeEventListener('toggle-archive', toggleArchiveHandler);
-    document.removeEventListener('back-to-list', backHandler);
+    document.removeEventListener("toggle-archive", toggleArchiveHandler);
+    document.removeEventListener("back-to-list", backHandler);
 
-    const existingDetail = document.querySelector('#noteDetailView');
+    const existingDetail = document.querySelector("#noteDetailView");
     if (existingDetail) existingDetail.remove();
   };
 
-  document.addEventListener('toggle-archive', toggleArchiveHandler);
-  document.addEventListener('back-to-list', backHandler);
+  document.addEventListener("toggle-archive", toggleArchiveHandler);
+  document.addEventListener("back-to-list", backHandler);
 };
 
 export default renderDetail;

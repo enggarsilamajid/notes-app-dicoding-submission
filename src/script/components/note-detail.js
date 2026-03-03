@@ -1,4 +1,4 @@
-import Utils from '../utils.js';
+import Utils from "../utils.js";
 
 class NoteDetail extends HTMLElement {
   _shadowRoot = null;
@@ -11,7 +11,7 @@ class NoteDetail extends HTMLElement {
 
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._shadowRoot = this.attachShadow({ mode: "open" });
   }
 
   render() {
@@ -34,36 +34,56 @@ class NoteDetail extends HTMLElement {
         <p>${this._note.body}</p>
 
         <button class="archive-btn">
-          ${this._note.archived ? 'Unarchive' : 'Archive'}
+          ${this._note.archived ? "Unarchive" : "Archive"}
         </button>
+
+        <button id="delete-btn">Delete</button>
 
         <button class="back-btn">Back</button>
       </div>
     `;
 
+    // Toggle archive
     this._shadowRoot
-      .querySelector('.archive-btn')
-      .addEventListener('click', () => {
+      .querySelector(".archive-btn")
+      .addEventListener("click", () => {
         this.dispatchEvent(
-          new CustomEvent('toggle-archive', {
+          new CustomEvent("toggle-archive", {
             detail: { id: this._note.id },
             bubbles: true,
             composed: true,
-          })
+          }),
         );
       });
 
+    // Delete
     this._shadowRoot
-      .querySelector('.back-btn')
-      .addEventListener('click', () => {
+      .querySelector("#delete-btn")
+      .addEventListener("click", () => {
+        const confirmDelete = confirm("Yakin ingin menghapus catatan ini?");
+        if (!confirmDelete) return;
+
         this.dispatchEvent(
-          new CustomEvent('back-to-list', {
+          new CustomEvent("delete-note", {
+            detail: { id: this._note.id },
             bubbles: true,
             composed: true,
-          })
+          }),
+        );
+      });
+
+    // Back
+    this._shadowRoot
+      .querySelector(".back-btn")
+      .addEventListener("click", () => {
+        this.dispatchEvent(
+          new CustomEvent("back-to-list", {
+            bubbles: true,
+            composed: true,
+          }),
         );
       });
   }
 }
 
-customElements.define('note-detail', NoteDetail);
+customElements.define("note-detail", NoteDetail);

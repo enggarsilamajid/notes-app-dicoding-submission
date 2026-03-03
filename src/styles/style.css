@@ -1,8 +1,8 @@
 :root {
-  --primary: #37353E;
-  --secondary: #44444E;
-  --additional: #715A5A;
-  --text: #D3DAD9;
+  --primary: #37353e;
+  --secondary: #44444e;
+  --additional: #715a5a;
+  --text: #d3dad9;
 }
 
 * {
@@ -38,7 +38,7 @@ label {
   display: block;
 }
 
-section>.title-section {
+section > .title-section {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -46,7 +46,7 @@ section>.title-section {
   font-size: 1.2em;
 }
 
-section>.title-section>h2 {
+section > .title-section > h2 {
   justify-self: start;
 }
 
@@ -63,7 +63,7 @@ section>.title-section>h2 {
 /* Start of Header */
 header {
   background-color: var(--secondary);
-  
+
   color: var(--text);
 }
 

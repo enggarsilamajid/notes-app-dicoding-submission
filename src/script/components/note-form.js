@@ -1,7 +1,7 @@
 class NoteForm extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
@@ -57,71 +57,71 @@ class NoteForm extends HTMLElement {
   }
 
   setupValidation() {
-    const titleInput = this.shadowRoot.querySelector('#title');
-    const bodyInput = this.shadowRoot.querySelector('#body');
-    const saveBtn = this.shadowRoot.querySelector('#saveBtn');
+    const titleInput = this.shadowRoot.querySelector("#title");
+    const bodyInput = this.shadowRoot.querySelector("#body");
+    const saveBtn = this.shadowRoot.querySelector("#saveBtn");
 
-    const titleError = this.shadowRoot.querySelector('#titleError');
-    const bodyError = this.shadowRoot.querySelector('#bodyError');
+    const titleError = this.shadowRoot.querySelector("#titleError");
+    const bodyError = this.shadowRoot.querySelector("#bodyError");
 
     const validate = () => {
       let isValid = true;
 
       // Title validation
       if (!titleInput.value.trim()) {
-        titleError.textContent = 'Title is required';
+        titleError.textContent = "Title is required";
         isValid = false;
       } else if (titleInput.value.trim().length < 3) {
-        titleError.textContent = 'At least 3 characters';
+        titleError.textContent = "At least 3 characters";
         isValid = false;
       } else {
-        titleError.textContent = '';
+        titleError.textContent = "";
       }
 
       // Body validation
       if (!bodyInput.value.trim()) {
-        bodyError.textContent = 'Body is required';
+        bodyError.textContent = "Body is required";
         isValid = false;
       } else if (bodyInput.value.trim().length < 5) {
-        bodyError.textContent = 'At least 5 characters';
+        bodyError.textContent = "At least 5 characters";
         isValid = false;
       } else {
-        bodyError.textContent = '';
+        bodyError.textContent = "";
       }
 
       saveBtn.disabled = !isValid;
     };
 
     // Realtime validation
-    titleInput.addEventListener('input', validate);
-    bodyInput.addEventListener('input', validate);
+    titleInput.addEventListener("input", validate);
+    bodyInput.addEventListener("input", validate);
 
     // Submit handler
-    saveBtn.addEventListener('click', () => {
+    saveBtn.addEventListener("click", () => {
       this.dispatchEvent(
-        new CustomEvent('add-note', {
+        new CustomEvent("add-note", {
           detail: {
             title: titleInput.value.trim(),
             body: bodyInput.value.trim(),
           },
           bubbles: true,
           composed: true,
-        })
+        }),
       );
     });
 
     // Cancel handler
     this.shadowRoot
-      .querySelector('#cancelBtn')
-      .addEventListener('click', () => {
+      .querySelector("#cancelBtn")
+      .addEventListener("click", () => {
         this.dispatchEvent(
-          new CustomEvent('cancel-add-note', {
+          new CustomEvent("cancel-add-note", {
             bubbles: true,
             composed: true,
-          })
+          }),
         );
       });
   }
 }
 
-customElements.define('note-form', NoteForm);
+customElements.define("note-form", NoteForm);

@@ -1,7 +1,7 @@
 class LoadingIndicator extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
@@ -42,4 +42,4 @@ class LoadingIndicator extends HTMLElement {
   }
 }
 
-customElements.define('loading-indicator', LoadingIndicator);
+customElements.define("loading-indicator", LoadingIndicator);

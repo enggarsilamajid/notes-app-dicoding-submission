@@ -1,5 +1,5 @@
-import Utils from '../utils.js';
-import NotesData from '../data/api/notes.js';
+import Utils from "../utils.js";
+import NotesData from "../data/api/notes.js";
 
 const renderAddForm = ({
   container,
@@ -9,31 +9,31 @@ const renderAddForm = ({
   notFound,
   returnToList,
 }) => {
-  searchBar.classList.add('view-hidden');
-  titleSection.classList.add('view-hidden');
+  searchBar.classList.add("view-hidden");
+  titleSection.classList.add("view-hidden");
   Utils.hideElement(noteList);
   Utils.hideElement(notFound);
 
-  const form = document.createElement('note-form');
-  form.id = 'noteFormView';
+  const form = document.createElement("note-form");
+  form.id = "noteFormView";
 
   container.appendChild(form);
 
   const addHandler = async (event) => {
-  try {
-    Utils.showLoading();
+    try {
+      Utils.showLoading();
 
-    await NotesData.addNote(event.detail);
-    await NotesData.fetchNotes();
+      await NotesData.addNote(event.detail);
+      await NotesData.fetchNotes();
 
-    cleanup();
-    returnToList();
-  } catch (error) {
-    console.error('Gagal menambahkan note', error);
-  } finally {
-    Utils.hideLoading();
-  }
-};
+      cleanup();
+      returnToList();
+    } catch (error) {
+      console.error("Gagal menambahkan note", error);
+    } finally {
+      Utils.hideLoading();
+    }
+  };
 
   const cancelHandler = () => {
     cleanup();
@@ -41,15 +41,15 @@ const renderAddForm = ({
   };
 
   const cleanup = () => {
-    document.removeEventListener('add-note', addHandler);
-    document.removeEventListener('cancel-add-note', cancelHandler);
+    document.removeEventListener("add-note", addHandler);
+    document.removeEventListener("cancel-add-note", cancelHandler);
 
-    const existingForm = document.querySelector('#noteFormView');
+    const existingForm = document.querySelector("#noteFormView");
     if (existingForm) existingForm.remove();
   };
 
-  document.addEventListener('add-note', addHandler);
-  document.addEventListener('cancel-add-note', cancelHandler);
+  document.addEventListener("add-note", addHandler);
+  document.addEventListener("cancel-add-note", cancelHandler);
 };
 
 export default renderAddForm;
