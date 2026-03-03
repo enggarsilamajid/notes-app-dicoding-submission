@@ -96,6 +96,29 @@ const home = () => {
       returnToList: returnToListView,
     });
   });
+
+  document.addEventListener("delete-note", async (event) => {
+  const { id } = event.detail;
+
+  try {
+    Utils.showLoading();
+
+    await NotesData.deleteNote(id);
+    await NotesData.fetchNotes();
+
+    // Hapus detail view jika ada
+    const existingDetail = document.querySelector("#noteDetailView");
+    if (existingDetail) existingDetail.remove();
+
+    returnToListView();
+
+  } catch (error) {
+    console.error("DELETE ERROR:", error);
+    alert("Failed delete note");
+  } finally {
+    Utils.hideLoading();
+  }
+});
 };
 
 export default home;

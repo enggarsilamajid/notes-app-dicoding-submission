@@ -46,29 +46,6 @@ const renderDetail = ({
     }
   };
 
-  document.addEventListener("delete-note", async (event) => {
-  const { id } = event.detail;
-
-  try {
-    Utils.showLoading();
-
-    await NotesData.deleteNote(id);
-
-    await NotesData.fetchNotes();
-
-    searchBarContainerElement.classList.remove("view-hidden");
-    titleSectionElement.classList.remove("view-hidden");
-
-    showNotes();
-
-  } catch (error) {
-    console.error("DELETE ERROR:", error);
-    alert("Failed delete note");
-  } finally {
-    Utils.hideLoading();
-  }
-});
-
   const backHandler = () => {
     cleanup();
     returnToList();
