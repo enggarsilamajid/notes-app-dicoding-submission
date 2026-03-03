@@ -27,9 +27,7 @@ class NotesData {
     const loweredQuery = query.toLowerCase().replace(/\s/g, "");
 
     return this._notes.filter((note) => {
-      const loweredTitle = (note.title || "")
-        .toLowerCase()
-        .replace(/\s/g, "");
+      const loweredTitle = (note.title || "").toLowerCase().replace(/\s/g, "");
 
       return loweredTitle.includes(loweredQuery);
     });
@@ -76,19 +74,19 @@ class NotesData {
   }
 
   static async deleteNote(id) {
-  const response = await fetch(`${BASE_URL}/notes/${id}`, {
-    method: "DELETE",
-  });
+    const response = await fetch(`${BASE_URL}/notes/${id}`, {
+      method: "DELETE",
+    });
 
-  if (!response.ok) {
-    throw new Error("Failed to delete note");
+    if (!response.ok) {
+      throw new Error("Failed to delete note");
+    }
+
+    // Tidak perlu parse JSON kalau tidak dipakai
+    this._notes = this._notes.filter((note) => note.id !== id);
+
+    return true;
   }
-
-  // Tidak perlu parse JSON kalau tidak dipakai
-  this._notes = this._notes.filter((note) => note.id !== id);
-
-  return true;
-}
 }
 
 export default NotesData;
