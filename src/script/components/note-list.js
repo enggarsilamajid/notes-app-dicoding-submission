@@ -21,9 +21,6 @@ class NoteList extends HTMLElement {
     this.render();
   }
 
-  // ======================
-  // PROPERTY NOTES
-  // ======================
   set notes(value) {
     this._notes = value || [];
     this.render();
@@ -33,9 +30,6 @@ class NoteList extends HTMLElement {
     return this._notes;
   }
 
-  // ======================
-  // GRID CONFIG
-  // ======================
   set column(value) {
     const newValue = Number(value);
     if (!Utils.isValidInteger(newValue)) return;
@@ -56,9 +50,6 @@ class NoteList extends HTMLElement {
     return this._gutter;
   }
 
-  // ======================
-  // STYLE
-  // ======================
   _updateStyle() {
     this._style.textContent = `
       :host {
@@ -94,9 +85,6 @@ class NoteList extends HTMLElement {
     this._shadowRoot.innerHTML = '';
   }
 
-  // ======================
-  // RENDER SECTION
-  // ======================
   _renderSection(title, notes, emptyMessage) {
     const section = document.createElement('div');
     section.classList.add('section');
@@ -126,9 +114,6 @@ class NoteList extends HTMLElement {
     return section;
   }
 
-  // ======================
-  // MAIN RENDER
-  // ======================
   render() {
     this._emptyContent();
     this._updateStyle();

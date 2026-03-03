@@ -31,9 +31,6 @@ const home = () => {
     Utils.showElement(noteNotFoundElement);
   };
 
-  // ======================
-  // SHOW NOTES
-  // ======================
   const showNotes = (query = '') => {
     const result = NotesData.searchNote(query);
 
@@ -57,16 +54,13 @@ const home = () => {
     showNotes();
   };
 
-  // ======================
-  // INITIAL LOAD
-  // ======================
   const init = async () => {
     try {
       Utils.showLoading();
       await NotesData.fetchNotes();
       showNotes();
     } catch (error) {
-      console.error('Gagal mengambil data dari API', error);
+      console.error('Failed get notes from API', error);
       showNotFound();
     } finally {
       Utils.hideLoading();
@@ -76,9 +70,6 @@ const home = () => {
   searchBarElement.addEventListener('search', onSearchHandler);
   init();
 
-  // ======================
-  // OPEN DETAIL
-  // ======================
   document.addEventListener('open-detail', (event) => {
     const noteId = event.detail.id;
     const selectedNote = NotesData.getNoteById(noteId);
@@ -94,9 +85,6 @@ const home = () => {
     });
   });
 
-  // ======================
-  // OPEN ADD FORM
-  // ======================
   addNoteButton.addEventListener('click', () => {
     renderAddForm({
       container: noteListContainerElement,
